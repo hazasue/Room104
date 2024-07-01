@@ -90,6 +90,10 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log($"There's no any screen named \'{name}\'");
             return;
+        }        
+        else if (screen.activeSelf == true)
+        {
+            return;
         }
 
         if (activatedScreens.Count > 0) activatedScreens.Peek().SetActive(false);
