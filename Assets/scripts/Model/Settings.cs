@@ -59,8 +59,6 @@ public class Settings : MonoBehaviour
         }
         
         resolution.value = resolution.options.FindIndex(option => option.text == $"{settingsData.screenResolution[0]} * {settingsData.screenResolution[1]}");
-        Debug.Log(resolution.options.FindIndex(option =>
-            option.text == $"{settingsData.screenResolution[0]} * {settingsData.screenResolution[1]}"));
 
         fullScreenToggle.isOn = settingsData.fullScreen;
         Screen.fullScreen = settingsData.fullScreen;
