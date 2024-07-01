@@ -43,7 +43,7 @@ public class Settings : MonoBehaviour
         }
         else
         {
-            settingsData = new SettingsData(DEFAULT_SCREEN_RESOLUTION_DEFAULT, true, DEFAULT_SOUND_VOLUME, 1f, 1f, true, true, true);
+            settingsData = new SettingsData(DEFAULT_SCREEN_RESOLUTION_DEFAULT, false, DEFAULT_SOUND_VOLUME, 1f, 1f, true, true, true);
             JsonManager.CreateJsonFile(JsonManager.DEFAULT_SETTING_DATA_NAME, settingsData);
         }
 
