@@ -29,7 +29,10 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        /*if (GameManager.Instance.GameState == GameManager.eGameState.PAUSED)
+            return;*/
+
         applyKeyInput();
         updatePlayerState();
         
@@ -100,6 +103,7 @@ public class Player : MonoBehaviour
 
     private void applyKeyInput()
     {
+
         Vector2 direction = Vector2.zero;
 
         // move directions
@@ -114,6 +118,17 @@ public class Player : MonoBehaviour
         // run state
         if (Input.GetKeyDown(KeyCode.LeftShift)) isRunning = true;
         else if (Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
+
+
+        //// 테스트용
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.Instance.GameState == GameManager.eGameState.PLAYING)
+                GameManager.Instance.PauseGame();
+            else
+                GameManager.Instance.ResumeGame();
+        }
+        ////
 
         direction = direction.normalized;
 

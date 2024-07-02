@@ -72,13 +72,13 @@ public class UIManager : MonoBehaviour
         {
             if (activatedScreens.Count <= 0)
             {
-                GameManager.PauseGame();
+                GameManager.Instance.PauseGame();
                 ActivateScreen(DEFAULT_SCREEN_NAME_SMARTPHONE);
             }
             else
             {
                 InactivateScreen();
-                if (activatedScreens.Count <= 0) GameManager.ResumeGame();
+                if (activatedScreens.Count <= 0) GameManager.Instance.ResumeGame();
             }
         }
     }
