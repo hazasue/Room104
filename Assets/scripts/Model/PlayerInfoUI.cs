@@ -25,7 +25,7 @@ public class PlayerInfoUI : MonoBehaviour
         this.PlayerObj = GameObject.FindWithTag("Player");
         this.Stat = PlayerObj.GetComponent<PlayerStat>();
 
-        // ºÎ¸ð-ÀÚ½Ä °ü°è Ãß°¡ °í·Á ÇÊ¿ä
+        // ï¿½Î¸ï¿½-ï¿½Ú½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
         this.healthBar = transform.GetChild(5).GetComponent<Image>();
         this.healthText = transform.GetChild(6).GetComponent<Text>();
 
