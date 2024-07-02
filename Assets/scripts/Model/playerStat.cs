@@ -2,120 +2,78 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerStat : MonoBehaviour
+public class PlayerStat
 {
     /* 
      * 나중에 scv파일에서 들고 와야 할 수도 있음
      * CSVReader.cs참고
      */
 
-
     // 플레이어 기본 스텟
-    private int S_health = 500;
-    private int S_stress = 700;
-    private int S_stamina = 1000;
-    private int S_int = 500;
-    private int S_speed = 1000;
-    private int S_money = 0;
-    private int S_safe = 0;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public int getHealth()
-    {
-        int health = this.S_health;
-        return health;
-    }
-
-    public int getStress()
-    {
-        int stress = this.S_stress;
-        return stress;
-    }
-
-    public int getstamina()
-    {
-        int stamina = this.S_stamina;
-        return stamina;
-    }
-
-    public int getInt()
-    {
-        int Int = this.S_int;
-        return Int;
-    }
-
-    public int getmoney()
-    {
-        int money = this.S_money;
-        return money;
-    }
-
-    public int getsafe()
-    {
-        int safe = this.S_safe;
-        return safe;
-    }
+    private int health = 500;
+    public int Health { get { return health; } }
+    private int stress = 700;
+    public int Stress { get { return stress; } }
+    private int stamina = 1000;
+    public int Stamina { get { return stamina; } }
+    private int intelligence = 500;
+    public int Intelligence { get { return intelligence; } }
+    private int speed = 1000;
+    public int Speed { get { return speed; } }
+    private int money = 0;
+    public int Money { get { return money; } }
+    private int safe = 0;
+    public int Safe { get { return safe; } }
 
     // 플레이어 스텟 증가 함수
-    public void healthIncrease(int health = 50)
+    public void HealthIncrease(int health = 50)
     {
-        this.S_health += health;
+        this.health += health;
     }
 
-    public void stressIncrease(int stress = 50)
+    public void StressIncrease(int stress = 50)
     {
-        this.S_stress += stress;
+        this.stress += stress;
     }
 
-    public void staminaIncrease(int stamina = 50)
+    public void StaminaIncrease(int stamina = 50)
     {
-        this.S_stamina += stamina;
+        this.stamina += stamina;
     }
 
-    public void intIncrease(int Int = 25)
+    public void IntIncrease(int Int = 25)
     {
-        this.S_int += Int;
+        this.intelligence += Int;
     }
 
-    public void speedIncrease(int speed = 25)
+    public void SpeedIncrease(int speed = 25)
     {
-        this.S_speed += speed;
+        this.speed += speed;
     }
 
-    public void moneyIncrease(int money = 1)
+    public void MoneyIncrease(int money = 1)
     {
-        this.S_money += money;
+        this.money += money;
     }
 
-    public void safeIncrease(int safe = 1)
+    public void SafeIncrease(int safe = 1)
     {
-        this.S_safe += safe;
+        this.safe += safe;
     }
 
     // 스텟 감소 함수
-    public void healthDecrease(int health = 200)
+    public void HealthDecrease(int health = 200)
     {
-        this.S_health -= health;
+        this.health -= health;
     }
 
-    public void stressDecrease(int stress = 50)
+    public void StressDecrease(int stress = 50)
     {
-        this.S_stress -= stress;
+        this.stress -= stress;
     }
 
-    public void moneyDecrease(int money = 1)
+    public void MoneyDecrease(int money = 1)
     {
-        this.S_money -= money;
+        this.money -= money;
     }
 }
