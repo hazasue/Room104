@@ -16,17 +16,17 @@ public class GameManager : Singleton<GameManager>
     private const float DEFAULT_TIME_SCALE_PAUSED = 0f;
     private const float DEFAULT_TIME_SCALE_PLAYING = 1f;
 
-
     //플레이 타임 변수
     private int date;
-    public int Date { get { return date; } }
+    public int Date { get { return date; } set { date = value; } }
     private int hour;
     public int Hour { get { return hour; } }
     private int minute;
     public int Minute { get { return minute; } }
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         init();
     }
     // Start is called before the first frame update
