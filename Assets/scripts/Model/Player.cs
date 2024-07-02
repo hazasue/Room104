@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     PlayerStat stat;
 
-    private enum PlayerState
+    private enum ePlayerState
     {
         IDLE,
         WALK,
@@ -20,14 +20,14 @@ public class Player : MonoBehaviour
     private const float DEFAULT_MOVE_SPEED_RUN = 1.5f;
 
 
-    private PlayerState state;
+    private ePlayerState state;
     private bool isRunning;
     private Vector2 moveDirection;
     
     // Start is called before the first frame update
     void Start()
     {
-        state = PlayerState.IDLE;
+        state = ePlayerState.IDLE;
         isRunning = false;
         PlayerStat stat = GetComponent<PlayerStat>();
     }
@@ -44,18 +44,18 @@ public class Player : MonoBehaviour
         switch (state)
         {
                 
-            case PlayerState.IDLE:
+            case ePlayerState.IDLE:
                 break;
             
-            case PlayerState.WALK:
+            case ePlayerState.WALK:
                 walk();
                 break;
             
-            case PlayerState.RUN:
+            case ePlayerState.RUN:
                 run();
                 break;
             
-            case PlayerState.INTERACT:
+            case ePlayerState.INTERACT:
                 interact();
                 break;
             
@@ -71,33 +71,33 @@ public class Player : MonoBehaviour
     {
         switch (state)
         {
-            case PlayerState.IDLE:
+            case ePlayerState.IDLE:
                 if (moveDirection != Vector2.zero && !isRunning) 
-                    state = PlayerState.WALK;
+                    state = ePlayerState.WALK;
                 else if(moveDirection != Vector2.zero && isRunning)
                 {
-                    state = PlayerState.RUN;
+                    state = ePlayerState.RUN;
                 }
                     
                 break;
             
-            case PlayerState.WALK:
-                if (moveDirection == Vector2.zero) state = PlayerState.IDLE;
+            case ePlayerState.WALK:
+                if (moveDirection == Vector2.zero) state = ePlayerState.IDLE;
                 else if (isRunning)
                 {
-                    state = PlayerState.RUN;
+                    state = ePlayerState.RUN;
                 }
                 break;
             
-            case PlayerState.RUN:
-                if (moveDirection == Vector2.zero) state = PlayerState.IDLE;
+            case ePlayerState.RUN:
+                if (moveDirection == Vector2.zero) state = ePlayerState.IDLE;
                 else if (!isRunning)
                 {
-                    state = PlayerState.WALK;
+                    state = ePlayerState.WALK;
                 }
                 break;
             
-            case PlayerState.INTERACT:
+            case ePlayerState.INTERACT:
                 break;
             
             default:
