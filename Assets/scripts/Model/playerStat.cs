@@ -1,15 +1,24 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStat
 {
     /* 
-     * ³ªÁß¿¡ scvÆÄÀÏ¿¡¼­ µé°í ¿Í¾ß ÇÒ ¼öµµ ÀÖÀ½
-     * CSVReader.csÂü°í
+     * ï¿½ï¿½ï¿½ß¿ï¿½ scvï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Í¾ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+     * CSVReader.csï¿½ï¿½ï¿½ï¿½
      */
 
-    // ÇÃ·¹ÀÌ¾î ±âº» ½ºÅÝ
+    // ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public const int MAX_HEALTH = 1000;
+    public const int MAX_STRESS = 1000;
+    public const int MAX_STAMINA = 2000;
+    public const int MAX_INTELLIGENCE = 1000;
+    public const int MAX_SPEED = 1500;
+    public const int MAX_MONEY = 9999999;
+    public const int MAX_SAFE = 3;
+
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½
     private int health = 500;
     public int Health { get { return health; } }
     private int stress = 700;
@@ -25,7 +34,7 @@ public class PlayerStat
     private int safe = 0;
     public int Safe { get { return safe; } }
 
-    // ÇÃ·¹ÀÌ¾î ½ºÅÝ Áõ°¡ ÇÔ¼ö
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     public void HealthIncrease(int health = 50)
     {
         this.health += health;
@@ -61,7 +70,7 @@ public class PlayerStat
         this.safe += safe;
     }
 
-    // ½ºÅÝ °¨¼Ò ÇÔ¼ö
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½
     public void HealthDecrease(int health = 200)
     {
         this.health -= health;
