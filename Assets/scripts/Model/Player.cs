@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    playerStat stat;
+    PlayerStat stat;
 
     private enum PlayerState
     {
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     {
         state = PlayerState.IDLE;
         isRunning = false;
-        playerStat stat = GetComponent<playerStat>();
+        PlayerStat stat = GetComponent<PlayerStat>();
     }
 
     // Update is called once per frame
