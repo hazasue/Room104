@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerStat
 {
-
     public const int MAX_HEALTH = 1000;
     public const int MAX_STRESS = 1000;
     public const int MAX_STAMINA = 2000;
