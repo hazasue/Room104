@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SceneManagement;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    playerStat stat;
+
     private enum PlayerState
     {
         IDLE,
@@ -25,6 +29,7 @@ public class Player : MonoBehaviour
     {
         state = PlayerState.IDLE;
         isRunning = false;
+        playerStat stat = GetComponent<playerStat>();
     }
 
     // Update is called once per frame
