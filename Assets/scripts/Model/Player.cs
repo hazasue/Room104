@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    PlayerStat stat;
+    PlayerStat stat;  
 
     private enum ePlayerState
     {
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private const float DEFAULT_MOVE_SPEED_WALK = 1f;
     private const float DEFAULT_MOVE_SPEED_RUN = 1.5f;
 
-
+     
     private ePlayerState state;
     private bool isRunning;
     private Vector2 moveDirection;
@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
 
 
-        //// ев╫╨ф╝©К
+        //// О©╫в╫О©╫ф╝О©╫О©╫
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameManager.Instance.GameState == GameManager.eGameState.PLAYING)
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
         setDirections(direction);
     }
 
-    private void setDirections(Vector2 direction)
+    private void setDirections(Vector2 direction) 
     {
         this.moveDirection = direction;
         
