@@ -59,9 +59,8 @@ public class Settings : MonoBehaviour
         }
         
         resolution.value = resolution.options.FindIndex(option => option.text == $"{settingsData.screenResolution[0]} * {settingsData.screenResolution[1]}");
-
+        
         fullScreenToggle.isOn = settingsData.fullScreen;
-        Screen.fullScreen = settingsData.fullScreen;
 
         masterVolumeSlider.value = settingsData.volumeMaster;
         bgmSlider.value = settingsData.volumeBgm;
@@ -70,11 +69,17 @@ public class Settings : MonoBehaviour
         masterToggle.isOn = settingsData.masterOn;
         bgmToggle.isOn = settingsData.bgmOn;
         sfxToggle.isOn = settingsData.sfxOn;
+
+        Screen.SetResolution(settingsData.screenResolution[0], settingsData.screenResolution[1],
+            settingsData.fullScreen);
+        Debug.Log(settingsData.fullScreen);
+        SoundManager.Instance().UpdateVolume(settingsData);
     }
 
-    public void ChangeSettings(string target)
+    public void SaveSettings(string name)
     {
-        switch (target)
+
+        switch (name)
         {
             case DEFAULT_SETTING_NAME_RESOLUTION:
                 string resolutionText = resolution.captionText.text;
@@ -85,12 +90,18 @@ public class Settings : MonoBehaviour
                 settingsData.screenResolution[0] = resolutionX;
                 settingsData.screenResolution[1] = screenResolutions[resolutionX];
 
-                SaveSettings(false);
+                Screen.SetResolution(settingsData.screenResolution[0], settingsData.screenResolution[1], settingsData.fullScreen);
                 break;
             
+            
             case DEFAULT_SETTING_NAME_FULLSCREEN:
-                settingsData.fullScreen = fullScreenToggle.isOn;
+                bool fullScreen = fullScreenToggle.isOn;
+                if (fullScreen == settingsData.fullScreen) return;
+
+                settingsData.fullScreen = fullScreen;
+                Screen.fullScreen = settingsData.fullScreen;
                 break;
+            
             
             case DEFAULT_SETTING_NAME_VOLUME:
                 settingsData.volumeMaster = masterVolumeSlider.value;
@@ -99,26 +110,12 @@ public class Settings : MonoBehaviour
                 settingsData.masterOn = masterToggle.isOn;
                 settingsData.bgmOn = bgmToggle.isOn;
                 settingsData.sfxOn = sfxToggle.isOn;
+                
+                SoundManager.Instance().UpdateVolume(settingsData);
                 break;
             
             default:
-                Debug.Log($"Invalid setting name: {target}");
                 break;
-        }
-    }
-
-    public void SaveSettings(bool saveAll = true)
-    {
-        if (saveAll)
-        {
-            settingsData.fullScreen = fullScreenToggle.isOn;
-            
-            settingsData.volumeMaster = masterVolumeSlider.value;
-            settingsData.volumeBgm = bgmSlider.value;
-            settingsData.volumeSfx = sfxSlider.value;
-            settingsData.masterOn = masterToggle.isOn;
-            settingsData.bgmOn = bgmToggle.isOn;
-            settingsData.sfxOn = sfxToggle.isOn;
         }
 
         JsonManager.CreateJsonFile(JsonManager.DEFAULT_SETTING_DATA_NAME, settingsData);
