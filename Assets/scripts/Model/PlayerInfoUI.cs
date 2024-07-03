@@ -59,6 +59,36 @@ public class PlayerInfoUI : MonoBehaviour
         this.healthText.text = Stat.Stamina.ToString() + " / " + PlayerStat.MAX_HEALTH.ToString();
     }
 
+    /*
+     * using coroutine
+    public void UpdateHealth()
+    {
+        if (healthCoroutine != null)
+        {
+            StopCoroutine(healthCoroutine);
+        }
+        healthCoroutine = StartCoroutine(AnimateHealthBar());
+    }
+
+    private IEnumerator AnimateHealthBar()
+    {
+        float healthRatio = (float)stat.Health / PlayerStat.MAX_HEALTH;
+        float startFillAmount = healthBar.fillAmount;
+        float duration = 0.5f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            healthBar.fillAmount = Mathf.Lerp(startFillAmount, healthRatio, elapsedTime / duration);
+            yield return null;
+        }
+
+        healthBar.fillAmount = healthRatio;
+        healthText.text = stat.Health.ToString() + " / " + PlayerStat.MAX_HEALTH.ToString();
+    }
+    */
+
     public void UpdateIntelligence()
     {
         float IntelligenceRatio = (float)Stat.Intelligence / PlayerStat.MAX_INTELLIGENCE;
@@ -80,7 +110,7 @@ public class PlayerInfoUI : MonoBehaviour
 
     public void UpdateStamina()
     {
-        float StaminaRatio = (float)Stat.Stamina / PlayerStat.MAX_STAMINA;
+        float StaminaRatio = (float)Stat.Stamina / (float)Stat.MaxStamina;
 
         this.staminaBar.fillAmount = StaminaRatio;
     }
