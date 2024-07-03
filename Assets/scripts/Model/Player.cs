@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
-using UnityEditor.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Player : MonoBehaviour
