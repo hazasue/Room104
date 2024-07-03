@@ -73,6 +73,11 @@ public class PlayerStat
         this.stress -= stress;
     }
 
+    public void StaminaDecrease(int stamina = 1)
+    {
+        this.stamina -= stamina;
+    }
+
     public void MoneyDecrease(int money = 1)
     {
         this.money -= money;
