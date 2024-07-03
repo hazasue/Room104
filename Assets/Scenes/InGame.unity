@@ -6697,6 +6697,7 @@ MonoBehaviour:
   reportScreen: {fileID: 385238669}
   cameraScreen: {fileID: 1477391594}
   sayTalkScreen: {fileID: 1887943421}
+  jobHunterScreen: {fileID: 417964304}
 --- !u!4 &428039766
 Transform:
   m_ObjectHideFlags: 0
@@ -6893,14 +6894,6 @@ MonoBehaviour:
           m_StringArgument: jobhunter
           m_BoolArgument: 0
         m_CallState: 2
---- !u!222 &457285844
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 630643399}
-  m_CullTransparentMesh: 1
 --- !u!1 &468349529
 GameObject:
   m_ObjectHideFlags: 0
@@ -8593,7 +8586,6 @@ GameObject:
   - component: {fileID: 630643402}
   - component: {fileID: 630643401}
   - component: {fileID: 630643400}
-  - component: {fileID: 457285844}
   m_Layer: 5
   m_Name: Checkmark
   m_TagString: Untagged
@@ -10683,6 +10675,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777446599}
   m_CullTransparentMesh: 1
+--- !u!1 &788388506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 788388508}
+  - component: {fileID: 788388507}
+  m_Layer: 0
+  m_Name: SceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &788388507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788388506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afc0fb1a47c869a418be92fcc8d0cebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &788388508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788388506}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802896139
 GameObject:
   m_ObjectHideFlags: 0
@@ -13591,13 +13627,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46feaaadadf182345bf730dee7db4cc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerObj: {fileID: 0}
-  healthBar: {fileID: 0}
-  healthText: {fileID: 0}
-  intelligenceBar: {fileID: 0}
-  intelligenceText: {fileID: 0}
-  StressBar: {fileID: 0}
-  StressText: {fileID: 0}
 --- !u!1 &1005662041
 GameObject:
   m_ObjectHideFlags: 0
@@ -15765,6 +15794,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1143437447}
   m_CullTransparentMesh: 1
+--- !u!1 &1144942896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1144942898}
+  - component: {fileID: 1144942897}
+  m_Layer: 0
+  m_Name: ProductManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1144942897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144942896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c56846caf543cf43abc2ed729751742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewport: {fileID: 1340716677}
+  productObject: {fileID: -4733954456669923167, guid: ce8500b14309e08489da292cc1959af2, type: 3}
+--- !u!4 &1144942898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144942896}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1150652125
 GameObject:
   m_ObjectHideFlags: 0
@@ -16908,7 +16983,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1265101859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25269,17 +25344,17 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2065294620}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: ChangeSettings
-        m_Mode: 5
+        m_MethodName: SaveSettings
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: fullscreen
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
   m_IsOn: 1
 --- !u!224 &1804011207
@@ -26325,16 +26400,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 428039765}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: InactivateScreen
-        m_Mode: 1
+      - m_Target: {fileID: 788388507}
+        m_TargetAssemblyTypeName: SceneManager, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: title
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1937550387
@@ -28444,3 +28519,5 @@ SceneRoots:
   - {fileID: 756231598}
   - {fileID: 1157756115}
   - {fileID: 428039766}
+  - {fileID: 788388508}
+  - {fileID: 1144942898}
