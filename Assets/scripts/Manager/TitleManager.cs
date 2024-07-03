@@ -77,4 +77,9 @@ public class TitleManager : MonoBehaviour
     public void NewGame() {}
     
     public void LoadGame() {}
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
