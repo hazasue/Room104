@@ -19,6 +19,8 @@ public class PlayerStat
     public int Stress { get { return stress; } }
     private int stamina = 1000;
     public int Stamina { get { return stamina; } }
+    private int maxStamina = 1000;
+    public int MaxStamina { get { return maxStamina; } }
     private int intelligence = 500;
     public int Intelligence { get { return intelligence; } }
     private int speed = 1000;
@@ -31,55 +33,73 @@ public class PlayerStat
     public void HealthIncrease(int health = 50)
     {
         this.health += health;
+        if (this.health >= MAX_HEALTH) this.health = MAX_HEALTH;
     }
 
     public void StressIncrease(int stress = 50)
     {
         this.stress += stress;
+        if (this.stress >= MAX_STAMINA) this.stress = MAX_STRESS;
+    }
+
+    public void MaxStaminaIncrease(int maxstamina = 1000)
+    {
+        this.maxStamina += maxstamina;
+        if (this.maxStamina >= MAX_STAMINA) this.maxStamina = MAX_STAMINA;
     }
 
     public void StaminaIncrease(int stamina = 50)
     {
         this.stamina += stamina;
+        if (this.stamina >= this.maxStamina) this.stamina = this.maxStamina;
     }
 
-    public void IntIncrease(int Int = 25)
+    public void IntellgenceIncrease(int Int = 25)
     {
         this.intelligence += Int;
+        if (this.intelligence >= MAX_INTELLIGENCE) this.intelligence = MAX_INTELLIGENCE;
     }
 
     public void SpeedIncrease(int speed = 25)
     {
         this.speed += speed;
+        if (this.Speed >= MAX_SPEED) this.speed = MAX_SPEED;
     }
 
     public void MoneyIncrease(int money = 1)
     {
         this.money += money;
+        if(this.money >= MAX_MONEY) this.money = MAX_MONEY;
     }
 
     public void SafeIncrease(int safe = 1)
     {
         this.safe += safe;
+        if (this.safe >= MAX_SAFE)  this.safe = MAX_SAFE;
     }
 
     public void HealthDecrease(int health = 200)
     {
         this.health -= health;
+        if(this.health <= 0) this.health = 0;
     }
 
     public void StressDecrease(int stress = 50)
     {
         this.stress -= stress;
+        if (this.stress <= 0) this.stress = 0;
     }
 
     public void StaminaDecrease(int stamina = 1)
     {
         this.stamina -= stamina;
+        if( this.stamina <= 0) this.stamina = 0;
     }
 
     public void MoneyDecrease(int money = 1)
     {
         this.money -= money;
+        if (this.money <= 0) this.money = 0;
     }
+
 }

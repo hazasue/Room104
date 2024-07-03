@@ -110,7 +110,7 @@ public class PlayerInfoUI : MonoBehaviour
 
     public void UpdateStamina()
     {
-        float StaminaRatio = (float)Stat.Stamina / PlayerStat.MAX_STAMINA;
+        float StaminaRatio = (float)Stat.Stamina / (float)Stat.MaxStamina;
 
         this.staminaBar.fillAmount = StaminaRatio;
     }
