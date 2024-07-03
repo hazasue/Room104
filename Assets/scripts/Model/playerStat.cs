@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class PlayerStat
 {
-    /* 
-     * ���߿� scv���Ͽ��� ��� �;� �� ���� ����
-     * CSVReader.cs����
-     */
 
-    // �ִ� ����
     public const int MAX_HEALTH = 1000;
     public const int MAX_STRESS = 1000;
     public const int MAX_STAMINA = 2000;
@@ -18,7 +13,6 @@ public class PlayerStat
     public const int MAX_MONEY = 9999999;
     public const int MAX_SAFE = 3;
 
-    // �÷��̾� �⺻ ����
     private int health = 500;
     public int Health { get { return health; } }
     private int stress = 700;
@@ -34,7 +28,6 @@ public class PlayerStat
     private int safe = 0;
     public int Safe { get { return safe; } }
 
-    // �÷��̾� ���� ���� �Լ�
     public void HealthIncrease(int health = 50)
     {
         this.health += health;
@@ -70,7 +63,6 @@ public class PlayerStat
         this.safe += safe;
     }
 
-    // ���� ���� �Լ�
     public void HealthDecrease(int health = 200)
     {
         this.health -= health;
