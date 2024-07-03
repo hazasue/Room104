@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     private const string DEFAULT_SCREEN_NAME_SETTINGS = "settings";
     private const string DEFAULT_SCREEN_NAME_REPORT = "report";
     private const string DEFAULT_SCREEN_NAME_CAMERA = "camera";
+    private const string DEFAULT_SCREEN_NAME_JOBHUNTER = "jobhunter";
     private const string DEFAULT_SCREEN_NAME_SAYTALK = "saytalk";
 
     public GameObject smartPhoneScreen;
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
     public GameObject reportScreen;
     public GameObject cameraScreen;
     public GameObject sayTalkScreen;
+    public GameObject jobHunterScreen;
 
 
     private Stack<GameObject> activatedScreens;
@@ -56,6 +58,7 @@ public class UIManager : MonoBehaviour
         screens.Add(DEFAULT_SCREEN_NAME_REPORT, reportScreen);
         screens.Add(DEFAULT_SCREEN_NAME_CAMERA, cameraScreen);
         screens.Add(DEFAULT_SCREEN_NAME_SAYTALK, sayTalkScreen);
+        screens.Add(DEFAULT_SCREEN_NAME_JOBHUNTER, jobHunterScreen);
     }
 
     public static UIManager GetInstance()
@@ -93,6 +96,7 @@ public class UIManager : MonoBehaviour
         }        
         else if (screen.activeSelf == true)
         {
+            Debug.Log($"Screen already activated: {name}");
             return;
         }
 
