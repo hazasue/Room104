@@ -1,3 +1,4 @@
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,9 @@ public class GameManager : Singleton<GameManager>
     private const float DEFAULT_TIME_SCALE_PAUSED = 0f;
     private const float DEFAULT_TIME_SCALE_PLAYING = 1f;
 
-    //«√∑π¿Ã ≈∏¿” ∫Øºˆ
+    private Dictionary<int, List<NpcData>> npcDatas;
+
+    //ÌîåÎ†àÏù¥ ÌÉÄÏûÑ Î≥ÄÏàò
     private int date;
     public int Date { get { return date; } set { date = value; } }
     private int hour;
@@ -45,6 +48,20 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = DEFAULT_TIME_SCALE_PLAYING;
         gameState = eGameState.PLAYING;
+
+        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_NPC_DATA_NAME + ".json"))
+        {
+            npcDatas = new Dictionary<int, List<NpcData>>();
+            JsonManager.CreateJsonFile(JsonManager.DEFAULT_NPC_DATA_NAME, npcDatas);
+        }
+        else
+        {
+            npcDatas = JsonManager.LoadJsonFile<Dictionary<int, List<NpcData>>>(JsonManager.DEFAULT_NPC_DATA_NAME);
+        }
+
+        initNpcTrait();
+
+
     }
 
     public void PauseGame()
@@ -60,4 +77,32 @@ public class GameManager : Singleton<GameManager>
         gameState = eGameState.PLAYING;
         Debug.Log("Game Playing");
     }
+
+    // init npc trait when new game starts
+    private void initNpcTrait()
+    {
+        List<NpcData> npcInitDatas = JsonManager.LoadJsonFile<List<NpcData>>(JsonManager.DEFAULT_NPCINIT_DATA_NAME);
+
+        List<NpcData> tempNpcDatas = new List<NpcData>();
+        
+        bool trait;
+
+        foreach (NpcData data in npcInitDatas)
+        {
+            trait = (Random.Range(0, 2) == 0 ? false : true);
+            tempNpcDatas.Add(new NpcData(data.id, data.name, trait, data.traitName1, data.traitEvents1, !trait,
+                data.traitName2, data.traitEvents2));
+            Debug.Log(
+                $"{data.id}, {data.name}, {trait}, {data.traitName1}, {data.traitEvents1[0]}, {data.traitEvents1[1]}, {!trait}, {data.traitName2}, {data.traitEvents2[0]}, {data.traitEvents2[1]}");
+        }
+
+
+        // Add tempNpcDatas into npcDatas and save json file
+    }
+    
+    // setting side event when date changes
+    private void resetSideEventList() {}
+    
+    // setting guest when date changes
+    private void resetGuest() {}
 }
