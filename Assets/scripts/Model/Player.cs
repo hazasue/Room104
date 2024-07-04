@@ -4,21 +4,20 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
+public enum ePlayerState
+{
+    IDLE,
+    WALK,
+    RUN,
+    INTERACT,
+}
+
 public class Player : MonoBehaviour
 {
     PlayerStat stat;  
 
-    private enum ePlayerState
-    {
-        IDLE,
-        WALK,
-        RUN,
-        INTERACT,
-    }
-    
     private const float DEFAULT_MOVE_SPEED_WALK = 1f;
     private const float DEFAULT_MOVE_SPEED_RUN = 1.5f;
-
      
     private ePlayerState state;
     private bool isRunning;
@@ -29,7 +28,8 @@ public class Player : MonoBehaviour
     {
         state = ePlayerState.IDLE;
         isRunning = false;
-        PlayerStat stat = GetComponent<PlayerStat>();
+        PlayerStat stat = new PlayerStat();
+        Debug.Log(InputManager.Instance.GetKeyAction());
     }
 
     // Update is called once per frame
@@ -110,22 +110,17 @@ public class Player : MonoBehaviour
     {
 
         Vector2 direction = Vector2.zero;
+        if(InputManager.Instance.GetKeyAction() == eKeyAction.Move)
+        {
+            direction += new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        }
 
-        // move directions
-        if (Input.GetKey(KeyCode.LeftArrow)) direction += new Vector2(-1f, 0f);
-        
-        if (Input.GetKey(KeyCode.RightArrow)) direction += new Vector2(1f, 0f);
-        
-        if (Input.GetKey(KeyCode.UpArrow)) direction += new Vector2(0f, 1f);
-        
-        if (Input.GetKey(KeyCode.DownArrow)) direction += new Vector2(0f, -1f);
-        
         // run state
         if (Input.GetKeyDown(KeyCode.LeftShift)) isRunning = true;
         else if (Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
 
 
-        //// �׽�Ʈ��
+        //// 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameManager.Instance.GameState == GameManager.eGameState.PLAYING)
