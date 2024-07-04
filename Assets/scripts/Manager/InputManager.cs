@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// 추가적인 키세팅이 필요하다면 eKeyAction의 FullScreen뒤에 값을 추가하고 KeySettting 클래스의 keyCodes 배열 끝에 값을 추가해주면 됨.
+// 이후 InputManager 클래스의 Update에서 입력을 확인하고 변수를 변경하는 코드 작성
+
 public enum eKeyAction
 {
     None,
@@ -42,26 +46,25 @@ public class InputManager : Singleton<InputManager>
 {
     private bool bUIInputToggle = true;
     public bool BInputToglle { get { return bUIInputToggle; } }
+
     private KeySetting keySet;
+
     private eKeyAction action = eKeyAction.None;
-    // Start is called before the first frame update
+
+
     public override void Awake()
     {
         base.Awake();
         keySet = new KeySetting();
     }
     
-    public eKeyAction GetKeyAction()
-    {
-        return action;
-    }
-
     void Start()
     {
-        for(int i = 1; i < (int)eKeyAction.KEYCOUNT; i++)
+        //For Checking key setting
+        //Check if the correct key is matched
+        for (int i = 1; i < (int)eKeyAction.KEYCOUNT; i++)
         {
             Debug.Log((eKeyAction)i);
-            //Debug.Log("실행됨?" + keySet.Keys[(eKeyAction)i].Count);
             for (int j = 0; j < keySet.Keys[(eKeyAction)i].Count; j++)
             {
                 Debug.Log(keySet.Keys[(eKeyAction)i][j]);
@@ -72,11 +75,20 @@ public class InputManager : Singleton<InputManager>
     // Update is called once per frame
     void Update()
     {
+        if(!Input.anyKey)
+        {
+            action = eKeyAction.None;
+            return;
+        }
+
         foreach(KeyCode key in keySet.Keys[eKeyAction.Move])
         {
             if(Input.GetKey(key))
             {
-                action = eKeyAction.Move;
+                if (Input.GetKey(keySet.Keys[eKeyAction.Run][0]))
+                    action = eKeyAction.Run;
+                else
+                    action = eKeyAction.Move;
                 return;
             }
         }
@@ -84,12 +96,6 @@ public class InputManager : Singleton<InputManager>
         if (Input.GetKeyDown(keySet.Keys[eKeyAction.Interact][0]))
         {
             action = eKeyAction.Interact;
-            return;
-        }
-
-        if (Input.GetKey(keySet.Keys[eKeyAction.Run][0]))
-        {
-            action = eKeyAction.Run;
             return;
         }
 
@@ -105,7 +111,14 @@ public class InputManager : Singleton<InputManager>
             return;
         }
 
+
+        //Last Check
         action = eKeyAction.None;
-        return;
     }
+
+    public eKeyAction GetKeyAction()
+    {
+        return action;
+    }
+
 }

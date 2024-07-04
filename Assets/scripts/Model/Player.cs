@@ -4,163 +4,43 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
-public enum ePlayerState
-{
-    IDLE,
-    WALK,
-    RUN,
-    INTERACT,
-}
-
 public class Player : MonoBehaviour
 {
-    PlayerStat stat;  
-
+    PlayerStat stat;
+    PlayerState state;
     private const float DEFAULT_MOVE_SPEED_WALK = 1f;
     private const float DEFAULT_MOVE_SPEED_RUN = 1.5f;
-     
-    private ePlayerState state;
-    private bool isRunning;
-    private Vector2 moveDirection;
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        state = ePlayerState.IDLE;
-        isRunning = false;
-        PlayerStat stat = new PlayerStat();
+        state = new IdleState();
+        stat = new PlayerStat();
         Debug.Log(InputManager.Instance.GetKeyAction());
     }
 
     // Update is called once per frame
     void Update()
-    {   
-        /*if (GameManager.Instance.GameState == GameManager.eGameState.PAUSED)
-            return;*/
-
-        applyKeyInput();
-        updatePlayerState();
-        
-        switch (state)
-        {
-                
-            case ePlayerState.IDLE:
-                break;
-            
-            case ePlayerState.WALK:
-                walk();
-                break;
-            
-            case ePlayerState.RUN:
-                run();
-                break;
-            
-            case ePlayerState.INTERACT:
-                interact();
-                break;
-            
-            default:
-                Debug.Log($"Invalid Player State: {state}");
-                break;
-        }
-    }
-   
-    public void Init() {}
-
-    private void updatePlayerState()
     {
-        switch (state)
-        {
-            case ePlayerState.IDLE:
-                if (moveDirection != Vector2.zero && !isRunning) 
-                    state = ePlayerState.WALK;
-                else if(moveDirection != Vector2.zero && isRunning)
-                {
-                    state = ePlayerState.RUN;
-                }
-                    
-                break;
-            
-            case ePlayerState.WALK:
-                if (moveDirection == Vector2.zero) state = ePlayerState.IDLE;
-                else if (isRunning)
-                {
-                    state = ePlayerState.RUN;
-                }
-                break;
-            
-            case ePlayerState.RUN:
-                if (moveDirection == Vector2.zero) state = ePlayerState.IDLE;
-                else if (!isRunning)
-                {
-                    state = ePlayerState.WALK;
-                }
-                break;
-            
-            case ePlayerState.INTERACT:
-                break;
-            
-            default:
-                Debug.Log($"Invalid Player State: {state}");
-                break;
-        }
-    }
+        if (GameManager.Instance.GameState == GameManager.eGameState.PAUSED)
+            return;
 
-    private void applyKeyInput()
-    {
+        PlayerState temp = state.TransitionState(InputManager.Instance.GetKeyAction());
 
-        Vector2 direction = Vector2.zero;
-        if(InputManager.Instance.GetKeyAction() == eKeyAction.Move)
+        if (temp != null)
         {
-            direction += new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            state.end(this);
+            state = temp;
+            state.start(this);
         }
 
-        // run state
-        if (Input.GetKeyDown(KeyCode.LeftShift)) isRunning = true;
-        else if (Input.GetKeyUp(KeyCode.LeftShift)) isRunning = false;
+        state.Update(this);
 
-
-        //// 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (GameManager.Instance.GameState == GameManager.eGameState.PLAYING)
-                GameManager.Instance.PauseGame();
-            else
-                GameManager.Instance.ResumeGame();
-        }
-        ////
-
-        direction = direction.normalized;
-
-        setDirections(direction);
     }
 
-    private void setDirections(Vector2 direction) 
+    private void FixedUpdate()
     {
-        this.moveDirection = direction;
-        
-        if (direction == Vector2.zero) return;
-
-        if (direction.x >= 0f) this.transform.localScale = new Vector3(1f, 1f, 1f);
-        else
-        {
-            this.transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
+        state.FixedUpdate(this);
     }
-
-    private void walk()
-    {
-        if (moveDirection == Vector2.zero) return;
-        
-        this.transform.position += new Vector3(moveDirection.x, moveDirection.y, 0f) * Time.deltaTime * DEFAULT_MOVE_SPEED_WALK;
-    }
-
-    private void run()
-    {
-        if (moveDirection == Vector2.zero) return;
-        
-        this.transform.position += new Vector3(moveDirection.x, moveDirection.y, 0f) * Time.deltaTime * DEFAULT_MOVE_SPEED_RUN;
-    }
-    
-    private void interact() {}
 }
+
