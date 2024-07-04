@@ -10,6 +10,8 @@ public class JsonManager
 {
     public static string DEFAULT_SETTING_DATA_NAME = "settings";
     public static string DEFAULT_PRODUCT_DATA_NAME = "products";
+    public static string DEFAULT_NPCINIT_DATA_NAME = "npcinitdata";
+    public static string DEFAULT_NPC_DATA_NAME = "npcdata";
     
     public static void CreateJsonFile(string fileName, object obj)
     {
