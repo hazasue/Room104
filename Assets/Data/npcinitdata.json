@@ -1,0 +1,23 @@
+[
+    {
+        "id":802,
+        "name":"집주인",
+        "trait1":false,
+        "traitName1":"침입",
+        "traitEvents1": [21001, 21002],
+        "trait2":false,
+        "traitName2":"곰손",
+        "traitEvents2": [21041, 21042]
+    },
+    {
+        "id":814,
+        "name":"101",
+        "trait1":false,
+        "traitName1":"주정뱅이",
+        "traitEvents1": [21011, 21012],
+        "trait2":false,
+        "traitName2":"실내흡연",
+        "traitEvents2": [21031, 21032]
+    }
+
+]
