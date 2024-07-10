@@ -13,6 +13,11 @@ public class TitleManager : MonoBehaviour
     private const string DEFAULT_SCREEN_NAME_SETTINGS = "settings";
     private const string DEFAULT_SCREEN_NAME_CREDIT = "credit";
 
+    private static Vector3 DEFAULT_ARROW_POSITION = new Vector3(50f, -100f, 0f);
+    private static Vector3 DEFAULT_ARROW_POSITION_GAP = new Vector3(0f, -260f, 0f);
+    
+    private const int MAX_SAVE_SLOT_COUNT = 3;
+
     public GameObject newGameScreen;
     public GameObject loadGameScreen;
     public GameObject settingsScreen;
@@ -21,7 +26,9 @@ public class TitleManager : MonoBehaviour
     private Dictionary<string, GameObject> screens;
     private Stack<GameObject> activatedScreens;
 
-    private Dictionary<int, GameData> gameDatas;
+    private GameData[] gameDatas;
+    private int selectedSlot;
+    public Transform arrowObject;
     public Transform loadViewPort;
     public LoadGameInfo loadGamePrefab;
     
@@ -31,30 +38,16 @@ public class TitleManager : MonoBehaviour
         init();
     }
 
+    void Update()
+    {
+        applyKeyInput();
+    }
+
     private void init()
     {
         instance = this;
-        
-        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_CURRENT_DATA_NAME + ".json"))
-        {
-            JsonManager.CreateJsonFile(JsonManager.DEFAULT_CURRENT_DATA_NAME, new CurrentGameInfo(true, 0));
-        }
 
-        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_GAME_DATA_NAME + ".json"))
-        {
-            gameDatas = new Dictionary<int, GameData>();
-            JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
-        }
-        else
-        {
-            gameDatas = JsonManager.LoadJsonFile<Dictionary<int, GameData>>(JsonManager.DEFAULT_GAME_DATA_NAME);
-
-            foreach (GameData data in gameDatas.Values)
-            {
-                LoadGameInfo go = Instantiate(loadGamePrefab, loadViewPort, true);
-                go.Init(data.root, data.episode, data.date, data.gameTime, data.playTime);
-            }
-        }
+        initDatas();
 
         activatedScreens = new Stack<GameObject>();
         screens = new Dictionary<string, GameObject>();
@@ -63,8 +56,38 @@ public class TitleManager : MonoBehaviour
         screens.Add(DEFAULT_SCREEN_NAME_LOADGAME, loadGameScreen);
         screens.Add(DEFAULT_SCREEN_NAME_SETTINGS, settingsScreen);
         screens.Add(DEFAULT_SCREEN_NAME_CREDIT, creditScreen);
+
+        selectedSlot = 0;
     }
-    
+
+    private void initDatas()
+    {
+        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_CURRENT_DATA_NAME + ".json"))
+        {
+            JsonManager.CreateJsonFile(JsonManager.DEFAULT_CURRENT_DATA_NAME, new CurrentGameInfo(true, 0));
+        }
+
+        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_GAME_DATA_NAME + ".json"))
+        {
+            gameDatas = new GameData[MAX_SAVE_SLOT_COUNT];
+            JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
+        }
+        else
+        {
+            gameDatas = JsonManager.LoadJsonFile<GameData[]>(JsonManager.DEFAULT_GAME_DATA_NAME);
+
+            foreach (GameData data in gameDatas)
+            {
+                LoadGameInfo go = Instantiate(loadGamePrefab, loadViewPort, true);
+                if(data != null) go.Init(data.root, data.episode, data.date, data.gameTime, data.playTime);
+                else
+                {
+                    Debug.Log("null data");
+                }
+            }
+        }
+    }
+
     public static TitleManager GetInstance()
     {
         if (instance != null) return instance;
@@ -104,13 +127,40 @@ public class TitleManager : MonoBehaviour
         JsonManager.CreateJsonFile(JsonManager.DEFAULT_CURRENT_DATA_NAME, new CurrentGameInfo(true, 0));
     }
 
-    public void LoadGame()
+    public void LoadGame(int idx)
     {
-        JsonManager.CreateJsonFile(JsonManager.DEFAULT_CURRENT_DATA_NAME, new CurrentGameInfo(false, 0));
+        JsonManager.CreateJsonFile(JsonManager.DEFAULT_CURRENT_DATA_NAME, new CurrentGameInfo(false, idx));
     }
 
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+
+    private void applyKeyInput()
+    {
+        // if load game screen activated
+        if (!loadGameScreen.activeSelf) return;
+
+        if (Input.GetKeyDown(KeyCode.UpArrow) && selectedSlot > 0)
+            changeSelectArrowPosition(--selectedSlot);
+        else if (Input.GetKeyDown(KeyCode.DownArrow) && selectedSlot < MAX_SAVE_SLOT_COUNT - 1)
+        {
+            changeSelectArrowPosition(++selectedSlot);
+        }
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (gameDatas[selectedSlot] == null) return;
+            LoadGame(selectedSlot);
+            SceneManager.Instance().LoadScene("ingame");
+        }
+    }
+
+    private void changeSelectArrowPosition(int idx)
+    {
+        if (idx >= MAX_SAVE_SLOT_COUNT) return;
+
+        arrowObject.localPosition = DEFAULT_ARROW_POSITION + (DEFAULT_ARROW_POSITION_GAP * idx);
     }
 }
