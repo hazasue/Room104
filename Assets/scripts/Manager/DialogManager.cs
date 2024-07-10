@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DialogManager : MonoBehaviour
+public class DialogManager : Singleton<GameManager>
 {
     private const string CSV_FILENAME_MAINEVENT = "main_event";
     
     // event_id - group_id - dialog_info
-    private Dictionary<int, Dictionary<int, List<Dialog>>> allDialogs;
+    //private Dictionary<int, Dictionary<int, List<Dialog>>> allDialogs;
+    private Dictionary<int, List<Dialog>> dialogLists;
     private List<Dialog> currentDialogs;
     private int currentDialogIdx;
 
     // Start is called before the first frame update
-    void Awake()
+    public override void Awake()
     {
+        base.Awake();
         init();
     }
 
     private void init()
     {
+        /*
         allDialogs = new Dictionary<int, Dictionary<int, List<Dialog>>>();
         currentDialogs = null;
 
@@ -62,10 +65,31 @@ public class DialogManager : MonoBehaviour
         }
 
         Debug.Log($"event: {allDialogs.Count}\n group: {groupCount}\n dialog: {dialogCount}");
+        */
+        
+        
+        dialogLists = new Dictionary<int, List<Dialog>>();
+        
+        int dialogGroupId;
+        List<Dialog> tempDialogs;
+        Dialog tempDialog;
+        
+        List<Dictionary<string, object>> mainEventDB = CSVReader.Read(CSV_FILENAME_MAINEVENT);
+        foreach (Dictionary<string, object> data in mainEventDB)
+        {
+            dialogGroupId = (int)data["dialog_group_id"];
 
-        //StartDialog(10001, 1);
+            if (!dialogLists.TryGetValue(dialogGroupId, out tempDialogs))
+            {
+                dialogLists.Add(dialogGroupId, new List<Dialog>());
+            }
+
+            tempDialog = new Dialog((int)data["dialog_num"], data["type"].ToString(), data["text"].ToString());
+            dialogLists[dialogGroupId].Add(tempDialog);
+        }
     }
 
+    /*
     public void StartDialog(int eventId, int dialogGroupId)
     {
         initDialog(eventId, dialogGroupId);
@@ -77,6 +101,14 @@ public class DialogManager : MonoBehaviour
         currentDialogIdx = 0;
 
         handleDialog(currentDialogs[currentDialogIdx++]);
+    }
+    */
+
+    public List<Dialog> GetDialogList(int groupId)
+    {
+        if (!dialogLists.ContainsKey(groupId)) return new List<Dialog>();
+        
+        return dialogLists[groupId];
     }
 
     private void handleDialog(Dialog dialog)
@@ -114,6 +146,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    /*
     public void UpdateDialog()
     {
         if (currentDialogs == null 
@@ -127,4 +160,5 @@ public class DialogManager : MonoBehaviour
 
         handleDialog(currentDialogs[currentDialogIdx++]);
     }
+    */
 }
