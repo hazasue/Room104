@@ -31,9 +31,12 @@ public class UIManager : MonoBehaviour
     public TMP_Text currentDateInfo;
     public LoadGameInfo[] saveFiles = new LoadGameInfo[2];
 
+    public GameObject diaryWarningMessage;
+
 
     private Stack<GameObject> activatedScreens;
     private Dictionary<string, GameObject> screens;
+    private int dataIdx;
     
     // Start is called before the first frame update
     void Awake()
@@ -123,6 +126,7 @@ public class UIManager : MonoBehaviour
     {
         //init current infos, saved datas
         GameData gameData = GameManager.Instance.Data;
+        dataIdx = -1;
 
         currentDateInfo.text = $"{gameData.date} 일차 {gameData.gameTime}";
         
@@ -138,7 +142,27 @@ public class UIManager : MonoBehaviour
 
     public void SaveData(int idx)
     {
+        if (JsonManager.LoadJsonFile<GameData[]>(JsonManager.DEFAULT_GAME_DATA_NAME)[idx] != null)
+        {
+            diaryWarningMessage.SetActive(true);
+            dataIdx = idx;
+            return;
+        }
+        
         GameManager.Instance.SaveGame(idx);
         initDiary();
+    }
+
+    public void ClearData(bool state)
+    {
+        if (state)
+        {
+            GameData[] gameDatas = JsonManager.LoadJsonFile<GameData[]>(JsonManager.DEFAULT_GAME_DATA_NAME);
+            gameDatas[dataIdx] = null;
+            JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
+            SaveData(dataIdx);
+        }
+
+        diaryWarningMessage.SetActive(false);
     }
 }
