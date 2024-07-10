@@ -16,9 +16,14 @@ public class GameManager : Singleton<GameManager>
 
     private const float DEFAULT_TIME_SCALE_PAUSED = 0f;
     private const float DEFAULT_TIME_SCALE_PLAYING = 1f;
+    private const int MAX_SAVE_SLOT_COUNT = 3;
 
-    private Dictionary<int, GameData> gameDatas;
+    private GameData[] gameDatas;
     private Dictionary<int, List<NpcData>> npcDatas;
+
+    private int dataKey;
+    private GameData gameData;
+    public GameData Data { get { return gameData; } }
 
     //플레이 타임 변수
     private int date;
@@ -50,16 +55,8 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = DEFAULT_TIME_SCALE_PLAYING;
         gameState = eGameState.PLAYING;
 
-        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_NPC_DATA_NAME + ".json"))
-        {
-            npcDatas = new Dictionary<int, List<NpcData>>();
-            JsonManager.CreateJsonFile(JsonManager.DEFAULT_NPC_DATA_NAME, npcDatas);
-        }
-        else
-        {
-            npcDatas = JsonManager.LoadJsonFile<Dictionary<int, List<NpcData>>>(JsonManager.DEFAULT_NPC_DATA_NAME);
-        }
-
+        initDatas();
+        
         if (JsonManager.LoadJsonFile<CurrentGameInfo>(JsonManager.DEFAULT_CURRENT_DATA_NAME).newGame)
             newGame();
         else
@@ -84,36 +81,24 @@ public class GameManager : Singleton<GameManager>
 
     private void newGame()
     {
-        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_GAME_DATA_NAME + ".json"))
-        {
-            gameDatas = new Dictionary<int, GameData>();
-            JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
-        }
-        else
-        {
-            gameDatas = JsonManager.LoadJsonFile<Dictionary<int, GameData>>(JsonManager.DEFAULT_GAME_DATA_NAME);
-        }
-
         int currentKey = 0;
         
-        if(gameDatas.Count <= 0) 
-            gameDatas.Add(0, new GameData("test", 0, 0, 0, 0f, initNpcTrait()));
-        else
-        {
-            foreach (int data in gameDatas.Keys)
-            {
-                if (data > currentKey) currentKey = data;
-            }
-            
-            gameDatas.Add(currentKey + 1, new GameData("test", 0, 0, 0, 0f, initNpcTrait()));
-        }
-
-        JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
+        gameData = new GameData("root name", 0, 0, 0, 0f, initNpcTrait());
     }
 
-    private void loadGame(int dataId)
+    private void loadGame(int slotIdx)
     {
+        if (slotIdx >= MAX_SAVE_SLOT_COUNT) return;
         
+        gameData = gameDatas[slotIdx];
+    }
+
+    public void SaveGame(int slotIdx)
+    {
+        if (slotIdx >= MAX_SAVE_SLOT_COUNT) return;
+
+        gameDatas[slotIdx] = gameData;
+        JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
     }
 
     // init npc trait when new game starts
@@ -139,7 +124,30 @@ public class GameManager : Singleton<GameManager>
 
         // Add tempNpcDatas into npcDatas and save json file
     }
-    
+
+    private void initDatas()
+    {
+        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_NPC_DATA_NAME + ".json"))
+        {
+            npcDatas = new Dictionary<int, List<NpcData>>();
+            JsonManager.CreateJsonFile(JsonManager.DEFAULT_NPC_DATA_NAME, npcDatas);
+        }
+        else
+        {
+            npcDatas = JsonManager.LoadJsonFile<Dictionary<int, List<NpcData>>>(JsonManager.DEFAULT_NPC_DATA_NAME);
+        }
+
+        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_GAME_DATA_NAME + ".json"))
+        {
+            gameDatas = new GameData[MAX_SAVE_SLOT_COUNT];
+            JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
+        }
+        else
+        {
+            gameDatas = JsonManager.LoadJsonFile<GameData[]>(JsonManager.DEFAULT_GAME_DATA_NAME);
+        }
+    }
+
     // setting side event when date changes
     private void resetSideEventList() {}
     
