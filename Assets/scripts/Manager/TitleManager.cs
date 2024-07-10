@@ -75,15 +75,15 @@ public class TitleManager : MonoBehaviour
         else
         {
             gameDatas = JsonManager.LoadJsonFile<GameData[]>(JsonManager.DEFAULT_GAME_DATA_NAME);
-
-            foreach (GameData data in gameDatas)
+        }
+        
+        foreach (GameData data in gameDatas)
+        {
+            LoadGameInfo go = Instantiate(loadGamePrefab, loadViewPort, true);
+            if(data != null) go.Init(data.root, data.episode, data.date, data.gameTime, data.playTime);
+            else
             {
-                LoadGameInfo go = Instantiate(loadGamePrefab, loadViewPort, true);
-                if(data != null) go.Init(data.root, data.episode, data.date, data.gameTime, data.playTime);
-                else
-                {
-                    Debug.Log("null data");
-                }
+                Debug.Log("null data");
             }
         }
     }
