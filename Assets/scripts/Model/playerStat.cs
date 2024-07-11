@@ -54,7 +54,7 @@ public class PlayerStat
         if (this.stamina >= this.maxStamina) this.stamina = this.maxStamina;
     }
 
-    public void IntellgenceIncrease(int Int = 25)
+    public void IntelligenceIncrease(int Int = 25)
     {
         this.intelligence += Int;
         if (this.intelligence >= MAX_INTELLIGENCE) this.intelligence = MAX_INTELLIGENCE;
@@ -82,6 +82,12 @@ public class PlayerStat
     {
         this.health -= health;
         if(this.health <= 0) this.health = 0;
+    }
+
+    public void IntelligenceDecrease(int intelligence = 50)
+    {
+        this.intelligence -= intelligence;
+        if (this.intelligence <= 0) this.intelligence = 0;
     }
 
     public void StressDecrease(int stress = 50)
