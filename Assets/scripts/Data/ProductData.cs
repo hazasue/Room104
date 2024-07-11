@@ -5,15 +5,21 @@ using UnityEngine;
 [System.Serializable]
 public class ProductData
 {
-    public string name;
-    public string option;
+    public string nameKR;
+    public string nameEN;
+    public string description;
+    public string requiredStat;
+    public int requiredStatValue;
     public int price;
     public int count;
 
-    public ProductData(string name, string option, int price, int count)
+    public ProductData(string nameKR, string nameEN, string description, string requiredStat, int requiredStatValue, int price, int count)
     {
-        this.name = name;
-        this.option = option;
+        this.nameKR = nameKR;
+        this.nameEN = nameEN;
+        this.description = description;
+        this.requiredStat = requiredStat;
+        this.requiredStatValue = requiredStatValue;
         this.price = price;
         this.count = count;
     }

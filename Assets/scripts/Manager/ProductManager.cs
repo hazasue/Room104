@@ -8,8 +8,8 @@ public class ProductManager : MonoBehaviour
 
     public Product productObject;
 
-    private Dictionary<string, ProductData> productDatas;
-    private Dictionary<string, Product> products; 
+    private Dictionary<int, ProductData> productDatas;
+    private Dictionary<int, Product> products; 
 
     // Start is called before the first frame update
     void Awake()
@@ -19,8 +19,8 @@ public class ProductManager : MonoBehaviour
 
     private void init()
     {
-        productDatas = JsonManager.LoadJsonFile<Dictionary<string, ProductData>>(JsonManager.DEFAULT_PRODUCT_DATA_NAME);
-        products = new Dictionary<string, Product>();
+        productDatas = JsonManager.LoadJsonFile<Dictionary<int, ProductData>>(JsonManager.DEFAULT_PRODUCT_DATA_NAME);
+        products = new Dictionary<int, Product>();
 
         for (int i = viewport.childCount - 1; i >= 0; i--)
         {
@@ -28,10 +28,11 @@ public class ProductManager : MonoBehaviour
         }
 
         Product tempProduct;
-        foreach (ProductData data in productDatas.Values)
+        foreach (KeyValuePair<int, ProductData> data in productDatas)
         {
             tempProduct = Instantiate(productObject, viewport, true);
-            tempProduct.Init(data.name, data.option, data.price, data.count);
+            tempProduct.Init(data.Value.nameKR, data.Value.description, data.Value.price, data.Value.count);
+            products.Add(data.Key, tempProduct);
         }
     }
 }
