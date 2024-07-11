@@ -65,8 +65,11 @@ public class WalkState : PlayerState
 
     public override void Update(Player player)
     {
-        direction += new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        direction = direction.normalized;       
+        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        direction = direction.normalized;
+        if (direction.magnitude > 0)
+            player.direction = direction;
+      
     }
     
     public override void FixedUpdate(Player player) 
@@ -104,8 +107,10 @@ public class RunState : PlayerState
 
     public override void Update(Player player)
     {
-        direction += new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        direction = direction.normalized;       
+        direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        direction = direction.normalized;
+        if (direction.magnitude > 0)
+            player.direction = direction;    
     }
 
     public override void FixedUpdate(Player player) 
@@ -118,17 +123,219 @@ public class RunState : PlayerState
 
 public class InteractState : PlayerState
 {
+    bool isFind = false;
+    private string objectName = "";
     public override void start(Player player)
     {
-
+        RaycastHit2D hit = Physics2D.Raycast(player.transform.position, player.direction, 2.0f);
+        if (hit.collider != null)
+        {
+            isFind = true;
+            objectName = hit.collider.name;
+            Debug.Log("실행됨");
+            Debug.Log(hit.collider.name);
+            //오브젝트에 따라 행동 변경 추가.
+        }
     }
 
     public override PlayerState TransitionState(eKeyAction action)
     {
-        return new IdleState();
+        if(isFind == false)
+        {
+            return new IdleState();
+        }
+        else
+        {
+            if(objectName == "Desk")
+            {
+                return new StudyState();
+            }
+            else if(objectName == "Chair")
+            {
+                return new ListeningMusicState();
+            }
+            else if (objectName == "Bed")
+            {
+                return new RestState();
+            }
+            else if(objectName == "Park")
+            {
+                return new ExerciseState();
+            }
+
+        }
+        return null;
     }
 
     public override void Update(Player player) { }
     public override void FixedUpdate(Player player) { }
     public override void end(Player player) { }
+}
+
+public abstract class BehaviorState : PlayerState
+{
+    protected float time = 0.0f;
+    public abstract override void start(Player player);
+    public override PlayerState TransitionState(eKeyAction action)
+    {
+        if(action == eKeyAction.Interact)
+        {
+            return new IdleState();
+        }
+        return null;
+    }
+    public override void Update(Player player)
+    {
+        time += Time.deltaTime;
+    }
+    public abstract override void FixedUpdate(Player player);
+    public abstract override void end(Player player);
+}
+
+public class ExerciseState : BehaviorState
+{
+    public override void start(Player player)
+    {
+
+    }
+
+    public override void Update(Player player)
+    {
+        base.Update(player);
+        if(time >= 5.0f)
+        {
+            time = 0.0f;
+            GameManager.Instance.ModifyDateTime();
+            player.Stat.StaminaIncrease();
+            player.Stat.HealthDecrease();
+            player.Stat.StressDecrease();
+        }
+    }
+
+    public override void FixedUpdate(Player player)
+    {
+
+    }
+
+    public override void end(Player player)
+    {
+
+    }
+}
+
+public class StudyState : BehaviorState
+{
+    public override void start(Player player)
+    {
+
+    }
+
+    public override void Update(Player player)
+    {
+        base.Update(player);
+        if (time >= 5.0f)
+        {
+            time = 0.0f;
+            GameManager.Instance.ModifyDateTime();
+            player.Stat.IntelligenceIncrease();
+            player.Stat.HealthDecrease();
+            player.Stat.StressIncrease();
+        }
+    }
+
+    public override void FixedUpdate(Player player)
+    {
+
+    }
+
+    public override void end(Player player)
+    {
+
+    }
+}
+
+public class RestState : BehaviorState
+{
+    public override void start(Player player)
+    {
+
+    }
+
+    public override void Update(Player player)
+    {
+        base.Update(player);
+        if (time >= 5.0f)
+        {
+            time = 0.0f;
+            GameManager.Instance.ModifyDateTime();
+            player.Stat.IntelligenceDecrease();
+            player.Stat.HealthDecrease();
+            player.Stat.StressDecrease();
+        }
+    }
+
+    public override void FixedUpdate(Player player)
+    {
+
+    }
+
+    public override void end(Player player)
+    {
+
+    }
+}
+
+public class ListeningMusicState : BehaviorState
+{
+    public override void start(Player player)
+    {
+
+    }
+
+    public override void Update(Player player)
+    {
+        base.Update(player);
+        if (time >= 5.0f)
+        {
+            time = 0.0f;
+            GameManager.Instance.ModifyDateTime();
+            player.Stat.IntelligenceDecrease();
+            player.Stat.HealthDecrease();
+            player.Stat.StressDecrease();
+        }
+    }
+
+    public override void FixedUpdate(Player player)
+    {
+
+    }
+
+    public override void end(Player player)
+    {
+
+    }
+}
+
+public class SleepState : BehaviorState
+{
+    public override void start(Player player)
+    {
+
+    }
+
+    public override void Update(Player player)
+    {
+        base.Update(player);
+        player.Stat.HealthIncrease();
+    }
+
+    public override void FixedUpdate(Player player)
+    {
+
+    }
+
+    public override void end(Player player)
+    {
+
+    }
 }

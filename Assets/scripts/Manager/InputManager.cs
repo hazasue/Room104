@@ -13,6 +13,7 @@ public enum eKeyAction
     Run,
     Interact,
     Setting,
+    TextSkip,
     FullScreen,
     KEYCOUNT
 }
@@ -24,7 +25,7 @@ public class KeySetting
 
     public KeySetting()
     {
-        KeyCode[] keyCodes = new KeyCode[] { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.UpArrow, KeyCode.LeftShift, KeyCode.E, KeyCode.Escape, KeyCode.F4 };
+        KeyCode[] keyCodes = new KeyCode[] { KeyCode.LeftArrow, KeyCode.RightArrow, KeyCode.DownArrow, KeyCode.UpArrow, KeyCode.LeftShift, KeyCode.E, KeyCode.Escape, KeyCode.X, KeyCode.F4 };
         for (int i = 1; i < (int)eKeyAction.KEYCOUNT; i++)
         {
             List<KeyCode> temp = new List<KeyCode>();
@@ -81,7 +82,14 @@ public class InputManager : Singleton<InputManager>
             return;
         }
 
-        foreach(KeyCode key in keySet.Keys[eKeyAction.Move])
+
+        if (Input.GetKeyDown(keySet.Keys[eKeyAction.Interact][0]))
+        {
+            action = eKeyAction.Interact;
+            return;
+        }
+
+        foreach (KeyCode key in keySet.Keys[eKeyAction.Move])
         {
             if(Input.GetKey(key))
             {
@@ -93,15 +101,15 @@ public class InputManager : Singleton<InputManager>
             }
         }
 
-        if (Input.GetKeyDown(keySet.Keys[eKeyAction.Interact][0]))
-        {
-            action = eKeyAction.Interact;
-            return;
-        }
-
         if (Input.GetKey(keySet.Keys[eKeyAction.Setting][0]))
         {
             action = eKeyAction.Setting;
+            return;
+        }
+
+        if (Input.GetKey(keySet.Keys[eKeyAction.TextSkip][0]))
+        {
+            action = eKeyAction.TextSkip;
             return;
         }
 
@@ -110,7 +118,6 @@ public class InputManager : Singleton<InputManager>
             action = eKeyAction.FullScreen;
             return;
         }
-
 
         //Last Check
         action = eKeyAction.None;

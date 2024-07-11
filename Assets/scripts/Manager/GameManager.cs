@@ -60,4 +60,19 @@ public class GameManager : Singleton<GameManager>
         gameState = eGameState.PLAYING;
         Debug.Log("Game Playing");
     }
+
+    public void ModifyDateTime()
+    {
+        minute += 1;
+        if(minute == 60)
+        {
+            minute = 0;
+            hour += 1;
+        }
+        if(hour == 24)
+        {
+            hour = 0;
+            date += 1;
+        }
+    }
 }

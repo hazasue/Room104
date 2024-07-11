@@ -6,14 +6,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    PlayerStat stat;
-    PlayerState state;
+    private PlayerStat stat;
+    public PlayerStat Stat { get { return stat; } }
+
+    private PlayerState state;
+    private PlayerState Stete { get { return state; } }
+
+    public Vector2 direction;
+
     private const float DEFAULT_MOVE_SPEED_WALK = 1f;
     private const float DEFAULT_MOVE_SPEED_RUN = 1.5f;
 
     // Start is called before the first frame update
     void Start()
     {
+        direction = new Vector2(0.0f, 0.0f);
         state = new IdleState();
         stat = new PlayerStat();
         Debug.Log(InputManager.Instance.GetKeyAction());
@@ -25,13 +32,16 @@ public class Player : MonoBehaviour
         if (GameManager.Instance.GameState == GameManager.eGameState.PAUSED)
             return;
 
-        PlayerState temp = state.TransitionState(InputManager.Instance.GetKeyAction());
-
-        if (temp != null)
+        if (InputManager.Instance.BInputToglle == false)
         {
-            state.end(this);
-            state = temp;
-            state.start(this);
+            PlayerState temp = state.TransitionState(InputManager.Instance.GetKeyAction());
+
+            if (temp != null)
+            {
+                state.end(this);
+                state = temp;
+                state.start(this);
+            }
         }
 
         state.Update(this);
