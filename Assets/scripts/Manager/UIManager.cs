@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -27,9 +28,15 @@ public class UIManager : MonoBehaviour
     public GameObject sayTalkScreen;
     public GameObject jobHunterScreen;
 
+    public TMP_Text currentDateInfo;
+    public LoadGameInfo[] saveFiles = new LoadGameInfo[2];
+
+    public GameObject diaryWarningMessage;
+
 
     private Stack<GameObject> activatedScreens;
     private Dictionary<string, GameObject> screens;
+    private int dataIdx;
     
     // Start is called before the first frame update
     void Awake()
@@ -46,6 +53,8 @@ public class UIManager : MonoBehaviour
     private void init()
     {
         instance = this;
+
+        initDiary();
 
         activatedScreens = new Stack<GameObject>();
         screens = new Dictionary<string, GameObject>();
@@ -111,5 +120,49 @@ public class UIManager : MonoBehaviour
         activatedScreens.Pop().SetActive(false);
 
         if (activatedScreens.Count > 0) activatedScreens.Peek().SetActive(true);
+    }
+
+    private void initDiary()
+    {
+        //init current infos, saved datas
+        GameData gameData = GameManager.Instance.Data;
+        dataIdx = -1;
+
+        currentDateInfo.text = $"{gameData.date} 일차 {gameData.gameTime}";
+        
+        GameData[] gameDatas = JsonManager.LoadJsonFile<GameData[]>(JsonManager.DEFAULT_GAME_DATA_NAME);
+
+        for (int i = 1; i <= 2; i++)
+        {
+            if (gameDatas[i] == null) continue;
+
+            saveFiles[i - 1].Init(gameDatas[i]);
+        }
+    }
+
+    public void SaveData(int idx)
+    {
+        if (JsonManager.LoadJsonFile<GameData[]>(JsonManager.DEFAULT_GAME_DATA_NAME)[idx] != null)
+        {
+            diaryWarningMessage.SetActive(true);
+            dataIdx = idx;
+            return;
+        }
+        
+        GameManager.Instance.SaveGame(idx);
+        initDiary();
+    }
+
+    public void ClearData(bool state)
+    {
+        if (state)
+        {
+            GameData[] gameDatas = JsonManager.LoadJsonFile<GameData[]>(JsonManager.DEFAULT_GAME_DATA_NAME);
+            gameDatas[dataIdx] = null;
+            JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
+            SaveData(dataIdx);
+        }
+
+        diaryWarningMessage.SetActive(false);
     }
 }
