@@ -1,24 +1,93 @@
 {
-    "test1":
+    "401":
     {
-        "name":"test1",
-        "option":"testOption1",
-        "price":1000,
+        "nameKR":"안전고리",
+        "nameEN":"Security Chain",
+        "description":"...",
+        "requiredStat":null,
+        "requiredStatValue": 0,
+        "price":10000,
         "count":1
     },
-    "test2":
+    "402":
     {
-        "name":"test2",
-        "option":"testOption2",
-        "price":2000,
-        "count":2
+        "nameKR":"문고리 잠금",
+        "nameEN":"Knob Lock",
+        "description":"...",
+        "requiredStat":null,
+        "requiredStatValue": 0,
+        "price":40000,
+        "count":1
     },
-    "test3":
+    "403":
     {
-        "name":"test3",
-        "option":"testOption3",
-        "price":3000,
-        "count":3
-    }
+        "nameKR":"블라인드 교체",
+        "nameEN":"Blinds",
+        "description":"...",
+        "requiredStat":null,
+        "requiredStatValue": 0,
+        "price":50000,
+        "count":1
+    },
+    "404":
+    {
+        "nameKR":"운동화",
+        "nameEN":"Sneakers",
+        "description":"...",
+        "requiredStat":null,
+        "requiredStatValue": 0,
+        "price":60000,
+        "count":1
+    },
+    "405":
+    {
+        "nameKR":"철창",
+        "nameEN":"Window Bars",
+        "description":"...",
+        "requiredStat":null,
+        "requiredStatValue": 0,
+        "price":60000,
+        "count":1
+    },
+    "406":
+    {
+        "nameKR":"도어 경보기",
+        "nameEN":"Door Alarm",
+        "description":"...",
+        "requiredStat":null,
+        "requiredStatValue": 0,
+        "price":70000,
+        "count":1
+    },
+    "407":
+    {
+        "nameKR":"창문 잠금 장치",
+        "nameEN":"Window Lock",
+        "description":"...",
+        "requiredStat":null,
+        "requiredStatValue": 0,
+        "price":80000,
+        "count":1
+    },
+    "408":
+    {
+        "nameKR":"SD 카드",
+        "nameEN":"SD Card",
+        "description":"...",
+        "requiredStat":"Intelligence",
+        "requiredStatValue": 85,
+        "price":120000,
+        "count":1
+    },
+    "409":
+    {
+        "nameKR":"CCTV",
+        "nameEN":"CCTV",
+        "description":"...",
+        "requiredStat":"Intelligence",
+        "requiredStatValue": 85,
+        "price":150000,
+        "count":1
+    },
 
 }
