@@ -348,7 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   image: {fileID: 7334468867072608565}
   nameText: {fileID: 2122437684601228249}
-  optionText: {fileID: 6271586585664108290}
+  descriptionText: {fileID: 6271586585664108290}
   priceText: {fileID: 8442096553310892738}
 --- !u!1 &3018986264269358067
 GameObject:
@@ -702,7 +702,7 @@ GameObject:
   - component: {fileID: 4326118888793119191}
   - component: {fileID: 6271586585664108290}
   m_Layer: 5
-  m_Name: Option
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -755,7 +755,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Option
+  m_text: 'Desc
 
 '
   m_isRightToLeft: 0
