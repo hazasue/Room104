@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class DoorLock : MonoBehaviour
+public class DoorLock : MiniGame
 {
     private const int DEFAULT_NUMBER_COUNT_LITTLE = 4;
     private const int DEFAULT_NUMBER_COUNT_MANY = 8;
@@ -19,13 +19,21 @@ public class DoorLock : MonoBehaviour
     public TMP_Text passWordText;
 
     // Start is called before the first frame update
-    void Start()
+
+    public override void Activate(float safety)
     {
-        InitNumber(DEFAULT_NUMBER_COUNT_MANY);
+        activated = true;
+        init(safety);
+        StartCoroutine(decreaseGauge());
     }
 
-    public void InitNumber(int length)
+    protected override void init(float safety)
     {
+        timeLimit = DEFAULT_TIME_LIMIT + safety;
+        timer.text = timeLimit.ToString("F2");
+        
+        int length = DEFAULT_NUMBER_COUNT_MANY;
+        
         passWord = new List<int>();
         answerSheet = new List<int>();
         answerSheetTexts = new List<TMP_Text>();
@@ -46,6 +54,25 @@ public class DoorLock : MonoBehaviour
         showPassWord();
     }
 
+    protected override IEnumerator interact() { yield break; }
+
+    protected override IEnumerator decreaseGauge()
+    {
+        float gap;
+        while (activated)
+        {
+            gap = Time.deltaTime;
+            yield return new WaitForSeconds(gap);
+            timer.text = timeLimit.ToString("F2");
+            
+            if (timeLimit <= 0f)
+            {
+                sendClearState(false);
+                activated = false;
+            }
+        }
+    }
+
     public void AddNumber(int number)
     {
         int idx = answerSheet.Count;
@@ -59,8 +86,8 @@ public class DoorLock : MonoBehaviour
 
         if (passWord.Count == answerSheet.Count)
         {
-            //success
-            Debug.Log("Complete");
+            sendClearState(true);
+            activated = false;
         }
 
         updateAnswerSheet();
