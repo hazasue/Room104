@@ -5,6 +5,10 @@ using UnityEngine;
 public class MiniGameManager : Singleton<MiniGameManager>
 {
     private Dictionary<string, MiniGame> miniGames;
+
+    public MiniGame doorLock;
+    public MiniGame doorInvade;
+    public MiniGame windowInvade;
     
     // Start is called before the first frame update
     public override void Awake()
@@ -22,6 +26,12 @@ public class MiniGameManager : Singleton<MiniGameManager>
     private void init()
     {
         miniGames = new Dictionary<string, MiniGame>();
+
+        miniGames.Add("door lock", doorLock);
+        miniGames.Add("door invade", doorInvade);
+        miniGames.Add("window invade", windowInvade);
+
+        ActivateGame("window invade");
     }
 
     public void ActivateGame(string name)
@@ -33,7 +43,7 @@ public class MiniGameManager : Singleton<MiniGameManager>
             return;
         }
 
-        miniGame.gameObject.SetActive(false);
+        miniGame.gameObject.SetActive(true);
         miniGame.Activate(0f); // argument: safety
     }
 
