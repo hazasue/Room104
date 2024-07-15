@@ -63,6 +63,8 @@ public class DoorLock : MiniGame
         {
             gap = Time.deltaTime;
             yield return new WaitForSeconds(gap);
+            
+            timeLimit -= gap;
             timer.text = timeLimit.ToString("F2");
             
             if (timeLimit <= 0f)
