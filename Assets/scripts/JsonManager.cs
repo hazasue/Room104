@@ -14,6 +14,7 @@ public class JsonManager
     public static string DEFAULT_NPC_DATA_NAME = "npcdata";
     public static string DEFAULT_GAME_DATA_NAME = "gamedata";
     public static string DEFAULT_CURRENT_DATA_NAME = "CurrentGameData";
+    public static string DEFAULT_ACCOUNT_DATA_NAME = "AccountData";
     
     public static void CreateJsonFile(string fileName, object obj)
     {
