@@ -132,9 +132,9 @@ public class InteractState : PlayerState
         {
             isFind = true;
             objectName = hit.collider.name;
-            Debug.Log("½ÇÇàµÊ");
+            Debug.Log("ì‹¤í–‰ë¨");
             Debug.Log(hit.collider.name);
-            //¿ÀºêÁ§Æ®¿¡ µû¶ó Çàµ¿ º¯°æ Ãß°¡.
+            //ì˜¤ë¸Œì íŠ¸ì— ë”°ë¼ í–‰ë™ ë³€ê²½ ì¶”ê°€.
         }
     }
 
@@ -206,9 +206,9 @@ public class ExerciseState : BehaviorState
         {
             time = 0.0f;
             GameManager.Instance.ModifyDateTime();
-            player.Stat.StaminaIncrease();
-            player.Stat.HealthDecrease();
-            player.Stat.StressDecrease();
+            player.Stat.IncreaseStamina();
+            player.Stat.DecreaseHealth();
+            player.Stat.DecreaseStress();
         }
     }
 
@@ -237,9 +237,9 @@ public class StudyState : BehaviorState
         {
             time = 0.0f;
             GameManager.Instance.ModifyDateTime();
-            player.Stat.IntelligenceIncrease();
-            player.Stat.HealthDecrease();
-            player.Stat.StressIncrease();
+            player.Stat.IncreaseIntelligence();
+            player.Stat.DecreaseHealth();
+            player.Stat.IncreaseStress();
         }
     }
 
@@ -268,9 +268,9 @@ public class RestState : BehaviorState
         {
             time = 0.0f;
             GameManager.Instance.ModifyDateTime();
-            player.Stat.IntelligenceDecrease();
-            player.Stat.HealthDecrease();
-            player.Stat.StressDecrease();
+            player.Stat.DecreaseIntelligence();
+            player.Stat.DecreaseHealth();
+            player.Stat.DecreaseStress();
         }
     }
 
@@ -299,9 +299,9 @@ public class ListeningMusicState : BehaviorState
         {
             time = 0.0f;
             GameManager.Instance.ModifyDateTime();
-            player.Stat.IntelligenceDecrease();
-            player.Stat.HealthDecrease();
-            player.Stat.StressDecrease();
+            player.Stat.DecreaseIntelligence();
+            player.Stat.DecreaseHealth();
+            player.Stat.DecreaseStress();
         }
     }
 
@@ -326,7 +326,7 @@ public class SleepState : BehaviorState
     public override void Update(Player player)
     {
         base.Update(player);
-        player.Stat.HealthIncrease();
+        player.Stat.IncreaseHealth();
     }
 
     public override void FixedUpdate(Player player)

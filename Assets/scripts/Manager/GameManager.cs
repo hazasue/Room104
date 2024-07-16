@@ -18,6 +18,9 @@ public class GameManager : Singleton<GameManager>
     private const float DEFAULT_TIME_SCALE_PLAYING = 1f;
     private const int MAX_SAVE_SLOT_COUNT = 3;
 
+    private Player player;
+    public Player Player { get { return player; } }
+
     private GameData[] gameDatas;
     private Dictionary<int, List<NpcData>> npcDatas;
 
@@ -54,6 +57,7 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = DEFAULT_TIME_SCALE_PLAYING;
         gameState = eGameState.PLAYING;
+        player = GameObject.Find("Player").GetComponent<Player>();
 
         initDatas();
         
@@ -82,8 +86,9 @@ public class GameManager : Singleton<GameManager>
     private void newGame()
     {
         int currentKey = 0;
+        player.Stat.InitNewStats();
         
-        gameData = new GameData("root name", 0, 0, 0, 0f, initNpcTrait());
+        gameData = new GameData("root name", 0, 0, 0, 0f, initNpcTrait(), player.Stat.ConvertToData());
     }
 
     private void loadGame(int slotIdx)
@@ -91,6 +96,7 @@ public class GameManager : Singleton<GameManager>
         if (slotIdx >= MAX_SAVE_SLOT_COUNT) return;
         
         gameData = gameDatas[slotIdx];
+        player.Stat.InitSavedStats(gameData.stats);
     }
 
     public void SaveGame(int slotIdx)

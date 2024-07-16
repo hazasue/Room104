@@ -31,7 +31,7 @@ public class MiniGameManager : Singleton<MiniGameManager>
         miniGames.Add("door invade", doorInvade);
         miniGames.Add("window invade", windowInvade);
 
-        ActivateGame("window invade");
+        //ActivateGame("window invade");
     }
 
     public void ActivateGame(string name)

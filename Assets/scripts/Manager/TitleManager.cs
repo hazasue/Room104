@@ -18,6 +18,7 @@ public class TitleManager : MonoBehaviour
     
     private const int MAX_SAVE_SLOT_COUNT = 3;
 
+    public RawImage title;
     public GameObject newGameScreen;
     public GameObject loadGameScreen;
     public GameObject settingsScreen;
@@ -58,6 +59,8 @@ public class TitleManager : MonoBehaviour
         screens.Add(DEFAULT_SCREEN_NAME_CREDIT, creditScreen);
 
         selectedSlot = 0;
+
+        changeTitleImage();
     }
 
     private void initDatas()
@@ -65,6 +68,11 @@ public class TitleManager : MonoBehaviour
         if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_CURRENT_DATA_NAME + ".json"))
         {
             JsonManager.CreateJsonFile(JsonManager.DEFAULT_CURRENT_DATA_NAME, new CurrentGameInfo(true, 0));
+        }
+        
+        if(!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_ACCOUNT_DATA_NAME + ".json"))
+        {
+            JsonManager.CreateJsonFile(JsonManager.DEFAULT_ACCOUNT_DATA_NAME, new AccountInfo(null));
         }
 
         if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_GAME_DATA_NAME + ".json"))
@@ -162,5 +170,19 @@ public class TitleManager : MonoBehaviour
         if (idx >= MAX_SAVE_SLOT_COUNT) return;
 
         arrowObject.localPosition = DEFAULT_ARROW_POSITION + (DEFAULT_ARROW_POSITION_GAP * idx);
+    }
+
+    private void changeTitleImage()
+    {
+        string currentEnding =
+            JsonManager.LoadJsonFile<AccountInfo>(JsonManager.DEFAULT_ACCOUNT_DATA_NAME).currentEnding;
+
+        if (currentEnding == null)
+        {
+            // Activate special screen that has setting options
+            return;
+        }
+
+        title.texture = Resources.Load<Texture>($"Sprites/Title/{currentEnding}");
     }
 }

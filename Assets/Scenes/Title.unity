@@ -1687,10 +1687,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89312e4c1435d344d9a645d73eb487c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  title: {fileID: 595572232}
   newGameScreen: {fileID: 891214393}
   loadGameScreen: {fileID: 145243854}
   settingsScreen: {fileID: 1117260618}
   creditScreen: {fileID: 150884028}
+  arrowObject: {fileID: 646917277}
   loadViewPort: {fileID: 399566724}
   loadGamePrefab: {fileID: 1119573205631169762, guid: 230048d73eaba34428a162e9d62b93cd, type: 3}
 --- !u!4 &376732519
@@ -2868,14 +2870,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21568628, g: 0.21568628, b: 0.21568628, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 0}
+  m_Texture: {fileID: 2800000, guid: d54a5f376aee8584b90513b635078222, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
