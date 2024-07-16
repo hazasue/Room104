@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private const float DEFAULT_MOVE_SPEED_RUN = 1.5f;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         direction = new Vector2(0.0f, 0.0f);
         state = new IdleState();
