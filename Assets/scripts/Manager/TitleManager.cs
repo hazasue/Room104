@@ -15,9 +15,14 @@ public class TitleManager : MonoBehaviour
 
     private static Vector3 DEFAULT_ARROW_POSITION = new Vector3(50f, -100f, 0f);
     private static Vector3 DEFAULT_ARROW_POSITION_GAP = new Vector3(0f, -260f, 0f);
+
+    private static Vector3 DEFAULT_HOVER_POSITION = new Vector3(0f, 0f, 0f);
+    private static Vector3 DEFAULT_HOVER_GAP = new Vector3(0f, -100f, 0f);
     
     private const int MAX_SAVE_SLOT_COUNT = 3;
 
+    public Transform hover;
+    
     public RawImage title;
     public GameObject newGameScreen;
     public GameObject loadGameScreen;
@@ -172,6 +177,16 @@ public class TitleManager : MonoBehaviour
         arrowObject.localPosition = DEFAULT_ARROW_POSITION + (DEFAULT_ARROW_POSITION_GAP * idx);
     }
 
+    public void HoverButton(int idx)
+    {
+        hover.localPosition = DEFAULT_HOVER_POSITION + DEFAULT_HOVER_GAP * idx;
+    }
+
+    public void ActivateHover(bool state)
+    {
+        hover.gameObject.SetActive(state);
+    }
+
     private void changeTitleImage()
     {
         string currentEnding =
@@ -180,6 +195,39 @@ public class TitleManager : MonoBehaviour
         if (currentEnding == null)
         {
             // Activate special screen that has setting options
+            SceneManager.Instance().LoadScene("firstrun");
+            /*
+            **Add to GameManager.newGame()
+            string root;
+            switch(JsonManager.LoadJsonFile<AccountInfo>(JsonManager.DEFAULT_ACCOUNT_DATA_NAME).currentEnding)
+            {
+                case null:
+                    root = "fake";
+                    break;
+                
+                case "bad":
+                    root = "normal";
+                    break;
+                    
+                case "normal":
+                    root = "good";
+                    break;
+                
+                case "good":
+                    root = "true";
+                    break;
+                    
+                case "true":
+                    root = "true";
+                    break;
+                
+                default:
+                    Debug.Log($"Invalid current ending");
+                    break;
+            }
+            
+            gameData = new GameData(root, 0, 0, 0, 0f, initNpcTrait(), player.Stat.ConvertToData());
+             */
             return;
         }
 

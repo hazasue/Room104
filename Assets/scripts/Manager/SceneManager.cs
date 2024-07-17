@@ -9,6 +9,7 @@ public class SceneManager : MonoBehaviour
 
     private const string SCENE_NAME_TITLE = "title";
     private const string SCENE_NAME_INGAME = "ingame";
+    private const string SCENE_NAME_FIRSTRUN = "firstrun";
 
     void Awake()
     {
@@ -32,6 +33,10 @@ public class SceneManager : MonoBehaviour
                 break;
             
             case SCENE_NAME_INGAME:
+                UnityEngine.SceneManagement.SceneManager.LoadScene(name);
+                break;
+            
+            case SCENE_NAME_FIRSTRUN:
                 UnityEngine.SceneManagement.SceneManager.LoadScene(name);
                 break;
             
