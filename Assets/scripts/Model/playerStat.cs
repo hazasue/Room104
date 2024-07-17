@@ -30,7 +30,7 @@ public class PlayerStat
     private float safety;
     public float Safety { get { return safety; } }
 
-    public void InitNewStats()
+    public PlayerStat()
     {
         health = 500f;
         stress = 700f;
@@ -59,7 +59,10 @@ public class PlayerStat
         return new StatsData(health, stress, stamina, maxStamina, intelligence, speed, money, safety);
     }
 
-
+    public void DebugLogPlayerStat()
+    {
+        Debug.Log(this.health + ", " + this.stress + ", " + this.stamina + ", " + this.intelligence + ", " + this.speed);
+    }
 
     public void IncreaseHealth(float health = 50f)
     {

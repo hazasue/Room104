@@ -45,7 +45,7 @@ public class KeySetting
 
 public class InputManager : Singleton<InputManager>
 {
-    private bool bUIInputToggle = true;
+    private bool bUIInputToggle = false;
     public bool BInputToglle { get { return bUIInputToggle; } }
 
     private KeySetting keySet;

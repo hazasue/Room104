@@ -6,6 +6,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public delegate void statEventHandler();
+    public statEventHandler StatEventHandler;
+
+    public delegate void timeEventHandler();
+    public timeEventHandler TimeEventHandler;
+
     private PlayerStat stat;
     public PlayerStat Stat { get { return stat; } }
 
@@ -25,7 +31,11 @@ public class Player : MonoBehaviour
         stat = new PlayerStat();
         Debug.Log(InputManager.Instance.GetKeyAction());
     }
-
+    private void Start()
+    {
+        StatEventHandler();
+        TimeEventHandler();
+    }
     // Update is called once per frame
     void Update()
     {

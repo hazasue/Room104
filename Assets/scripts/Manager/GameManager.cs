@@ -2,6 +2,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -28,6 +29,9 @@ public class GameManager : Singleton<GameManager>
     private GameData gameData;
     public GameData Data { get { return gameData; } }
 
+    [SerializeField]
+    private TMP_Text dateText;
+
     //플레이 타임 변수
     private int date;
     public int Date { get { return date; } set { date = value; } }
@@ -40,10 +44,15 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         init();
+        player.TimeEventHandler += ModifyDateTime;
     }
     // Start is called before the first frame update
     void Start()
     {
+        date = 1;
+        hour = 6;
+        minute = 0;
+
         Debug.Log("GameManagerStart");
     }
 
@@ -59,14 +68,14 @@ public class GameManager : Singleton<GameManager>
         gameState = eGameState.PLAYING;
         player = GameObject.Find("Player").GetComponent<Player>();
 
-        initDatas();
-        
+/*        initDatas();
+
         if (JsonManager.LoadJsonFile<CurrentGameInfo>(JsonManager.DEFAULT_CURRENT_DATA_NAME).newGame)
             newGame();
         else
         {
             loadGame(JsonManager.LoadJsonFile<CurrentGameInfo>(JsonManager.DEFAULT_CURRENT_DATA_NAME).dataId);
-        }
+        }*/
     }
 
     public void PauseGame()
@@ -85,9 +94,7 @@ public class GameManager : Singleton<GameManager>
 
     private void newGame()
     {
-        int currentKey = 0;
-        player.Stat.InitNewStats();
-        
+        int currentKey = 0;      
         gameData = new GameData("root name", 0, 0, 0, 0f, initNpcTrait(), player.Stat.ConvertToData());
     }
 
@@ -162,7 +169,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ModifyDateTime()
     {
-        minute += 1;
+        minute += 10;
         if(minute == 60)
         {
             minute = 0;
@@ -173,5 +180,6 @@ public class GameManager : Singleton<GameManager>
             hour = 0;
             date += 1;
         }
+        dateText.text = $"Day {date} / {hour} : {minute}";
     }
 }

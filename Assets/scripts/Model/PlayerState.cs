@@ -205,10 +205,11 @@ public class ExerciseState : BehaviorState
         if(time >= 5.0f)
         {
             time = 0.0f;
-            GameManager.Instance.ModifyDateTime();
             player.Stat.IncreaseStamina();
             player.Stat.DecreaseHealth();
             player.Stat.DecreaseStress();
+            player.StatEventHandler();
+            player.TimeEventHandler();
         }
     }
 
@@ -236,10 +237,11 @@ public class StudyState : BehaviorState
         if (time >= 5.0f)
         {
             time = 0.0f;
-            GameManager.Instance.ModifyDateTime();
             player.Stat.IncreaseIntelligence();
             player.Stat.DecreaseHealth();
             player.Stat.IncreaseStress();
+            player.StatEventHandler();
+            player.TimeEventHandler();
         }
     }
 
@@ -267,10 +269,11 @@ public class RestState : BehaviorState
         if (time >= 5.0f)
         {
             time = 0.0f;
-            GameManager.Instance.ModifyDateTime();
             player.Stat.DecreaseIntelligence();
             player.Stat.DecreaseHealth();
             player.Stat.DecreaseStress();
+            player.StatEventHandler();
+            player.TimeEventHandler();
         }
     }
 
@@ -298,10 +301,11 @@ public class ListeningMusicState : BehaviorState
         if (time >= 5.0f)
         {
             time = 0.0f;
-            GameManager.Instance.ModifyDateTime();
             player.Stat.DecreaseIntelligence();
             player.Stat.DecreaseHealth();
             player.Stat.DecreaseStress();
+            player.StatEventHandler();
+            player.TimeEventHandler();
         }
     }
 
@@ -320,13 +324,14 @@ public class SleepState : BehaviorState
 {
     public override void start(Player player)
     {
-
+        player.Stat.IncreaseHealth();
+        player.StatEventHandler();
+        player.TimeEventHandler();
     }
 
     public override void Update(Player player)
     {
         base.Update(player);
-        player.Stat.IncreaseHealth();
     }
 
     public override void FixedUpdate(Player player)
