@@ -13,10 +13,15 @@ public class Settings : MonoBehaviour
     private static int[] DEFAULT_SCREEN_RESOLUTION_BIG = new int[2]{ 1920, 1080 };
     private const float DEFAULT_SOUND_VOLUME = 0.33f;
 
+    private const string DEFAULT_LANGUAGE_KOREAN = "한국어";
+    private const string DEFAULT_LANGUAGE_ENGLISH = "English";
+
     private const string DEFAULT_SETTING_NAME_RESOLUTION = "resolution";
     private const string DEFAULT_SETTING_NAME_FULLSCREEN = "fullscreen";
     private const string DEFAULT_SETTING_NAME_VOLUME = "volume";
+    private const string DEFAULT_SETTING_NAME_LANGUAGE = "language";
 
+    public TMP_Text languageText;
     public TMP_Dropdown resolution;
     public Toggle fullScreenToggle;
     public Slider masterVolumeSlider;
@@ -43,7 +48,7 @@ public class Settings : MonoBehaviour
         }
         else
         {
-            settingsData = new SettingsData(DEFAULT_SCREEN_RESOLUTION_DEFAULT, false, DEFAULT_SOUND_VOLUME, 1f, 1f, true, true, true);
+            settingsData = new SettingsData(DEFAULT_LANGUAGE_KOREAN, DEFAULT_SCREEN_RESOLUTION_DEFAULT, false, DEFAULT_SOUND_VOLUME, 1f, 1f, true, true, true);
             JsonManager.CreateJsonFile(JsonManager.DEFAULT_SETTING_DATA_NAME, settingsData);
         }
 
@@ -59,7 +64,8 @@ public class Settings : MonoBehaviour
         }
         
         resolution.value = resolution.options.FindIndex(option => option.text == $"{settingsData.screenResolution[0]} * {settingsData.screenResolution[1]}");
-        
+
+        languageText.text = settingsData.language;
         fullScreenToggle.isOn = settingsData.fullScreen;
 
         masterVolumeSlider.value = settingsData.volumeMaster;
@@ -72,8 +78,18 @@ public class Settings : MonoBehaviour
 
         Screen.SetResolution(settingsData.screenResolution[0], settingsData.screenResolution[1],
             settingsData.fullScreen);
-        Debug.Log(settingsData.fullScreen);
         SoundManager.Instance().UpdateVolume(settingsData);
+    }
+
+    public void ChangeLanguage()
+    {
+        if (languageText.text == DEFAULT_LANGUAGE_KOREAN) languageText.text = DEFAULT_LANGUAGE_ENGLISH;
+        else
+        {
+            languageText.text = DEFAULT_LANGUAGE_KOREAN;
+        }
+
+        SaveSettings(DEFAULT_SETTING_NAME_LANGUAGE);
     }
 
     public void SaveSettings(string name)
@@ -112,6 +128,10 @@ public class Settings : MonoBehaviour
                 settingsData.sfxOn = sfxToggle.isOn;
                 
                 SoundManager.Instance().UpdateVolume(settingsData);
+                break;
+            
+            case DEFAULT_SETTING_NAME_LANGUAGE:
+                settingsData.language = languageText.text;
                 break;
             
             default:
