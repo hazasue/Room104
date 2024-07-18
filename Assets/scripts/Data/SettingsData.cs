@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SettingsData
 {
+    public string language;
     public int[] screenResolution;
     public bool fullScreen;
     public float volumeMaster;
@@ -14,14 +15,15 @@ public class SettingsData
     public bool bgmOn;
     public bool sfxOn;
 
-    public SettingsData(int[] screenResolution, bool fullScreen, float volumeMaster, float volumeBgm, float volumeSfx, bool masterOn, bool bgmOn, bool sfxOn)
+    public SettingsData(string language, int[] screenResolution, bool fullScreen, float volumeMaster, float volumeBgm, float volumeSfx, bool masterOn, bool bgmOn, bool sfxOn)
     {
         if (screenResolution.Length != 2)
         {
             Debug.Log($"Out of form: Screen Resolution(size: {screenResolution.Length})");
             return;
         }
-        
+
+        this.language = language;
         this.screenResolution = screenResolution;
         this.fullScreen = fullScreen;
         this.volumeMaster = volumeMaster;

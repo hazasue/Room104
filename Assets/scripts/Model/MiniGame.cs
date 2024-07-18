@@ -6,9 +6,9 @@ using TMPro;
 
 public abstract class MiniGame : MonoBehaviour
 {
-    protected const float DEFAULT_TIME_LIMIT = 5f;
+    protected const float DEFAULT_TIME_LIMIT = 10f;
     protected const float MAX_PROGRESS = 1f;
-    protected const float DEFAULT_PROGRESS_INCREASE_AMOUNT = 0.1f;
+    protected const float DEFAULT_PROGRESS_INCREASE_AMOUNT = 0.04f;
     protected const float DEFAULT_DECREASE_MULTIPLE = 0.2f;
     
     public TMP_Text timer;
@@ -39,7 +39,7 @@ public abstract class MiniGame : MonoBehaviour
             gauge.value = progress;
             timer.text = timeLimit.ToString("F2");
 
-            if (timeLimit <= 0f)
+            if (timeLimit <= 0f || progress <= 0f)
             {
                 sendClearState(false);
                 activated = false;

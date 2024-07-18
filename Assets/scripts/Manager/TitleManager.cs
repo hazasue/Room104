@@ -16,8 +16,8 @@ public class TitleManager : MonoBehaviour
     private static Vector3 DEFAULT_ARROW_POSITION = new Vector3(50f, -100f, 0f);
     private static Vector3 DEFAULT_ARROW_POSITION_GAP = new Vector3(0f, -260f, 0f);
 
-    private static Vector3 DEFAULT_HOVER_POSITION = new Vector3(0f, 0f, 0f);
-    private static Vector3 DEFAULT_HOVER_GAP = new Vector3(0f, -100f, 0f);
+    private static Vector3 DEFAULT_HOVER_POSITION = new Vector3(0f, 100f, 0f);
+    private static Vector3 DEFAULT_HOVER_GAP = new Vector3(0f, -50f, 0f);
     
     private const int MAX_SAVE_SLOT_COUNT = 3;
 
