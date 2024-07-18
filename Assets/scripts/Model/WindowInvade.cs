@@ -21,8 +21,8 @@ public class WindowInvade : MiniGame
         timer.text = timeLimit.ToString("F2");
 
         gauge.maxValue = MAX_PROGRESS;
-        gauge.value = 0f;
-        progress = 0f;
+        gauge.value = 0.5f;
+        progress = 0.5f;
 
         structurePos = structure.position;
     }
