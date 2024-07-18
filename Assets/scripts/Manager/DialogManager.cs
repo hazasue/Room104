@@ -2,10 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class DialogManager : Singleton<GameManager>
 {
     private const string CSV_FILENAME_MAINEVENT = "main_event";
+
+    public TMP_Text narrativeText;
+    public TMP_Text portraitText;
+    public GameObject narrativeObject;
+    public GameObject portraitObject;
+
+    private GameObject currentObject;
     
     // event_id - group_id - dialog_info
     //private Dictionary<int, Dictionary<int, List<Dialog>>> allDialogs;
@@ -73,6 +81,7 @@ public class DialogManager : Singleton<GameManager>
         int dialogGroupId;
         List<Dialog> tempDialogs;
         Dialog tempDialog;
+        currentObject = null;
         
         List<Dictionary<string, object>> mainEventDB = CSVReader.Read(CSV_FILENAME_MAINEVENT);
         foreach (Dictionary<string, object> data in mainEventDB)
@@ -87,22 +96,25 @@ public class DialogManager : Singleton<GameManager>
             tempDialog = new Dialog((int)data["dialog_num"], data["type"].ToString(), data["text"].ToString());
             dialogLists[dialogGroupId].Add(tempDialog);
         }
+
+        //Debug.Log($"Dialog list count: {dialogLists.Count}");
+        StartDialog(1);
     }
 
-    /*
-    public void StartDialog(int eventId, int dialogGroupId)
+    
+    public void StartDialog(int dialogGroupId)
     {
-        initDialog(eventId, dialogGroupId);
+        initDialog(dialogGroupId);
     }
 
-    private void initDialog(int eventId, int dialogGroupId)
+    private void initDialog(int dialogGroupId)
     {
-        currentDialogs = allDialogs[eventId][dialogGroupId];
+        currentDialogs = dialogLists[dialogGroupId];
         currentDialogIdx = 0;
 
         handleDialog(currentDialogs[currentDialogIdx++]);
     }
-    */
+    
 
     public List<Dialog> GetDialogList(int groupId)
     {
@@ -117,10 +129,26 @@ public class DialogManager : Singleton<GameManager>
         {
             case Dialog.eDialogType.NARRATIVE:
                 // update text
+                if (currentObject != narrativeObject)
+                {
+                    if(currentObject != null) currentObject.SetActive(false);
+                    currentObject = narrativeObject;
+                    currentObject.SetActive(true);
+                }
+
+                narrativeText.text = dialog.Text;
                 break;
             
             case Dialog.eDialogType.PORTRAIT:
                 // update text
+                if (currentObject != portraitObject)
+                {
+                    if(currentObject != null) currentObject.SetActive(false);
+                    currentObject = portraitObject;
+                    currentObject.SetActive(true);
+                }
+
+                portraitText.text = dialog.Text;
                 Debug.Log($"PORTRAIT: {dialog.Num}, {dialog.Type}, {dialog.Text}");
                 break;
             
@@ -146,19 +174,21 @@ public class DialogManager : Singleton<GameManager>
         }
     }
 
-    /*
+    
     public void UpdateDialog()
     {
         if (currentDialogs == null 
             || currentDialogs.Count <= currentDialogIdx)
         {
             // exit dialog
+            currentObject.SetActive(false);
             currentDialogs = null;
             currentDialogIdx = 0;
+            currentObject = null;
             return;
         }
 
         handleDialog(currentDialogs[currentDialogIdx++]);
     }
-    */
+    
 }
