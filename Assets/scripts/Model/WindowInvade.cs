@@ -63,7 +63,7 @@ public class WindowInvade : MiniGame
             timer.text = timeLimit.ToString("F2");
             structure.position = structurePos + new Vector3(structure.rect.width * progress, 0f, 0f);
             
-            if (timeLimit <= 0f)
+            if (timeLimit <= 0f || progress <= 0f)
             {
                 sendClearState(false);
                 activated = false;
