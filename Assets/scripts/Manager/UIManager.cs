@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     private const string DEFAULT_SCREEN_NAME_CAMERA = "camera";
     private const string DEFAULT_SCREEN_NAME_JOBHUNTER = "jobhunter";
     private const string DEFAULT_SCREEN_NAME_SAYTALK = "saytalk";
+    private const string DEFAULT_SCREEN_NAME_SAYTALKHISTORY = "saytalkhistory";
 
     public GameObject smartPhoneScreen;
     public GameObject shoppingScreen;
@@ -26,13 +27,18 @@ public class UIManager : MonoBehaviour
     public GameObject reportScreen;
     public GameObject cameraScreen;
     public GameObject sayTalkScreen;
+    public GameObject sayTalkHistoryScreen;
     public GameObject jobHunterScreen;
+
+    public TMP_Text sayTalkText;
+    public SayTalk sayTalk;
+    public Transform sayTalkList;
+    public Transform sayTalkHistory;
 
     public TMP_Text currentDateInfo;
     public LoadGameInfo[] saveFiles = new LoadGameInfo[2];
 
     public GameObject diaryWarningMessage;
-
 
     private Stack<GameObject> activatedScreens;
     private Dictionary<string, GameObject> screens;
@@ -67,6 +73,7 @@ public class UIManager : MonoBehaviour
         screens.Add(DEFAULT_SCREEN_NAME_REPORT, reportScreen);
         screens.Add(DEFAULT_SCREEN_NAME_CAMERA, cameraScreen);
         screens.Add(DEFAULT_SCREEN_NAME_SAYTALK, sayTalkScreen);
+        screens.Add(DEFAULT_SCREEN_NAME_SAYTALKHISTORY, sayTalkHistoryScreen);
         screens.Add(DEFAULT_SCREEN_NAME_JOBHUNTER, jobHunterScreen);
     }
 
@@ -164,5 +171,47 @@ public class UIManager : MonoBehaviour
         }
 
         diaryWarningMessage.SetActive(false);
+    }
+
+    public void InitSayTalkList()
+    {
+        Dictionary<int, SayTalkHistory> datas = JsonManager.LoadJsonFile<Dictionary<int, SayTalkHistory>>(JsonManager.DEFAULT_SAYTALK_DATA_NAME);
+        
+        for (int i = sayTalkList.childCount - 1; i >= 0; i--)
+        {
+            Destroy(sayTalkList.GetChild(i).gameObject);
+        }
+
+        foreach (KeyValuePair<int, SayTalkHistory> data in datas)
+        {
+            SayTalk tempTalk = Instantiate(sayTalk, sayTalkList, true);
+            tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].text);
+            tempTalk.GetComponent<Button>().onClick.AddListener(() => ActivateScreen(DEFAULT_SCREEN_NAME_SAYTALKHISTORY));
+            tempTalk.GetComponent<Button>().onClick.AddListener(() => InitSayTalkHistory(data.Key));
+            // Instantiate button
+            // init button
+        }
+    }
+
+    public void InitSayTalkHistory(int id)
+    {
+        List<SayTalkData> data =
+            JsonManager.LoadJsonFile<Dictionary<int, SayTalkHistory>>(JsonManager.DEFAULT_SAYTALK_DATA_NAME)[id].datas;
+        
+        for (int i = sayTalkHistory.childCount - 1; i >= 0; i--)
+        {
+            Destroy(sayTalkHistory.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < data.Count; i++)
+        {
+            // Instantiate Texts according to 'isPlaying'
+            TMP_Text tempText = Instantiate(sayTalkText, sayTalkHistory, true);
+            if (data[i].isPlayer) tempText.text = $"<align=right>{data[i].text}</align>";
+            else
+            {
+                tempText.text = $"<align=left>{data[i].text}</align>";
+            }
+        }
     }
 }
