@@ -1,0 +1,28 @@
+{
+    "101":
+    {"datas":
+        [
+            {
+                "isPlayer":false,
+                "text":"test1"
+            },
+            {
+                "isPlayer":false,
+                "text":"test2"
+            }
+        ]
+    },
+    "102":
+    {"datas":
+        [
+            {
+                "isPlayer":false,
+                "text":"test3"
+            },
+            {
+                "isPlayer":false,
+                "text":"test4"
+            }
+        ]
+    }
+}
