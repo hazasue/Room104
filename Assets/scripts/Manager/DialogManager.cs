@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,15 @@ public class DialogManager : Singleton<GameManager>
 {
     private const string CSV_FILENAME_MAINEVENT = "main_event";
 
+    private const string SPLIT_STANDARD = ".";
+
     public TMP_Text narrativeText;
     public TMP_Text portraitText;
     public GameObject narrativeObject;
     public GameObject portraitObject;
+
+    public RawImage image1;
+    public RawImage image2;
 
     private GameObject currentObject;
     
@@ -81,6 +87,8 @@ public class DialogManager : Singleton<GameManager>
         int dialogGroupId;
         List<Dialog> tempDialogs;
         Dialog tempDialog;
+        Color32 color;
+        string[] splitColor;
         currentObject = null;
         
         List<Dictionary<string, object>> mainEventDB = CSVReader.Read(CSV_FILENAME_MAINEVENT);
@@ -93,7 +101,9 @@ public class DialogManager : Singleton<GameManager>
                 dialogLists.Add(dialogGroupId, new List<Dialog>());
             }
 
-            tempDialog = new Dialog((int)data["dialog_num"], data["type"].ToString(), data["text"].ToString());
+            splitColor = data["color"].ToString().Split(SPLIT_STANDARD);
+            color = new Color32(Convert.ToByte(splitColor[0]), Convert.ToByte(splitColor[1]), Convert.ToByte(splitColor[2]), Convert.ToByte(splitColor[3]));
+            tempDialog = new Dialog((int)data["dialog_num"], data["type"].ToString(), data["text"].ToString(), float.Parse(data["duration"].ToString()), Convert.ToBoolean(data["loop"].ToString()), color);
             dialogLists[dialogGroupId].Add(tempDialog);
         }
 
@@ -129,40 +139,40 @@ public class DialogManager : Singleton<GameManager>
         {
             case Dialog.eDialogType.NARRATIVE:
                 // update text
-                if (currentObject != narrativeObject)
-                {
-                    if(currentObject != null) currentObject.SetActive(false);
-                    currentObject = narrativeObject;
-                    currentObject.SetActive(true);
-                }
-
+                toggleCurrentObject(narrativeObject);
                 narrativeText.text = dialog.Text;
                 break;
             
             case Dialog.eDialogType.PORTRAIT:
                 // update text
-                if (currentObject != portraitObject)
-                {
-                    if(currentObject != null) currentObject.SetActive(false);
-                    currentObject = portraitObject;
-                    currentObject.SetActive(true);
-                }
-
+                toggleCurrentObject(portraitObject);
                 portraitText.text = dialog.Text;
-                Debug.Log($"PORTRAIT: {dialog.Num}, {dialog.Type}, {dialog.Text}");
                 break;
             
-            case Dialog.eDialogType.IMAGE:
+            case Dialog.eDialogType.IMAGE1:
                 // activate image
+                toggleCurrentObject(image1.gameObject);
+                image1.texture = Resources.Load<Texture>($"Sprites/InGame/{dialog.Text}");
+                image1.color = dialog.Color;
                 break;
             
+            case Dialog.eDialogType.IMAGE2:
+                // activate image
+                toggleCurrentObject(image2.gameObject);
+                image2.texture = Resources.Load<Texture>($"Sprites/InGame/{dialog.Text}");
+                image2.color = dialog.Color;
+                break;
+
             case Dialog.eDialogType.BGM:
                 // play bgm
+                SoundManager.Instance().ChangeBGM(dialog.Text, dialog.Loop);
+                UpdateDialog();
                 break;
             
             case Dialog.eDialogType.SFX:
                 // play sfx
-                Debug.Log($"SFX: {dialog.Num}, {dialog.Type}, {dialog.Text}");
+                SoundManager.Instance().ChangeSFX(dialog.Text, dialog.Loop);
+                UpdateDialog();
                 break;
             
             case Dialog.eDialogType.OBJECT:
@@ -174,7 +184,6 @@ public class DialogManager : Singleton<GameManager>
         }
     }
 
-    
     public void UpdateDialog()
     {
         if (currentDialogs == null 
@@ -190,5 +199,14 @@ public class DialogManager : Singleton<GameManager>
 
         handleDialog(currentDialogs[currentDialogIdx++]);
     }
-    
+
+    private void toggleCurrentObject(GameObject selectedObject)
+    {
+        if (currentObject != selectedObject)
+        {
+            if(currentObject != null) currentObject.SetActive(false);
+            currentObject = selectedObject;
+            currentObject.SetActive(true);
+        }
+    }
 }
