@@ -53,4 +53,18 @@ public class SoundManager : MonoBehaviour
             sfxSource.volume = 0f;
         }
     }
+
+    public void ChangeBGM(string bgm, bool loop)
+    {
+        bgmSource.clip = Resources.Load<AudioClip>($"Bgms/{bgm}");
+        bgmSource.loop = loop;
+        bgmSource.Play();
+    }
+
+    public void ChangeSFX(string sfx, bool loop)
+    {
+        sfxSource.clip = Resources.Load<AudioClip>($"Sfxs/{sfx}");
+        sfxSource.loop = loop;
+        sfxSource.Play();
+    }
 }
