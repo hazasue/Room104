@@ -146,6 +146,7 @@ public class InteractState : PlayerState
         }
         else
         {
+            InputManager.Instance.ChangeUIToggle(true);
             if(objectName == "Desk")
             {
                 return new StudyState();

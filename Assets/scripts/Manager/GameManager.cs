@@ -44,15 +44,14 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
         init();
+        date = 1;
+        hour = 6;
+        minute = 0;
         player.TimeEventHandler += ModifyDateTime;
     }
     // Start is called before the first frame update
     void Start()
     {
-        date = 1;
-        hour = 6;
-        minute = 0;
-
         Debug.Log("GameManagerStart");
     }
 
@@ -180,6 +179,6 @@ public class GameManager : Singleton<GameManager>
             hour = 0;
             date += 1;
         }
-        dateText.text = $"Day {date} / {hour} : {minute}";
+        dateText.text = $"Day {date} / {hour} : {minute:D2}";
     }
 }

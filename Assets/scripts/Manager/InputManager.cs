@@ -128,4 +128,8 @@ public class InputManager : Singleton<InputManager>
         return action;
     }
 
+    public void ChangeUIToggle(bool val)
+    {
+        bUIInputToggle = val;
+    }
 }
