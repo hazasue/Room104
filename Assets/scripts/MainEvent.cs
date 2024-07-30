@@ -20,3 +20,12 @@ public abstract class MainEvent
 
     public abstract void Update();
 }
+
+namespace Event
+{
+    public class Event10000
+    {
+
+    }
+}
+
