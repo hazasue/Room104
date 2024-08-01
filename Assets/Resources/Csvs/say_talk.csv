@@ -1,0 +1,8 @@
+event_id,dialog_num,type,isPlayer,autoSkip,text,duration,loop,color,direction,target
+10001,1,object,FALSE,TRUE,img_phone_base,1.5,FALSE,0.0.0.0,asd,101
+10001,2,sfx,FALSE,TRUE,sfx_sayTalk,0,FALSE,0.0.0.0,asd,101
+10001,3,object,FALSE,TRUE,img_phone_sayTalk,0.25,FALSE,0.0.0.0,asd,101
+10001,4,animation,FALSE,TRUE,anim_phone_talk_on,0,FALSE,0.0.0.0,asd,101
+10001,5,text,FALSE,FALSE,1,0,FALSE,0.0.0.0,asd,101
+10001,6,text,TRUE,FALSE,2,0,FALSE,0.0.0.0,asd,101
+10001,7,text,FALSE,FALSE,3,0,FALSE,0.0.0.0,asd,101
