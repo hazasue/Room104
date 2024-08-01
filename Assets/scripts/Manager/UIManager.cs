@@ -175,7 +175,7 @@ public class UIManager : MonoBehaviour
 
     public void InitSayTalkList()
     {
-        Dictionary<int, SayTalkHistory> datas = JsonManager.LoadJsonFile<Dictionary<int, SayTalkHistory>>(JsonManager.DEFAULT_SAYTALK_DATA_NAME);
+        Dictionary<int, SayTalkHistory> datas = SayTalkManager.Instance().SayTalkDatas;
         
         for (int i = sayTalkList.childCount - 1; i >= 0; i--)
         {
@@ -185,7 +185,7 @@ public class UIManager : MonoBehaviour
         foreach (KeyValuePair<int, SayTalkHistory> data in datas)
         {
             SayTalk tempTalk = Instantiate(sayTalk, sayTalkList, true);
-            tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].text);
+            //tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].text);
             tempTalk.GetComponent<Button>().onClick.AddListener(() => ActivateScreen(DEFAULT_SCREEN_NAME_SAYTALKHISTORY));
             tempTalk.GetComponent<Button>().onClick.AddListener(() => InitSayTalkHistory(data.Key));
             // Instantiate button
@@ -195,8 +195,7 @@ public class UIManager : MonoBehaviour
 
     public void InitSayTalkHistory(int id)
     {
-        List<SayTalkData> data =
-            JsonManager.LoadJsonFile<Dictionary<int, SayTalkHistory>>(JsonManager.DEFAULT_SAYTALK_DATA_NAME)[id].datas;
+        List<SayTalkData> data = SayTalkManager.Instance().SayTalkDatas[id].datas;
         
         for (int i = sayTalkHistory.childCount - 1; i >= 0; i--)
         {
