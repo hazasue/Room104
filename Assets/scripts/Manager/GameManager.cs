@@ -68,14 +68,14 @@ public class GameManager : Singleton<GameManager>
         gameState = eGameState.PLAYING;
         player = GameObject.Find("Player").GetComponent<Player>();
 
-/*        initDatas();
+        initDatas();
 
         if (JsonManager.LoadJsonFile<CurrentGameInfo>(JsonManager.DEFAULT_CURRENT_DATA_NAME).newGame)
             newGame();
         else
         {
             loadGame(JsonManager.LoadJsonFile<CurrentGameInfo>(JsonManager.DEFAULT_CURRENT_DATA_NAME).dataId);
-        }*/
+        }
     }
 
     public void PauseGame()
@@ -112,6 +112,11 @@ public class GameManager : Singleton<GameManager>
 
         gameDatas[slotIdx] = gameData;
         JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
+        
+        Dictionary<int, Dictionary<int, SayTalkHistory>> tempDatas = JsonManager.LoadJsonFile<Dictionary< int, Dictionary<int, SayTalkHistory>>>
+            (JsonManager.DEFAULT_SAYTALK_DATA_NAME);
+        tempDatas[slotIdx] = SayTalkManager.Instance().SayTalkDatas;
+        JsonManager.CreateJsonFile(JsonManager.DEFAULT_SAYTALK_DATA_NAME, tempDatas);
     }
 
     // init npc trait when new game starts
