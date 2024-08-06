@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4816366425595055116}
   - component: {fileID: 6036652454849302805}
   - component: {fileID: 7510053686327817582}
-  - component: {fileID: 5292717097965728490}
+  - component: {fileID: 3869624063050999078}
   m_Layer: 5
   m_Name: Say Talk Room
   m_TagString: Untagged
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 260, y: -90}
-  m_SizeDelta: {x: 480, y: 140}
+  m_SizeDelta: {x: 440, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4816366425595055116
 CanvasRenderer:
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5292717097965728490
+--- !u!114 &3869624063050999078
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 138979471293040005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c24431c8c88fc54889944b626c2dd5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9326432468282b24c92bcc009517661e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 3917336910419694630}
