@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     public GameObject jobHunterScreen;
 
     public TMP_Text sayTalkText;
-    public SayTalk sayTalk;
+    public SayTalkRoom sayTalkRoom;
     public Transform sayTalkList;
     public Transform sayTalkHistory;
 
@@ -184,8 +184,8 @@ public class UIManager : MonoBehaviour
 
         foreach (KeyValuePair<int, SayTalkHistory> data in datas)
         {
-            SayTalk tempTalk = Instantiate(sayTalk, sayTalkList, true);
-            //tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].text);
+            SayTalkRoom tempTalk = Instantiate(sayTalkRoom, sayTalkList, true);
+            tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].text);
             tempTalk.GetComponent<Button>().onClick.AddListener(() => ActivateScreen(DEFAULT_SCREEN_NAME_SAYTALKHISTORY));
             tempTalk.GetComponent<Button>().onClick.AddListener(() => InitSayTalkHistory(data.Key));
             // Instantiate button
