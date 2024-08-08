@@ -30,7 +30,8 @@ public class UIManager : MonoBehaviour
     public GameObject sayTalkHistoryScreen;
     public GameObject jobHunterScreen;
 
-    public TMP_Text sayTalkText;
+    public Transform playerText;
+    public Transform npcText;
     public SayTalkRoom sayTalkRoom;
     public Transform sayTalkList;
     public Transform sayTalkHistory;
@@ -202,14 +203,19 @@ public class UIManager : MonoBehaviour
             Destroy(sayTalkHistory.GetChild(i).gameObject);
         }
 
+        Transform tempTransform;
         for (int i = 0; i < data.Count; i++)
         {
             // Instantiate Texts according to 'isPlaying'
-            TMP_Text tempText = Instantiate(sayTalkText, sayTalkHistory, true);
-            if (data[i].isPlayer) tempText.text = $"<align=right>{data[i].text}</align>";
+            if (data[i].isPlayer)
+            {
+                tempTransform = Instantiate(playerText, sayTalkHistory, true);
+                tempTransform.GetChild(1).GetComponent<TMP_Text>().text = $"<align=right>{data[i].text}</align>";
+            }
             else
             {
-                tempText.text = $"<align=left>{data[i].text}</align>";
+                tempTransform = Instantiate(npcText, sayTalkHistory, true);
+                tempTransform.GetChild(2).GetComponent<TMP_Text>().text = $"<align=left>{data[i].text}</align>";
             }
         }
     }
