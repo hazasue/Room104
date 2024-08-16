@@ -8,7 +8,6 @@ public class ProductManager : MonoBehaviour
 
     public Product productObject;
 
-    private Dictionary<int, ProductData> productDatas;
     private Dictionary<int, Product> products; 
 
     // Start is called before the first frame update
@@ -19,7 +18,6 @@ public class ProductManager : MonoBehaviour
 
     private void init()
     {
-        productDatas = JsonManager.LoadJsonFile<Dictionary<int, ProductData>>(JsonManager.DEFAULT_PRODUCT_DATA_NAME);
         products = new Dictionary<int, Product>();
 
         for (int i = viewport.childCount - 1; i >= 0; i--)
@@ -28,7 +26,7 @@ public class ProductManager : MonoBehaviour
         }
 
         Product tempProduct;
-        foreach (KeyValuePair<int, ProductData> data in productDatas)
+        foreach (KeyValuePair<int, ProductData> data in GameManager.Instance.Products)
         {
             tempProduct = Instantiate(productObject, viewport, true);
             tempProduct.Init(data.Value.nameKR, data.Value.description, data.Value.price, data.Value.count);
