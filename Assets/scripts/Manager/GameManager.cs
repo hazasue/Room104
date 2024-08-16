@@ -24,7 +24,15 @@ public class GameManager : Singleton<GameManager>
 
     private GameData[] gameDatas;
     private Dictionary<int, List<NpcData>> npcDatas;
-
+    private Dictionary<int, ProductData>[] productLists;
+    
+    private Dictionary<int, ProductData> products;
+    public Dictionary<int, ProductData> Products
+    {
+        get { return products; }
+    }
+    
+    
     private int dataKey;
     private GameData gameData;
     public GameData Data { get { return gameData; } }
@@ -96,6 +104,7 @@ public class GameManager : Singleton<GameManager>
     {
         int currentKey = 0;      
         gameData = new GameData("root name", 0, 0, 0, 0f, initNpcTrait(), player.Stat.ConvertToData());
+        products = JsonManager.LoadJsonFile<Dictionary<int, ProductData>>(JsonManager.DEFAULT_PRODUCTINIT_DATA_NAME);
     }
 
     private void loadGame(int slotIdx)
@@ -103,6 +112,7 @@ public class GameManager : Singleton<GameManager>
         if (slotIdx >= MAX_SAVE_SLOT_COUNT) return;
         
         gameData = gameDatas[slotIdx];
+        products = productLists[slotIdx];
         player.Stat.InitSavedStats(gameData.stats);
     }
 
@@ -112,6 +122,9 @@ public class GameManager : Singleton<GameManager>
 
         gameDatas[slotIdx] = gameData;
         JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
+
+        productLists[slotIdx] = products;
+        JsonManager.CreateJsonFile(JsonManager.DEFAULT_PRODUCT_DATA_NAME, productLists);
         
         Dictionary<int, Dictionary<int, SayTalkHistory>> tempDatas = JsonManager.LoadJsonFile<Dictionary< int, Dictionary<int, SayTalkHistory>>>
             (JsonManager.DEFAULT_SAYTALK_DATA_NAME);
@@ -163,6 +176,16 @@ public class GameManager : Singleton<GameManager>
         else
         {
             gameDatas = JsonManager.LoadJsonFile<GameData[]>(JsonManager.DEFAULT_GAME_DATA_NAME);
+        }
+        
+        if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_PRODUCT_DATA_NAME + ".json"))
+        {
+            productLists = new Dictionary<int, ProductData>[MAX_SAVE_SLOT_COUNT];
+            JsonManager.CreateJsonFile(JsonManager.DEFAULT_PRODUCT_DATA_NAME, productLists);
+        }
+        else
+        {
+            productLists = JsonManager.LoadJsonFile<Dictionary<int, ProductData>[]>(JsonManager.DEFAULT_PRODUCT_DATA_NAME);
         }
     }
 
