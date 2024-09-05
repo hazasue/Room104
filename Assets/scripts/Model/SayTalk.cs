@@ -39,10 +39,16 @@ public class SayTalk : MonoBehaviour
         get { return autoSkip; }
     }
     
-    private string text;
-    public string Text
+    private string textKor;
+    public string TextKor
     {
-        get { return text; }
+        get { return textKor; }
+    }
+    
+    private string textEn;
+    public string TextEn
+    {
+        get { return textEn; }
     }
     
     private float duration;
@@ -76,13 +82,14 @@ public class SayTalk : MonoBehaviour
         get { return target; }
     }
 
-    public SayTalk(int num, string type, bool isPlayer, bool autoSkip, string text, float duration, bool loop,
+    public SayTalk(int num, string type, bool isPlayer, bool autoSkip, string textKor, string textEn, float duration, bool loop,
         Color32 color, string direction, int target)
     {
         this.num = num;
         this.isPlayer = isPlayer;
         this.autoSkip = autoSkip;
-        this.text = text;
+        this.textKor = textKor;
+        this.textEn = textEn;
         this.duration = duration;
         this.loop = loop;
         this.color = color;
