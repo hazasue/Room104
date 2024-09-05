@@ -186,7 +186,13 @@ public class UIManager : MonoBehaviour
         foreach (KeyValuePair<int, SayTalkHistory> data in datas)
         {
             SayTalkRoom tempTalk = Instantiate(sayTalkRoom, sayTalkList, true);
-            tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].text);
+            if (Settings.Instance().isKorean)
+                tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].textKor);
+            else
+            {
+                tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].textEn);
+            }
+            
             tempTalk.GetComponent<Button>().onClick.AddListener(() => ActivateScreen(DEFAULT_SCREEN_NAME_SAYTALKHISTORY));
             tempTalk.GetComponent<Button>().onClick.AddListener(() => InitSayTalkHistory(data.Key));
             // Instantiate button
@@ -210,13 +216,39 @@ public class UIManager : MonoBehaviour
             if (data[i].isPlayer)
             {
                 tempTransform = Instantiate(playerText, sayTalkHistory, true);
-                tempTransform.GetChild(1).GetComponent<TMP_Text>().text = $"<align=right>{data[i].text}</align>";
+                if (Settings.Instance().isKorean)
+                    tempTransform.GetChild(1).GetComponent<TMP_Text>().text = $"<align=right>{data[i].textKor}</align>";
+                else
+                {
+                    tempTransform.GetChild(1).GetComponent<TMP_Text>().text = $"<align=right>{data[i].textEn}</align>";
+                }
+
             }
             else
             {
                 tempTransform = Instantiate(npcText, sayTalkHistory, true);
-                tempTransform.GetChild(2).GetComponent<TMP_Text>().text = $"<align=left>{data[i].text}</align>";
+                if (Settings.Instance().isKorean)
+                    tempTransform.GetChild(2).GetComponent<TMP_Text>().text = $"<align=left>{data[i].textKor}</align>";
+                else
+                {
+                    tempTransform.GetChild(2).GetComponent<TMP_Text>().text = $"<align=left>{data[i].textEn}</align>";
+                }
+
             }
+        }
+    }
+    
+    public void ChangeLanguageSettings(bool isKorean)
+    {
+        if (isKorean)
+        {
+            notificationScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_criminal_KOR");
+            reportScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_{DEFAULT_SCREEN_NAME_REPORT}_KOR");
+        }
+        else
+        {
+            notificationScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_criminal_EN");
+            reportScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_{DEFAULT_SCREEN_NAME_REPORT}_EN");
         }
     }
 }
