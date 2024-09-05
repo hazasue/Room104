@@ -16,11 +16,13 @@ public class SayTalkHistory
 public class SayTalkData
 {
     public bool isPlayer;
-    public string text;
+    public string textKor;
+    public string textEn;
 
-    public SayTalkData(bool isPlayer, string text)
+    public SayTalkData(bool isPlayer, string textKor, string textEn)
     {
         this.isPlayer = isPlayer;
-        this.text = text;
+        this.textKor = textKor;
+        this.textEn = textEn;
     }
 }
