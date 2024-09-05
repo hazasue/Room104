@@ -17,6 +17,7 @@ public class JsonManager
     public static string DEFAULT_CURRENT_DATA_NAME = "CurrentGameData";
     public static string DEFAULT_ACCOUNT_DATA_NAME = "AccountData";
     public static string DEFAULT_SAYTALK_DATA_NAME = "SayTalk";
+    public static string DEFAULT_ACHIEVEMENT_DATA_NAME = "Achievement";
     
     public static void CreateJsonFile(string fileName, object obj)
     {
