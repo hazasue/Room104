@@ -35,6 +35,8 @@ public class SayTalkManager : MonoBehaviour
     public GameObject nullObject;
     public GameObject narrativeObject;
     public GameObject updateObject;
+    public GameObject animationObject;
+    public RawImage animationImage; 
 
     public Dictionary<string, string> objects; 
     
@@ -61,8 +63,9 @@ public class SayTalkManager : MonoBehaviour
 
         sayTalkLists = new Dictionary<int, List<SayTalk>>();
         objects = new Dictionary<string, string>();
-        objects.Add("img_phone_base", "saytalk");
-        objects.Add("img_phone_sayTalk", "saytalkhistory");
+        objects.Add("img_phone_sayTalk_List", "saytalk");
+        objects.Add("img_phone_sayTalk_Chat", "saytalkhistory");
+        objects.Add("inactivate_chat", "inactivate_chat");
         
         int eventId;
         List<SayTalk> tempTalks;
@@ -88,12 +91,12 @@ public class SayTalkManager : MonoBehaviour
             color = new Color32(Convert.ToByte(splitColor[0]), Convert.ToByte(splitColor[1]), Convert.ToByte(splitColor[2]), Convert.ToByte(splitColor[3]));
             tempTalk = new SayTalk((int)data["dialog_num"], data["type"].ToString(),
                 Convert.ToBoolean(data["isPlayer"].ToString()), Convert.ToBoolean(data["autoSkip"].ToString()),
-                data["text"].ToString(), float.Parse(data["duration"].ToString()),
+                data["text_kor"].ToString(), data["text_en"].ToString(), float.Parse(data["duration"].ToString()),
                 Convert.ToBoolean(data["loop"].ToString()), color, data["direction"].ToString(), (int)data["target"]);
             sayTalkLists[eventId].Add(tempTalk);
         }
 
-        initSayTalk(10001);
+        initSayTalk(9002);
     }
 
     private void initDatas()
@@ -148,20 +151,29 @@ public class SayTalkManager : MonoBehaviour
             case eSayTalkType.NARRATIVE:
                 // activate narrative screen
                 toggleCurrentObject(narrativeObject);
-                narrativeText.text = sayTalk.Text;
+                if (Settings.Instance().isKorean) narrativeText.text = sayTalk.TextKor;
+                else
+                {
+                    narrativeText.text = sayTalk.TextEn;
+                }
+                
                 // update text
                 break;
             
             case eSayTalkType.SFX:
                 // loop, duration, clip
                 toggleCurrentObject(nullObject);
-                SoundManager.Instance().ChangeSFX(sayTalk.Text, sayTalk.Loop);
+                SoundManager.Instance().ChangeSFX(sayTalk.TextKor, sayTalk.Loop);
                 UpdateSayTalk(sayTalk.Duration);
                 break;
             
             case eSayTalkType.OBJECT:
                 toggleCurrentObject(nullObject);
-                UIManager.GetInstance().ActivateScreen(objects[sayTalk.Text]);
+                if (objects[sayTalk.TextKor] == "inactivate_chat") UIManager.GetInstance().InactivateScreen();
+                else
+                {
+                    UIManager.GetInstance().ActivateScreen(objects[sayTalk.TextKor]);
+                }
                 UpdateSayTalk(sayTalk.Duration);
                 break;
             
@@ -177,12 +189,26 @@ public class SayTalkManager : MonoBehaviour
                     sayTalkData = sayTalkDatas[sayTalk.Target].datas;
                     targetId = sayTalk.Target;
                 }
-                sayTalkData.Add(new SayTalkData(sayTalk.IsPlayer, sayTalk.Text));
+                sayTalkData.Add(new SayTalkData(sayTalk.IsPlayer, sayTalk.TextKor, sayTalk.TextEn));
                 UIManager.GetInstance().InitSayTalkHistory(sayTalk.Target);
                 break;
             
             case eSayTalkType.ANIMATION:
-                toggleCurrentObject(nullObject);
+                toggleCurrentObject(animationObject);
+                Color tempColor;
+                switch (sayTalk.TextKor)
+                {
+                    case "anim_phone_talk_on":
+                        StartCoroutine(animateImage(true, sayTalk.Duration));
+                        break;
+                    
+                    case "anim_phone_talk_off":
+                        StartCoroutine(animateImage(false, sayTalk.Duration));
+                        break;
+                    
+                    default:
+                        break;
+                }
                 UpdateSayTalk(sayTalk.Duration);
                 break;
             
@@ -224,6 +250,38 @@ public class SayTalkManager : MonoBehaviour
             if(currentObject != null) currentObject.SetActive(false);
             currentObject = selectedObject;
             currentObject.SetActive(true);
+        }
+    }
+
+    private IEnumerator animateImage(bool isOn, float duration)
+    {
+        Color tempColor;
+        float timeGap;
+        if (isOn)
+        {
+            tempColor = animationImage.color;
+            tempColor.a = 1f;
+            animationImage.color = tempColor;
+            while (tempColor.a > 0f)
+            {
+                timeGap = Time.deltaTime;
+                yield return new WaitForSeconds(timeGap);
+                tempColor.a -= timeGap / duration * 2f;
+                animationImage.color = tempColor;
+            }
+        }
+        else
+        {
+            tempColor = animationImage.color;
+            tempColor.a = 0f;
+            animationImage.color = tempColor;
+            while (tempColor.a < 1f)
+            {
+                timeGap = Time.deltaTime;
+                yield return new WaitForSeconds(timeGap);
+                tempColor.a += timeGap / duration * 2f;
+                animationImage.color = tempColor;
+            }
         }
     }
 }
