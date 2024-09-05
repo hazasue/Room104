@@ -1,0 +1,19 @@
+id,EN,KOR
+900,Yes,예
+901,No,아니오
+902,Saved file already exists. Overwrite the data?,이미 저장된 데이터를 덮어씌우시겠습니까?
+903,Game's been saved.,저장되었습니다.
+904,New Game,새 게임
+905,Load Game,이어하기
+906,Settings,설정
+907,Credits,크레딧
+908,Quit,게임종료
+909,Quit the game?,게임을 종료하시겠습니까?
+910,Run this file?,해당 파일을 실행하시겠습니까?
+911,Would you like to go back to the title screen?,타이틀 화면으로 돌아가시겠습니까?
+912,You're tired. You have to get in bed before midnight to be less tired tomorrow.,피곤하다… 12시 전에는 자야 컨디션을 유지할 수 있을 것이다.
+913,You couldn't take it any longer and had to hit the hay.,피곤해서 더는 버틸 수 없다. 자러 가야한다.
+914,You've decided to rest in you room.,당신은 잠깐 집에서 쉬기로 했다.
+915,"Thank you for your interest in our company, but unfortunately we've",저희 00회사에 지원해주셔서 감사합니다. 안타깝게도 서류전형에 불합격하셨
+916,???,???
+917,Achievement,업적
