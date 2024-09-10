@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     private const string DEFAULT_SCREEN_NAME_SAYTALK = "saytalk";
     private const string DEFAULT_SCREEN_NAME_SAYTALKHISTORY = "saytalkhistory";
 
+    private static Vector3 DEFAULT_SAYTALK_SIZE = new Vector2(450f, 44f);
+    private static Vector3 DEFAULT_SAYTALK_INCREASION = new Vector2(0f, 18f);
+
     public GameObject smartPhoneScreen;
     public GameObject shoppingScreen;
     public GameObject notificationScreen;
@@ -210,31 +213,41 @@ public class UIManager : MonoBehaviour
         }
 
         Transform tempTransform;
+        TMP_Text tempText;
+        int line = 0;
         for (int i = 0; i < data.Count; i++)
         {
             // Instantiate Texts according to 'isPlaying'
             if (data[i].isPlayer)
             {
                 tempTransform = Instantiate(playerText, sayTalkHistory, true);
-                if (Settings.Instance().isKorean)
-                    tempTransform.GetChild(1).GetComponent<TMP_Text>().text = $"<align=right>{data[i].textKor}</align>";
+                tempText = tempTransform.GetChild(1).GetComponent<TMP_Text>();
+                if (Settings.Instance().isKorean) 
+                    tempText.text = $"<align=right>{data[i].textKor}</align>";
                 else
                 {
-                    tempTransform.GetChild(1).GetComponent<TMP_Text>().text = $"<align=right>{data[i].textEn}</align>";
+                    tempText.text = $"<align=right>{data[i].textEn}</align>";
                 }
 
+                tempText.ForceMeshUpdate(true);
+                line = tempText.textInfo.lineCount;
             }
             else
             {
                 tempTransform = Instantiate(npcText, sayTalkHistory, true);
+                tempText = tempTransform.GetChild(2).GetComponent<TMP_Text>();
                 if (Settings.Instance().isKorean)
                     tempTransform.GetChild(2).GetComponent<TMP_Text>().text = $"<align=left>{data[i].textKor}</align>";
                 else
                 {
                     tempTransform.GetChild(2).GetComponent<TMP_Text>().text = $"<align=left>{data[i].textEn}</align>";
                 }
-
+                
+                tempText.ForceMeshUpdate(true);
+                line = tempText.textInfo.lineCount;
             }
+
+            tempTransform.GetComponent<RectTransform>().sizeDelta = DEFAULT_SAYTALK_SIZE + DEFAULT_SAYTALK_INCREASION * line;
         }
     }
     
