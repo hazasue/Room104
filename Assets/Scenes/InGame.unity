@@ -30716,6 +30716,7 @@ MonoBehaviour:
   updateObject: {fileID: 336922404}
   animationObject: {fileID: 1116215961}
   animationImage: {fileID: 1116215963}
+  smartPhoneScreen: {fileID: 1456226460}
 --- !u!4 &1663641163
 Transform:
   m_ObjectHideFlags: 0
