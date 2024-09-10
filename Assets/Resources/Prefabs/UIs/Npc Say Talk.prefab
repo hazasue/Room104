@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 7095839726231719337}
   - component: {fileID: 2537440995949387429}
   - component: {fileID: 8873890244898584097}
+  - component: {fileID: 1342103805594825573}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -171,20 +172,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8352942, b: 0.9176471, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: fd1d74db705b5ff4aacd2c4f05a8ed61, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
+--- !u!114 &1342103805594825573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7871983149508408180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 109c41f08973846429af681aea0a30c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  r: {x: 15, y: 15, z: 15, w: 0}
+  rect2props: {x: -3.7499695, y: -3.75, z: 139.30005, w: 144.60335}
+  image: {fileID: 8873890244898584097}
 --- !u!1 &8912985641161659986
 GameObject:
   m_ObjectHideFlags: 0
