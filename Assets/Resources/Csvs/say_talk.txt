@@ -1,8 +1,8 @@
 route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,duration,loop,color,direction,target
 0,1,9999,9000,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,806
 0,1,9999,9000,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,806
-0,1,9999,9000,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,806
-0,1,9999,9000,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,806
+0,1,9999,9000,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,806
+0,1,9999,9000,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,806
 0,1,9999,9000,5,text,FALSE,FALSE,"안녕하세요, 알바 문의 주셔서 연락드렸습니다. 면접 시간은 언제가 편하실까요?","Hello, I read your applicant regarding the part-time job. Around when can you come in for an interview?",0,FALSE,0.0.0.0,null,806
 0,1,9999,9000,6,text,TRUE,FALSE,내일은 오후 3시부터 4시 사이만 아니면 다 가능합니다,"I can come in any time, aside from 3PM to 4PM.",0,FALSE,0.0.0.0,null,806
 0,1,9999,9000,7,text,FALSE,FALSE,그럼 내일 오전 11시 가능하신가요?,Does 11AM sound good for you?,0,FALSE,0.0.0.0,null,806
@@ -11,6 +11,7 @@ route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,dura
 0,1,9999,9000,10,text,TRUE,FALSE,네 11시에 뵙겠습니다,"Okay, I'll be there at 11",0,FALSE,0.0.0.0,null,806
 0,1,9999,9000,11,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,806
 0,1,9999,9000,12,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,806
+0,1,9999,9000,13,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,806
 5,1,1020,9001,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,1,1020,9001,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
 5,1,1020,9001,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
@@ -22,12 +23,13 @@ route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,dura
 5,1,1020,9001,9,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,1,1020,9001,10,narrative,FALSE,FALSE,당신은 이 사람을 차단했다.,You blocked this person.,0,FALSE,0.0.0.0,null,0
 5,1,1020,9001,11,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
-5,1,1020,9001,12,animation,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0.25,FALSE,0.0.0.0,out_down,0
+5,1,1020,9001,12,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,1,1020,9001,13,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,1,1050,9001,14,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 1,1,1020,9002,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,802
 1,1,1020,9002,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,802
-1,1,1020,9002,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,802
-1,1,1020,9002,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,802
+1,1,1020,9002,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,802
+1,1,1020,9002,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,802
 1,1,1020,9002,5,text,FALSE,FALSE,"안녕하세요, 11시에 면접 보셨던 247편의점 점장입니다.","Hi, this is the manager of the 247 convenience store you had a job interview, at 11 today.",0,FALSE,0.0.0.0,null,802
 1,1,1020,9002,6,text,FALSE,FALSE,돌아오는 월요일부터 출근해주셨으면 해서 연락드립니다.,I messaged you to see if you can come in starting on Monday.,0,FALSE,0.0.0.0,null,802
 1,1,1020,9002,7,text,FALSE,FALSE,"오실 때 신분증 또는 등본 사본과 함께 급여 받으실 계좌 사본, 보건증 챙겨 오시면 됩니다.","Bring a copy of your ID, a copy of your passbook, and a health certificate and you should be good.",0,FALSE,0.0.0.0,null,802
@@ -36,10 +38,11 @@ route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,dura
 1,1,1020,9002,10,text,TRUE,TRUE,감사합니다 열심히 하겠습니다,Thank you I'll do my best,0,FALSE,0.0.0.0,null,802
 1,1,1020,9002,11,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,802
 1,1,1020,9002,12,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,802
+1,1,1020,9002,13,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,802
 5,2,1020,9003,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,2,1020,9003,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,2,1020,9003,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,2,1020,9003,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,2,1020,9003,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,2,1020,9003,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,2,1020,9003,5,text,FALSE,FALSE,뭐하냐고.,Hello?? I asked you a question.,0,FALSE,0.0.0.0,null,0
 5,2,1020,9003,6,narrative,FALSE,FALSE,분명 어제 차단했는데도 다시 문자를 보냈다.,You could've sworn you blocked this person.,0,FALSE,0.0.0.0,null,0
 5,2,1020,9003,7,narrative,FALSE,FALSE,당신은 차단 목록을 확인한다. (알수없음)이 떠있었다.,You check the block list to find out the account you blocked has been deleted.,0,FALSE,0.0.0.0,null,0
@@ -48,10 +51,11 @@ route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,dura
 5,2,1020,9003,10,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,2,1020,9003,11,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,2,1020,9003,12,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,2,1020,9003,13,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,3,1020,9004,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,3,1020,9004,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,3,1020,9004,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,3,1020,9004,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,3,1020,9004,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,3,1020,9004,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,3,1020,9004,5,text,FALSE,FALSE,무시해?,Are you ignoring me?,0,FALSE,0.0.0.0,null,0
 5,3,1020,9004,6,narrative,FALSE,FALSE,세번째다. 당신은 잠깐이지만 전화번호를 바꿀까 고민한다.,This is your third time. You wonder for a split second if changing the number will fix this problem.,0,FALSE,0.0.0.0,null,0
 5,3,1020,9004,7,narrative,FALSE,FALSE,하지만 이미 이 번호로 가입한 게 많아서 차단만 하기로 한다.,"But you already used this number for countless accounts, so you decide blocking is the best solution.",0,FALSE,0.0.0.0,null,0
@@ -60,10 +64,11 @@ route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,dura
 5,3,1020,9004,10,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,3,1020,9004,11,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,3,1020,9004,12,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,3,1020,9004,13,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,4,1020,9005,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,4,1020,9005,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,4,1020,9005,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,4,1020,9005,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,4,1020,9005,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,4,1020,9005,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,4,1020,9005,5,text,FALSE,FALSE,자꾸 차단하지마ㅠ 계정 파기 귀찮앙,Stop blocking me :( It's bothersome to keep making new accounts,0,FALSE,0.0.0.0,null,0
 5,4,1020,9005,6,narrative,FALSE,FALSE,세번째다. 당신은 잠깐이지만 전화번호를 바꿀까 고민한다.,This is your third time. You wonder for a split second if changing the number will fix this problem.,0,FALSE,0.0.0.0,null,0
 5,4,1020,9005,7,narrative,FALSE,FALSE,하지만 이미 이 번호로 가입한 게 많아서 차단만 하기로 한다.,"But you already used this number for countless accounts, so you decide blocking is the best solution.",0,FALSE,0.0.0.0,null,0
@@ -79,10 +84,11 @@ route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,dura
 5,4,1020,9005,17,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,4,1020,9005,18,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,4,1020,9005,19,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,4,1050,9005,20,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,5,1020,9006,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
-5,5,1020,9006,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,5,1020,9006,2,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,5,1020,9006,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,5,1020,9006,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
+5,5,1020,9006,2,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,5,1020,9006,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,5,1020,9006,4,text,FALSE,FALSE,섬유유연제 뭐 써?,What kinda fabric conditioner do you use?,0,FALSE,0.0.0.0,null,0
 5,5,1020,9006,5,narrative,FALSE,FALSE,등골이 오싹해진다.,Chills went down your spine.,0,FALSE,0.0.0.0,null,0
 5,5,1020,9006,6,narrative,FALSE,FALSE,하지만 이런 걸로 신고해도 딱히 경찰이 해줄 수 있는 건 없을 것이다.,But the cops probably can't do anything about this.,0,FALSE,0.0.0.0,null,0
@@ -91,38 +97,42 @@ route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,dura
 5,5,1020,9006,9,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,5,1020,9006,10,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,5,1020,9006,11,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,5,1020,9006,12,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,6,1020,9007,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,6,1020,9007,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,6,1020,9007,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,6,1020,9007,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,6,1020,9007,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,6,1020,9007,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,6,1020,9007,5,text,FALSE,FALSE,아무거나 잘 받아먹네ㅋ,your lips don't stay sealed very well huh lmao,0,FALSE,0.0.0.0,null,0
 5,6,1020,9007,6,narrative,FALSE,FALSE,당신은 이 사람을 차단했다.,You blocked this person.,0,FALSE,0.0.0.0,null,0
 5,6,1020,9007,7,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,6,1020,9007,8,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,6,1020,9007,9,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,6,1020,9007,10,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,7,1020,9008,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,7,1020,9008,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,7,1020,9008,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,7,1020,9008,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,7,1020,9008,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,7,1020,9008,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,7,1020,9008,5,text,FALSE,FALSE,경찰서는 왜?,Why'd you go to the police station?,0,FALSE,0.0.0.0,null,0
 5,7,1020,9008,6,text,TRUE,FALSE,문자 그만 보내세요,Stop sending me messages,0,FALSE,0.0.0.0,null,0
 5,7,1020,9008,7,narrative,FALSE,FALSE,당신은 이 사람을 차단했다.,You blocked this person.,0,FALSE,0.0.0.0,null,0
 5,7,1020,9008,8,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,7,1020,9008,9,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,7,1020,9008,10,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,7,1020,9008,11,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,8,1020,9009,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,8,1020,9009,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,8,1020,9009,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,8,1020,9009,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,8,1020,9009,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,8,1020,9009,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,8,1020,9009,5,text,FALSE,FALSE,ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ답장도 귀엽게 한당,lmao that's a cute reply ;),0,FALSE,0.0.0.0,null,0
 5,8,1020,9009,6,narrative,FALSE,FALSE,당신은 이 사람을 차단했다.,You blocked this person.,0,FALSE,0.0.0.0,null,0
 5,8,1020,9009,7,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,8,1020,9009,8,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,8,1020,9009,9,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,8,1020,9009,10,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,9,1020,9010,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,9,1020,9010,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,9,1020,9010,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,9,1020,9010,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,9,1020,9010,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,9,1020,9010,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,9,1020,9010,5,text,FALSE,FALSE,자?,Are you asleep?,0,FALSE,0.0.0.0,null,0
 5,9,1020,9010,6,text,FALSE,FALSE,왜 벌써 자?,Sleeping so soon?,0,FALSE,0.0.0.0,null,0
 5,9,1020,9010,7,text,FALSE,FALSE,나랑 얘기하자,Talk to me,0,FALSE,0.0.0.0,null,0
@@ -140,28 +150,31 @@ route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,dura
 5,9,1020,9010,19,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,9,1020,9010,20,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,9,1020,9010,21,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,9,1020,9010,22,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,10,1020,9011,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,10,1020,9011,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,10,1020,9011,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,10,1020,9011,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,10,1020,9011,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,10,1020,9011,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,10,1020,9011,5,text,FALSE,FALSE,얼굴 좀 보여주지 :(,It's so hard to see your face :(,0,FALSE,0.0.0.0,null,0
 5,10,1020,9011,6,narrative,FALSE,FALSE,…,…,0,FALSE,0.0.0.0,null,0
 5,10,1020,9011,7,narrative,FALSE,FALSE,당신은 이 사람을 차단했다.,You blocked this person.,0,FALSE,0.0.0.0,null,0
 5,10,1020,9011,8,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,10,1020,9011,9,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,10,1020,9011,10,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,10,1020,9011,11,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,13,1020,9012,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,13,1020,9012,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,13,1020,9012,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,13,1020,9012,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,13,1020,9012,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,13,1020,9012,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,13,1020,9012,5,text,FALSE,FALSE,여자 옷 개는 건 처음인데 어때 좀 괜찮나?ㅎ;;,It's my first time folding a girl's clothes... how did I do? ;),0,FALSE,0.0.0.0,null,0
 5,13,1020,9012,6,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,13,1020,9012,7,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,10,1020,9012,8,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,10,1020,9012,9,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,14,1020,9013,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,14,1020,9013,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,14,1020,9013,3,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
-5,14,1020,9013,4,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,14,1020,9013,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
+5,14,1020,9013,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,14,1020,9013,5,bgm,FALSE,TRUE,bgm_criminal,bgm_criminal,0,FALSE,0.0.0.0,null,0
 5,14,1020,9013,6,bgm,FALSE,TRUE,bgm_criminal,bgm_criminal,0,FALSE,0.0.0.0,null,0
 5,14,1020,9013,7,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
@@ -170,11 +183,13 @@ route,date,time,event_id,dialog_num,type,isPlayer,autoSkip,text_kor,text_en,dura
 5,14,1020,9013,10,narrative,FALSE,FALSE,null,null,0,FALSE,0.0.0.0,null,0
 5,14,1020,9013,11,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
 5,14,1020,9013,12,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,14,1020,9013,13,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
 5,14,1140,9014,1,sfx,FALSE,TRUE,sfx_sayTalk,sfx_sayTalk,0,FALSE,0.0.0.0,null,0
 5,14,1140,9014,2,object,FALSE,TRUE,img_phone_sayTalk_List,img_phone_sayTalk_List,0,FALSE,255.255.255.255,null,0
-5,14,1140,9014,2,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
 5,14,1140,9014,3,animation,FALSE,TRUE,anim_phone_talk_on,anim_phone_talk_on,1.5,FALSE,0.0.0.0,null,0
-5,14,1140,9014,4,text,TRUE,FALSE,점장님 죄송한데 몸살 기운이 있어서 내일 못 갈 수도 있을 것 같습니다…,"Sir I might have to call in sick tomorrow, I think it could be a common cold.",0,FALSE,0.0.0.0,null,0
-5,14,1140,9014,5,text,TRUE,FALSE,어 괜찮아 쉬어,"That's completely fine, get well soon.",0,FALSE,0.0.0.0,null,0
-5,14,1140,9014,6,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
-5,14,1140,9014,7,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,14,1140,9014,4,object,FALSE,TRUE,img_phone_sayTalk_Chat,img_phone_sayTalk_Chat,0,FALSE,255.255.255.255,null,0
+5,14,1140,9014,5,text,TRUE,FALSE,점장님 죄송한데 몸살 기운이 있어서 내일 못 갈 수도 있을 것 같습니다…,"Sir I might have to call in sick tomorrow, I think it could be a common cold.",0,FALSE,0.0.0.0,null,0
+5,14,1140,9014,6,text,TRUE,FALSE,어 괜찮아 쉬어,"That's completely fine, get well soon.",0,FALSE,0.0.0.0,null,0
+5,14,1140,9014,7,animation,FALSE,TRUE,anim_phone_talk_off,anim_phone_talk_off,1.5,FALSE,0.0.0.0,null,0
+5,14,1140,9014,8,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
+5,14,1140,9014,9,object,FALSE,TRUE,inactivate_chat,inactivate_chat,0,FALSE,255.255.255.255,null,0
