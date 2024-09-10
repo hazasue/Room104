@@ -244,11 +244,13 @@ public class UIManager : MonoBehaviour
         {
             notificationScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_criminal_KOR");
             reportScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_{DEFAULT_SCREEN_NAME_REPORT}_KOR");
+            jobHunterScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_job_hunter_convenience_KOR");
         }
         else
         {
             notificationScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_criminal_EN");
             reportScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_{DEFAULT_SCREEN_NAME_REPORT}_EN");
+            jobHunterScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_job_hunter_convenience_EN");
         }
     }
 }
