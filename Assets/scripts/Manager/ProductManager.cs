@@ -26,10 +26,16 @@ public class ProductManager : MonoBehaviour
         }
 
         Product tempProduct;
+        string name;
         foreach (KeyValuePair<int, ProductData> data in GameManager.Instance.Products)
         {
+            if (Settings.Instance().isKorean) name = data.Value.nameKR;
+            else
+            {
+                name = data.Value.nameEN;
+            }
             tempProduct = Instantiate(productObject, viewport, true);
-            tempProduct.Init(data.Value.nameKR, data.Value.description, data.Value.price, data.Value.count);
+            tempProduct.Init(name, data.Value.description, data.Value.price, data.Value.count);
             products.Add(data.Key, tempProduct);
         }
     }
