@@ -13,6 +13,8 @@ public class SayTalkManager : MonoBehaviour
     private const string CSV_FILENAME_SAYTALK = "say_talk";
     private const string SPLIT_STANDARD = ".";
     private const int MAX_SAVE_SLOT_COUNT = 3;
+    private static Vector3 SAYTALK_POSITION_DEFAULT = new Vector3(960f, 540f, 0f);
+    private static Vector3 SAYTALK_POSITION_UNDER = new Vector3(960f, -402f, 0f);
 
     private Dictionary<int, Dictionary<int, SayTalkHistory>> datas;
 
@@ -37,6 +39,7 @@ public class SayTalkManager : MonoBehaviour
     public GameObject updateObject;
     public GameObject animationObject;
     public RawImage animationImage; 
+    public Transform smartPhoneScreen;
 
     public Dictionary<string, string> objects; 
     
@@ -76,7 +79,6 @@ public class SayTalkManager : MonoBehaviour
         sayTalkData = null;
         targetId = -1;
         //event_id, dialog_num, type, isPlayer, autoSkip, text, duration, loop, color, direction
-        
         List<Dictionary<string, object>> mainEventDB = CSVReader.Read(CSV_FILENAME_SAYTALK);
         foreach (Dictionary<string, object> data in mainEventDB)
         {
@@ -129,7 +131,6 @@ public class SayTalkManager : MonoBehaviour
     {
         currentSayTalkList = sayTalkLists[eventId];
         currentSayTalkIdx = 0;
-        
 
         handleSayTalk(currentSayTalkList[currentSayTalkIdx++]);
     }
@@ -194,7 +195,6 @@ public class SayTalkManager : MonoBehaviour
                 break;
             
             case eSayTalkType.ANIMATION:
-                toggleCurrentObject(animationObject);
                 Color tempColor;
                 switch (sayTalk.TextKor)
                 {
@@ -209,7 +209,6 @@ public class SayTalkManager : MonoBehaviour
                     default:
                         break;
                 }
-                UpdateSayTalk(sayTalk.Duration);
                 break;
             
             default:
@@ -257,8 +256,23 @@ public class SayTalkManager : MonoBehaviour
     {
         Color tempColor;
         float timeGap;
+        
         if (isOn)
         {
+            smartPhoneScreen.position = SAYTALK_POSITION_UNDER;
+            UIManager.GetInstance().ActivateScreen("smartphone");
+            while (smartPhoneScreen.position.y <= SAYTALK_POSITION_DEFAULT.y)
+            {
+                timeGap = Time.deltaTime;
+                yield return new WaitForSeconds(timeGap);
+                smartPhoneScreen.transform.position += new Vector3(0f, 1f, 0f) * timeGap * 1606f;
+            }
+
+            smartPhoneScreen.transform.position = SAYTALK_POSITION_DEFAULT;
+            
+            UIManager.GetInstance().ActivateScreen(objects["img_phone_sayTalk_List"]);
+            
+            toggleCurrentObject(animationObject);
             tempColor = animationImage.color;
             tempColor.a = 1f;
             animationImage.color = tempColor;
@@ -272,6 +286,7 @@ public class SayTalkManager : MonoBehaviour
         }
         else
         {
+            toggleCurrentObject(animationObject);
             tempColor = animationImage.color;
             tempColor.a = 0f;
             animationImage.color = tempColor;
@@ -282,6 +297,22 @@ public class SayTalkManager : MonoBehaviour
                 tempColor.a += timeGap / duration * 2f;
                 animationImage.color = tempColor;
             }
+
+            toggleCurrentObject(nullObject);
+            UIManager.GetInstance().InactivateScreen();
+            UIManager.GetInstance().InactivateScreen();
+            
+            smartPhoneScreen.position = SAYTALK_POSITION_DEFAULT;
+            while (smartPhoneScreen.position.y >= SAYTALK_POSITION_UNDER.y)
+            {
+                timeGap = Time.deltaTime;
+                yield return new WaitForSeconds(timeGap);
+                smartPhoneScreen.transform.position -= new Vector3(0f, 1f, 0f) * timeGap * 1606f;
+            }
+
+            smartPhoneScreen.gameObject.SetActive(false);
+            smartPhoneScreen.transform.position = SAYTALK_POSITION_DEFAULT;
         }
+        UpdateSayTalk(0f);
     }
 }
