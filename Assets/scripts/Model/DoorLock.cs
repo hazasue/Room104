@@ -8,6 +8,7 @@ public class DoorLock : MiniGame
 {
     private const int DEFAULT_NUMBER_COUNT_LITTLE = 4;
     private const int DEFAULT_NUMBER_COUNT_MANY = 8;
+    private const float DEFAULT_TIME_LIMIT_DOOR_LOCK = 5f;
 
     private int passWordLength;
     private List<int> passWord;
@@ -29,7 +30,13 @@ public class DoorLock : MiniGame
 
     protected override void init(float safety)
     {
-        timeLimit = DEFAULT_TIME_LIMIT + safety;
+        this.safety = safety;
+        if(safety != 3) timeLimit = DEFAULT_TIME_LIMIT_DOOR_LOCK + safety;
+        else
+        {
+            timeLimit = DEFAULT_TIME_LIMIT_DOOR_LOCK + 5f;
+        }
+        
         timer.text = timeLimit.ToString("F2");
         
         int length = DEFAULT_NUMBER_COUNT_MANY;

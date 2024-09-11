@@ -16,6 +16,7 @@ public abstract class MiniGame : MonoBehaviour
     
     protected float timeLimit;
     protected float progress;
+    protected float safety;
 
     protected bool activated;
 

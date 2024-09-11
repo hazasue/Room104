@@ -6,6 +6,7 @@ public class WindowInvade : MiniGame
 {
     public RectTransform structure;
     private Vector3 structurePos;
+    private float additionalIncreasion;
 
     public override void Activate(float safety)
     {
@@ -17,12 +18,35 @@ public class WindowInvade : MiniGame
 
     protected override void init(float safety)
     {
-        timeLimit = DEFAULT_TIME_LIMIT + safety;
+        timeLimit = DEFAULT_TIME_LIMIT;
         timer.text = timeLimit.ToString("F2");
-
+        
+        this.safety = safety;       
+        switch (safety)
+        {
+            case 0f:
+                additionalIncreasion = 0f;
+                break;
+            
+            case 1f:
+                additionalIncreasion = 0.01f;
+                break;
+            
+            case 2f:
+                additionalIncreasion = 0.03f;
+                break;
+            
+            case 3f:
+                additionalIncreasion = 0.05f;
+                break;
+            
+            default:
+                break;
+        }
+        
         gauge.maxValue = MAX_PROGRESS;
-        gauge.value = 0.5f;
         progress = 0.5f;
+        gauge.value = progress;
 
         structurePos = structure.position;
     }
@@ -35,7 +59,7 @@ public class WindowInvade : MiniGame
             
             if (Input.GetKeyDown(KeyCode.E))
             {
-                progress += DEFAULT_PROGRESS_INCREASE_AMOUNT;
+                progress += DEFAULT_PROGRESS_INCREASE_AMOUNT + additionalIncreasion;
                 gauge.value = progress;
                 structure.position = structurePos + new Vector3(structure.rect.width * progress, 0f, 0f);
                 
