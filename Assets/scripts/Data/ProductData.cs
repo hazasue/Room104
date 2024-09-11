@@ -7,17 +7,19 @@ public class ProductData
 {
     public string nameKR;
     public string nameEN;
-    public string description;
+    public string descriptionKR;
+    public string descriptionEN;
     public string requiredStat;
     public int requiredStatValue;
     public int price;
     public int count;
 
-    public ProductData(string nameKR, string nameEN, string description, string requiredStat, int requiredStatValue, int price, int count)
+    public ProductData(string nameKR, string nameEN, string descriptionKR, string descriptionEN, string requiredStat, int requiredStatValue, int price, int count)
     {
         this.nameKR = nameKR;
         this.nameEN = nameEN;
-        this.description = description;
+        this.descriptionKR = descriptionKR;
+        this.descriptionEN = descriptionEN;
         this.requiredStat = requiredStat;
         this.requiredStatValue = requiredStatValue;
         this.price = price;

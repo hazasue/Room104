@@ -13,10 +13,10 @@ public class ProductManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        init();
+        //Init();
     }
 
-    private void init()
+    public void Init()
     {
         products = new Dictionary<int, Product>();
 
@@ -27,15 +27,22 @@ public class ProductManager : MonoBehaviour
 
         Product tempProduct;
         string name;
+        string description;
         foreach (KeyValuePair<int, ProductData> data in GameManager.Instance.Products)
         {
-            if (Settings.Instance().isKorean) name = data.Value.nameKR;
+            if (Settings.Instance().isKorean)
+            {
+                name = data.Value.nameKR;
+                description = data.Value.descriptionKR;
+            }
             else
             {
                 name = data.Value.nameEN;
+                description = data.Value.descriptionEN;
             }
+            
             tempProduct = Instantiate(productObject, viewport, true);
-            tempProduct.Init(name, data.Value.description, data.Value.price, data.Value.count);
+            tempProduct.Init(name, description, data.Value.price, data.Value.count);
             products.Add(data.Key, tempProduct);
         }
     }
