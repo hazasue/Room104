@@ -18,6 +18,7 @@ public class GameManager : Singleton<GameManager>
     private const float DEFAULT_TIME_SCALE_PAUSED = 0f;
     private const float DEFAULT_TIME_SCALE_PLAYING = 1f;
     private const int MAX_SAVE_SLOT_COUNT = 3;
+    private const string CSV_FILENAME_PRODUCT = "product_init";
 
     private Player player;
     public Player Player { get { return player; } }
@@ -104,7 +105,17 @@ public class GameManager : Singleton<GameManager>
     {
         int currentKey = 0;      
         gameData = new GameData("root name", 0, 0, 0, 0f, initNpcTrait(), player.Stat.ConvertToData());
-        products = JsonManager.LoadJsonFile<Dictionary<int, ProductData>>(JsonManager.DEFAULT_PRODUCTINIT_DATA_NAME);
+        List<Dictionary<string, object>> productDB = CSVReader.Read(CSV_FILENAME_PRODUCT);
+        products = new Dictionary<int, ProductData>();
+        foreach (Dictionary<string, object> data in productDB)
+        {
+            products.Add((int)data["id"],
+                new ProductData(data["nameKR"].ToString(), data["nameEN"].ToString(), data["descriptionKR"].ToString(),
+                    data["descriptionEN"].ToString(),
+                    data["requiredStat"].ToString(), (int)data["requiredStatValue"], (int)data["price"],
+                    (int)data["count"])
+            );
+        }
     }
 
     private void loadGame(int slotIdx)
