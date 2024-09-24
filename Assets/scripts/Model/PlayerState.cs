@@ -4,18 +4,56 @@ using UnityEngine;
 
 public abstract class PlayerState
 {
+    public enum eDirection
+    {
+        Top,
+        Bottom,
+        Right,
+        Left
+    }
+
     public abstract void start(Player player);
     public abstract PlayerState TransitionState(eKeyAction action);
     public abstract void Update(Player player);
     public abstract void FixedUpdate(Player player);
     public abstract void end(Player player);
+    protected eDirection CheckDirection(Player player)
+    {
+        if (player.direction.x == 1)
+            return eDirection.Right;
+        else if (player.direction.x == -1)
+            return eDirection.Left;
+        else if (player.direction.y == 1)
+            return eDirection.Top;
+        else if (player.direction.y == -1)
+            return eDirection.Bottom;
+        else
+            return eDirection.Bottom;
+    }
 }
 
 public class IdleState : PlayerState
 {
     public override void start(Player player)
     {
-        
+        Debug.Log("Idle");
+        switch (CheckDirection(player))
+        {
+            case eDirection.Top:
+                player.anime.Play("IdleTop");
+                break;
+            case eDirection.Bottom:
+                player.anime.Play("IdleBottom");
+                break;
+            case eDirection.Right:
+                player.anime.Play("IdleRight");
+                break;
+            case eDirection.Left:
+                player.anime.Play("IdleLeft");
+                break;
+            default:
+                break;
+        }
     }
 
     public override PlayerState TransitionState(eKeyAction action)
@@ -45,7 +83,25 @@ public class WalkState : PlayerState
 
     public override void start(Player player)
     {
-        direction = new Vector2(0,0);
+        Debug.Log("Run");
+        direction = player.direction;
+        switch (CheckDirection(player))
+        {
+            case eDirection.Top:
+                player.anime.Play("RunTop");
+                break;
+            case eDirection.Bottom:
+                player.anime.Play("RunBottom");
+                break;
+            case eDirection.Right:
+                player.anime.Play("RunRight");
+                break;
+            case eDirection.Left:
+                player.anime.Play("RunLeft");
+                break;
+            default:
+                break;
+        }
     }
 
     public override PlayerState TransitionState(eKeyAction action)
@@ -66,10 +122,29 @@ public class WalkState : PlayerState
     public override void Update(Player player)
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        direction = direction.normalized;
-        if (direction.magnitude > 0)
+        if (direction.magnitude > 0 && direction.magnitude <= 1 && direction != player.direction)
+        {
             player.direction = direction;
-      
+            Debug.Log("실행됨");
+            switch (CheckDirection(player))
+            {
+                case eDirection.Top:
+                    player.anime.Play("RunTop");
+                    break;
+                case eDirection.Bottom:
+                    player.anime.Play("RunBottom");
+                    break;
+                case eDirection.Right:
+                    player.anime.Play("RunRight");
+                    break;
+                case eDirection.Left:
+                    player.anime.Play("RunLeft");
+                    break;
+                default:
+                    break;
+            }
+        }
+        direction = direction.normalized;
     }
     
     public override void FixedUpdate(Player player) 
@@ -127,7 +202,7 @@ public class InteractState : PlayerState
     private string objectName = "";
     public override void start(Player player)
     {
-        RaycastHit2D hit = Physics2D.Raycast(player.transform.position, player.direction, 2.0f);
+        RaycastHit2D hit = Physics2D.Raycast(player.transform.position, player.direction, 2.0f, (int)GameManager.eLayer.InteractalbeObject);
         if (hit.collider != null)
         {
             isFind = true;

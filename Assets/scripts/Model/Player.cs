@@ -20,12 +20,16 @@ public class Player : MonoBehaviour
 
     public Vector2 direction;
 
+    public Animator anime;
+
     private const float DEFAULT_MOVE_SPEED_WALK = 1f;
     private const float DEFAULT_MOVE_SPEED_RUN = 1.5f;
 
     // Start is called before the first frame update
     void Awake()
     {
+        anime = GetComponent<Animator>();
+
         direction = new Vector2(0.0f, 0.0f);
         state = new IdleState();
         stat = new PlayerStat();

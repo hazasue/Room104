@@ -8,10 +8,10 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - InteractableObjects
   - 
   - 
   - 
@@ -40,4 +40,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Map
+    uniqueID: 1618206433
+    locked: 0
+  - name: Object
+    uniqueID: 1260050503
+    locked: 0
+  - name: Player
+    uniqueID: 3833109811
+    locked: 0
+  - name: ScreenEffect
+    uniqueID: 269095731
+    locked: 0
+  - name: ScreenFence
+    uniqueID: 2181784049
     locked: 0

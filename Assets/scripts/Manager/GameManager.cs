@@ -6,6 +6,12 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
+    public enum eLayer
+    {
+        InteractalbeObject = 64
+    }
+
+
     public enum eGameState
     {
         PAUSED,
