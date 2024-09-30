@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 15fa06aa89d4a0249874ee0080c46aea
+guid: 9319fe1ad83c8454fbb1aff1a269a5f4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,106 +97,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_speech_0
+      name: portrait_T102_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 101
-        width: 47
-        height: 47
+        x: 0
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da51b3cd2d59fe148b68d6405844db48
-      internalID: 554690750
+      spriteID: 43b9a04d452cadd4a8eba833d8b28c2f
+      internalID: 827305215
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_speech_1
+      name: portrait_T102_1
       rect:
         serializedVersion: 2
-        x: 49
-        y: 2
-        width: 149
-        height: 148
+        x: 300
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 66, y: 21, z: 61, w: 67}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f078b8787ee1bd419ffb53616df4938
-      internalID: -1744562455
+      spriteID: adaa03ef7b76387499e39a83d49cb050
+      internalID: 1714629461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_speech_2
+      name: portrait_T102_2
       rect:
         serializedVersion: 2
-        x: 202
+        x: 600
+        y: 600
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aa13ed3a179f414388e2633bf3c76b2
+      internalID: 668537171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_T102_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ec560b64fb048347ab941ecafa29117
+      internalID: -204251730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_T102_4
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15112786a01b7f344a92e809f4689b10
+      internalID: -1881830516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_T102_5
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7edba49ba43180458ad0950f72b46f4
+      internalID: 454949593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_T102_6
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
-        width: 147
-        height: 148
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4fe667af813aa7499bd58c8a1ee8e10
-      internalID: -816183265
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_speech_3
-      rect:
-        serializedVersion: 2
-        x: 349
-        y: 0
-        width: 151
-        height: 150
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e314cefcf07a53e45a07a21ba719a51a
-      internalID: 82236938
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_speech_4
-      rect:
-        serializedVersion: 2
-        x: 502
-        y: 2
-        width: 146
-        height: 146
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5c831d96de63d6f41aa3d95ef69d1cda
-      internalID: -1800343594
+      spriteID: 3cd4cf693e818d243938d7da58f3cdeb
+      internalID: -1526601730
       vertices: []
       indices: 
       edges: []
@@ -212,11 +254,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spr_speech_0: 554690750
-      spr_speech_1: -1744562455
-      spr_speech_2: -816183265
-      spr_speech_3: 82236938
-      spr_speech_4: -1800343594
+      portrait_T102_0: 827305215
+      portrait_T102_1: 1714629461
+      portrait_T102_2: 668537171
+      portrait_T102_3: -204251730
+      portrait_T102_4: -1881830516
+      portrait_T102_5: 454949593
+      portrait_T102_6: -1526601730
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

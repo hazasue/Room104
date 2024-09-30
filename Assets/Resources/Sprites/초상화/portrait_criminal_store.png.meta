@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 15fa06aa89d4a0249874ee0080c46aea
+guid: 489f86ac08b2e7b43be7e7f2cd4516ad
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,106 +97,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_speech_0
+      name: portrait_criminal_store_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 101
-        width: 47
-        height: 47
+        x: 0
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da51b3cd2d59fe148b68d6405844db48
-      internalID: 554690750
+      spriteID: 8bfb847457381fd40aca3fde9e1016bc
+      internalID: -1574554820
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_speech_1
+      name: portrait_criminal_store_1
       rect:
         serializedVersion: 2
-        x: 49
-        y: 2
-        width: 149
-        height: 148
+        x: 300
+        y: 300
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 66, y: 21, z: 61, w: 67}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f078b8787ee1bd419ffb53616df4938
-      internalID: -1744562455
+      spriteID: 921243f23c1df724383a99a295d8145c
+      internalID: 1547854560
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_speech_2
+      name: portrait_criminal_store_2
       rect:
         serializedVersion: 2
-        x: 202
+        x: 600
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef6bc6315e5bd5a448db3d227b0eb33f
+      internalID: -924553744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_criminal_store_3
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
-        width: 147
-        height: 148
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4fe667af813aa7499bd58c8a1ee8e10
-      internalID: -816183265
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_speech_3
-      rect:
-        serializedVersion: 2
-        x: 349
-        y: 0
-        width: 151
-        height: 150
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e314cefcf07a53e45a07a21ba719a51a
-      internalID: 82236938
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_speech_4
-      rect:
-        serializedVersion: 2
-        x: 502
-        y: 2
-        width: 146
-        height: 146
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5c831d96de63d6f41aa3d95ef69d1cda
-      internalID: -1800343594
+      spriteID: e51d10aafdc09c44c82663428f508787
+      internalID: 968658637
       vertices: []
       indices: 
       edges: []
@@ -212,11 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spr_speech_0: 554690750
-      spr_speech_1: -1744562455
-      spr_speech_2: -816183265
-      spr_speech_3: 82236938
-      spr_speech_4: -1800343594
+      portrait_criminal_store_0: -1574554820
+      portrait_criminal_store_1: 1547854560
+      portrait_criminal_store_2: -924553744
+      portrait_criminal_store_3: 968658637
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

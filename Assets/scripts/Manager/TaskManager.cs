@@ -6,16 +6,12 @@ using TMPro;
 
 public class TaskManager : Singleton<TaskManager>
 {
-    public TMP_Text narrativeText;
-    public TMP_Text portraitText;
-    public GameObject narrativeObject;
-    public GameObject portraitObject;
-
     private Dictionary<int, TaskGroup> taskGroupDic;
     public Dictionary<int, TaskGroup> TaskGroupDic { get { return taskGroupDic; } }
 
-    private int i = 0;
-
+    private int taskCnt = 0;
+    private int groupCnt = 2000;
+    private int taskMax = 0;
     public override void Awake()
     {
         base.Awake();
@@ -23,14 +19,26 @@ public class TaskManager : Singleton<TaskManager>
         Debug.Log("TaskManager»ý¼ºµÊ");
     }
 
+
+    public void Start()
+    {
+        taskMax = taskGroupDic[2000].Tasks.Count;
+    }
+
     public void Update()
     {
-        if (i < 6)
+        if (taskCnt < taskMax)
         {
-            if (taskGroupDic[2000].Tasks[i].State != Task.eState.End)
-                taskGroupDic[2000].Tasks[i].Excute();
+            if (taskGroupDic[groupCnt].Tasks[taskCnt].State != Task.eState.End)
+                taskGroupDic[groupCnt].Tasks[taskCnt].Execute();
             else
-                i += 1;
+                taskCnt += 1;
+        }
+        else
+        {
+            taskCnt = 0;
+            groupCnt += 1;
+            taskMax = taskGroupDic[groupCnt].Tasks.Count;
         }
     }
 

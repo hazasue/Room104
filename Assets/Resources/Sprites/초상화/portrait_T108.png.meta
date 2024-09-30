@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 15fa06aa89d4a0249874ee0080c46aea
+guid: 014a252614bd6a740b7a504466c6a3d4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,106 +97,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_speech_0
+      name: portrait_T108_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 101
-        width: 47
-        height: 47
+        x: 0
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da51b3cd2d59fe148b68d6405844db48
-      internalID: 554690750
+      spriteID: 690c6564b8abd4a4cb0c2c048efb1fac
+      internalID: -1786955743
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_speech_1
+      name: portrait_T108_1
       rect:
         serializedVersion: 2
-        x: 49
-        y: 2
-        width: 149
-        height: 148
+        x: 300
+        y: 600
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 66, y: 21, z: 61, w: 67}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f078b8787ee1bd419ffb53616df4938
-      internalID: -1744562455
+      spriteID: 3cf16aad10b7f2945ba4bacdbd1d717d
+      internalID: -2041064572
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_speech_2
+      name: portrait_T108_2
       rect:
         serializedVersion: 2
-        x: 202
+        x: 600
+        y: 600
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6985111542faa0c4ea528878d3326487
+      internalID: -686915567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_T108_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0d89f2f0439b18498fa4233b43859fc
+      internalID: -1592341846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_T108_4
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff807553912f1dc4fb6fe1d028efaf43
+      internalID: 407899963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_T108_5
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 300
+        width: 300
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4951d4c822dc04409b1e0bceb70d0a3
+      internalID: -230180217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: portrait_T108_6
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
-        width: 147
-        height: 148
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4fe667af813aa7499bd58c8a1ee8e10
-      internalID: -816183265
+      spriteID: 00e8f51305aa3094bb28c6b7e6a39e68
+      internalID: 1932316993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_speech_3
+      name: portrait_T108_7
       rect:
         serializedVersion: 2
-        x: 349
+        x: 300
         y: 0
-        width: 151
-        height: 150
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e314cefcf07a53e45a07a21ba719a51a
-      internalID: 82236938
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_speech_4
-      rect:
-        serializedVersion: 2
-        x: 502
-        y: 2
-        width: 146
-        height: 146
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5c831d96de63d6f41aa3d95ef69d1cda
-      internalID: -1800343594
+      spriteID: d8d87d29026b2ac4d8450966997d673b
+      internalID: 863816193
       vertices: []
       indices: 
       edges: []
@@ -212,11 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spr_speech_0: 554690750
-      spr_speech_1: -1744562455
-      spr_speech_2: -816183265
-      spr_speech_3: 82236938
-      spr_speech_4: -1800343594
+      portrait_T108_0: -1786955743
+      portrait_T108_1: -2041064572
+      portrait_T108_2: -686915567
+      portrait_T108_3: -1592341846
+      portrait_T108_4: 407899963
+      portrait_T108_5: -230180217
+      portrait_T108_6: 1932316993
+      portrait_T108_7: 863816193
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

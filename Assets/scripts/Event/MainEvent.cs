@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MainEvent
 {
@@ -32,6 +33,10 @@ public class MainEvent
     protected List<TaskGroup> taskGroups;
     public List<TaskGroup> TaskGroups { get { return taskGroups; } }
 
+    private bool isExecutable;
+
+    private Action conditionCheckFunc;
+
     public MainEvent(string route, string eventDay, string occurrenceCondition, string detailedCondition, string eventTime, string eventID)
     {
         taskGroups = new List<TaskGroup>();
@@ -41,6 +46,7 @@ public class MainEvent
         this.detailedCondition = detailedCondition;
         int.TryParse(eventTime, out this.eventTime);
         int.TryParse(eventID, out this.eventID);
+        this.isExecutable = false;
     }
 
     public void AddTaskGroup(TaskGroup group)
@@ -48,12 +54,7 @@ public class MainEvent
         taskGroups.Add(group);
     }
 
-    public void CheckConditions()
-    {
-
-    }
-
-    public void Update()
+    public void Execute()
     {
 
     }

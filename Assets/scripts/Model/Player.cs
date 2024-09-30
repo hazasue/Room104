@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
     public Animator anime;
 
+    private Camera camera;
+
     private const float DEFAULT_MOVE_SPEED_WALK = 1f;
     private const float DEFAULT_MOVE_SPEED_RUN = 1.5f;
 
@@ -37,6 +39,10 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        camera = Camera.main;
+        camera.gameObject.AddComponent<CameraFollow>().target = this.gameObject.transform;
+        GameManager.Instance.SetPlayer(this.gameObject.name);
+        UITest.Instance.PlayerUI.GetComponent<PlayerInfoUI>().SetPlayerHandler(this.GetComponent<Player>());
         StatEventHandler();
         TimeEventHandler();
     }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerInfoUI : MonoBehaviour
 {
-    public Player player;
+    private Player player;
 
     public Image healthBar;
     public TMP_Text healthText;
@@ -16,22 +16,23 @@ public class PlayerInfoUI : MonoBehaviour
     public TMP_Text stressText;
     public Image staminaBar;
 
-    private void Awake()
+    public void SetPlayerHandler(Player player)
     {
+        this.player = player;
         player.StatEventHandler += UpdateHealth;
         player.StatEventHandler += UpdateIntelligence;
         player.StatEventHandler += UpdateStress;
         player.StatEventHandler += UpdateStamina;
     }
 
-    public void UpdateHealth()
+    private void UpdateHealth()
     {
         healthBar.fillAmount = player.Stat.Health / PlayerStat.MAX_HEALTH;
 
         healthText.text = $"{(int)player.Stat.Health} / {(int)PlayerStat.MAX_HEALTH}";
     }
 
-    public void UpdateIntelligence()
+    private void UpdateIntelligence()
     {
         intelligenceBar.fillAmount = player.Stat.Intelligence / PlayerStat.MAX_INTELLIGENCE;
         
@@ -39,14 +40,14 @@ public class PlayerInfoUI : MonoBehaviour
     }
 
 
-    public void UpdateStress()
+    private void UpdateStress()
     {
         stressBar.fillAmount = player.Stat.Stress / PlayerStat.MAX_STRESS;
 
         stressText.text = $"{(int)player.Stat.Stress} / {(int)PlayerStat.MAX_STRESS}";
     }
 
-    public void UpdateStamina()
+    private void UpdateStamina()
     {
         staminaBar.fillAmount = player.Stat.Stamina / player.Stat.MaxStamina;
     }

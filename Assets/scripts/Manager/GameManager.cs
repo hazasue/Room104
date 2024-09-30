@@ -53,7 +53,6 @@ public class GameManager : Singleton<GameManager>
         date = 1;
         hour = 6;
         minute = 0;
-        player.TimeEventHandler += ModifyDateTime;
     }
     // Start is called before the first frame update
     void Start()
@@ -71,7 +70,6 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = DEFAULT_TIME_SCALE_PLAYING;
         gameState = eGameState.PLAYING;
-        player = GameObject.Find("Player").GetComponent<Player>();
 
 /*        initDatas();
 
@@ -117,6 +115,12 @@ public class GameManager : Singleton<GameManager>
 
         gameDatas[slotIdx] = gameData;
         JsonManager.CreateJsonFile(JsonManager.DEFAULT_GAME_DATA_NAME, gameDatas);
+    }
+
+    public void SetPlayer(string name)
+    {
+        player = GameObject.Find(name).GetComponent<Player>();
+        player.TimeEventHandler += ModifyDateTime;
     }
 
     // init npc trait when new game starts

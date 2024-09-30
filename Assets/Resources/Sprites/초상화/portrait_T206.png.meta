@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 15fa06aa89d4a0249874ee0080c46aea
+guid: 2efc97dcd7088804b9293b9d191da6a2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,106 +97,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spr_speech_0
+      name: portrait_T206_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 101
-        width: 47
-        height: 47
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da51b3cd2d59fe148b68d6405844db48
-      internalID: 554690750
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_speech_1
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 2
-        width: 149
-        height: 148
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 66, y: 21, z: 61, w: 67}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9f078b8787ee1bd419ffb53616df4938
-      internalID: -1744562455
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spr_speech_2
-      rect:
-        serializedVersion: 2
-        x: 202
+        x: 0
         y: 0
-        width: 147
-        height: 148
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b4fe667af813aa7499bd58c8a1ee8e10
-      internalID: -816183265
+      spriteID: f3202879954cb0b43b03b64e2dd375b1
+      internalID: -1197474993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_speech_3
+      name: portrait_T206_1
       rect:
         serializedVersion: 2
-        x: 349
+        x: 300
         y: 0
-        width: 151
-        height: 150
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e314cefcf07a53e45a07a21ba719a51a
-      internalID: 82236938
+      spriteID: d5de70d8c9f2cab4aa25ed4816b74b98
+      internalID: 782527534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spr_speech_4
+      name: portrait_T206_2
       rect:
         serializedVersion: 2
-        x: 502
-        y: 2
-        width: 146
-        height: 146
+        x: 600
+        y: 0
+        width: 300
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c831d96de63d6f41aa3d95ef69d1cda
-      internalID: -1800343594
+      spriteID: f4dd9729c1e37e1409b5cb687fbd5f2a
+      internalID: -924540080
       vertices: []
       indices: 
       edges: []
@@ -212,11 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      spr_speech_0: 554690750
-      spr_speech_1: -1744562455
-      spr_speech_2: -816183265
-      spr_speech_3: 82236938
-      spr_speech_4: -1800343594
+      portrait_T206_0: -1197474993
+      portrait_T206_1: 782527534
+      portrait_T206_2: -924540080
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

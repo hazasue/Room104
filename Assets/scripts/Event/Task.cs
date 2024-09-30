@@ -31,7 +31,7 @@ public abstract class Task
         state = eState.Waiting;
     }
 
-    public abstract void Excute();
+    public abstract void Execute();
 
     protected Color StringToColor(string color)
     {
@@ -47,13 +47,14 @@ public class TextOutput : Task
     public string Text { get { return text; } }
     float elapseTime = 0.0f;
     float completionTIme = 1.0f;
+    float offset = 0.5f;
     public TextOutput(string taskID, string effect, string text, string otherEventID) : base(taskID, otherEventID)
     {
         int.TryParse(effect, out this.effect);
         this.text = text.Replace("\\n","\n");
     }
 
-    public override void Excute()
+    public override void Execute()
     {
         switch(effect)
         {
@@ -66,14 +67,13 @@ public class TextOutput : Task
                     UITest.Instance.NoticeObject.SetActive(true);
                 }
                 fadeIn();
-                if(elapseTime >= completionTIme)
+                if(elapseTime >= completionTIme + offset)
                     state = eState.End;
                 break;
             //페이드 아웃
             case 3:
                 fadeOut();
-
-                if (elapseTime >= completionTIme)
+                if (elapseTime >= completionTIme + offset)
                 {
                     UITest.Instance.NoticeObject.SetActive(false);
                     state = eState.End;
@@ -107,7 +107,7 @@ public class Timer : Task
         this.completionTIme = this.completionTIme * 0.001f;
     }
 
-    public override void Excute()
+    public override void Execute()
     {
         switch (state)
         {
@@ -128,42 +128,137 @@ public class Timer : Task
 
 public class ImageOutput : Task
 {
-    private string imageLayer;
+    private Image imageComp;
     private string resourceName;
     private int resourceNum;
     private int effect;
+    float elapseTime = 0.0f;
+    float completionTIme = 1.0f;
+    float offset = 0.5f;
     private Color color;
 
     public ImageOutput(string taskID, string imageLayer, string resourceName, string resourceNum, string color, string effect, string otherEventID) : base(taskID, otherEventID)
     {
-        this.imageLayer = imageLayer;
+        switch (imageLayer)
+        {
+            case "image1":
+                imageComp = UITest.Instance.Image1.GetComponent<Image>();
+                break;
+            case "image2":
+                imageComp = UITest.Instance.Image2.GetComponent<Image>();
+                break;
+/*            case "image3":
+                imageComp = UITest.Instance.Image3.GetComponent<Image>();
+                break;
+            case "image4":
+                imageComp = UITest.Instance.Image4.GetComponent<Image>();
+                break;*/
+            default:
+                Debug.Log("ImageOutput Layer Error");
+                break;
+        }
         this.resourceName = resourceName;
         int.TryParse(resourceNum, out this.resourceNum);
         int.TryParse(effect, out this.effect);
         this.color = StringToColor(color);
     }
 
-    public override void Excute()
+    public override void Execute()
     {
+        if(state == eState.Waiting)
+        {
+            imageComp.sprite = Resources.Load<Sprite>("Sprites/원화/"+resourceName);
+            imageComp.color = color;           
+            state = eState.Running;
+        }
+        if(state == eState.Running)
+        {
+            switch(effect)
+            {
+                case 0:
+                    imageComp.gameObject.SetActive(false);
+                    state = eState.End;
+                    break;
+                case 1:
+                    imageComp.gameObject.SetActive(true);
+                    state = eState.End;
+                    break;
+                case 2:
+                    fadeIn();
+                    if (elapseTime >= completionTIme + offset)
+                        state = eState.End;
+                    break;
+                case 3:
+                    fadeOut();
+                    if (elapseTime >= completionTIme + offset)
+                    {
+                        imageComp.gameObject.SetActive(false);
+                        state = eState.End;
+                    }
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                default:
+                    Debug.Log("ImageOutput Effect Error");
+                    break;
+            }
+        }
+    }
 
+    private void fadeIn()
+    {
+        imageComp.gameObject.SetActive(true);
+        imageComp.color = new Color(255, 255, 255, Mathf.Lerp(0f, 1f, elapseTime / completionTIme));
+        elapseTime += Time.deltaTime;
+    }
+    private void fadeOut()
+    {
+        imageComp.color = new Color(255, 255, 255, Mathf.Lerp(1f, 0f, elapseTime / completionTIme));
+        elapseTime += Time.deltaTime;
     }
 }
 
-public class SpawnOrDespawn : Task
+public class ObjectSpawner : Task
 {
     private GameObject subject;
     private Vector2 location;
+    private string locationName;
     private int condition;
-    public SpawnOrDespawn(string taskID, string objectName, string locationName, string condition, string ohterEventID) : base(taskID, ohterEventID)
+    public ObjectSpawner(string taskID, string objectName, string locationName, string condition, string ohterEventID) : base(taskID, ohterEventID)
     {
-        //subject = GameObject.Find(objectName);
-        //location = GameObject.Find(locationName).transform.position;
+        this.locationName = locationName;
         int.TryParse(condition, out this.condition);
+        switch (this.condition)
+        {
+            case 0:
+                subject = GameObject.Find(objectName);
+                break;
+            case 1:
+                subject = Resources.Load<GameObject>("Prefabs/Spawnable/" + objectName);
+                break;
+            default:
+                break;
+        }
     }
 
-    public override void Excute()
+    public override void Execute()
     {
-        
+        switch (this.condition)
+        {
+            case 0:
+                GameObject.Destroy(subject);
+                state = eState.End;
+                break;
+            case 1:
+                location = GameObject.Find(locationName).transform.position;
+                GameObject.Instantiate(subject, location, Quaternion.identity);
+                state = eState.End;
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -178,9 +273,9 @@ public class BGM : Task
         int.TryParse(effect, out this.effect);
     }
 
-    public override void Excute()
+    public override void Execute()
     {
-
+        state = eState.End;
     }
 }
 
@@ -197,9 +292,9 @@ public class SFX : Task
         int.TryParse(effect, out this.effect);
     }
 
-    public override void Excute()
+    public override void Execute()
     {
-
+        state = eState.End;
     }
 }
 
@@ -218,9 +313,9 @@ public class SpriteModifier : Task
         int.TryParse(effect, out this.effect);
     }
 
-    public override void Excute()
+    public override void Execute()
     {
-
+        state = eState.End;
     }
 }
 
@@ -235,9 +330,9 @@ public class ObjectMove : Task
         //location = GameObject.Find(locationName).transform.position;
     }
 
-    public override void Excute()
+    public override void Execute()
     {
-
+        state = eState.End;
     }
 }
 
@@ -252,9 +347,24 @@ public class Narrative : Task
         this.text = text;
     }
 
-    public override void Excute()
+    public override void Execute()
     {
-
+        if (state == eState.Waiting)
+        {
+            state = eState.Running;
+            switch (effect)
+            {
+                case 0:
+                    UITest.Instance.DeactivateNarrative();
+                    break;
+                case 1:
+                    UITest.Instance.ActivateNarrative();
+                    UITest.Instance.ModifyNarrative(text);
+                    break;
+            }
+        }
+        if(InputManager.Instance.GetKeyAction() == eKeyAction.TextSkip)
+            state = eState.End;
     }
 }
 
@@ -275,9 +385,24 @@ public class Portrait : Task
         this.text = text;
     }
 
-    public override void Excute()
+    public override void Execute()
     {
-
+        if (state == eState.Waiting)
+        {
+            state = eState.Running;
+            switch (effect)
+            {
+                case 0:
+                    UITest.Instance.DeactivatePortrait();
+                    break;
+                case 1:
+                    UITest.Instance.ActivatePortrait();
+                    UITest.Instance.ModifyPortrait(resourceName, resourceNum, name, text);
+                    break;
+            }
+        }
+        if (InputManager.Instance.GetKeyAction() == eKeyAction.TextSkip)
+            state = eState.End;
     }
 }
 
@@ -292,9 +417,9 @@ public class Animation : Task
         this.animationName = animationName;
     }
 
-    public override void Excute()
+    public override void Execute()
     {
-
+        state = eState.End;
     }
 }
 

@@ -98,7 +98,7 @@ public class DataManager : Singleton<DataManager>
             case "portrait":
                 return new Portrait(data["TaskID"].ToString(), data["RescName"].ToString(), data["RescNum"].ToString(), data["RescEffect"].ToString(), data["NameKor"].ToString(), data["TextKor"].ToString(), data["System"].ToString());
             case "spawn":
-                return new SpawnOrDespawn(data["TaskID"].ToString(), data["ObjectName"].ToString(), data["RescName"].ToString(), data["RescEffect"].ToString(), data["System"].ToString());
+                return new ObjectSpawner(data["TaskID"].ToString(), data["ObjectName"].ToString(), data["RescName"].ToString(), data["RescEffect"].ToString(), data["System"].ToString());
             case "bgm":
                 return new BGM(data["TaskID"].ToString(), data["RescName"].ToString(), data["RescEffect"].ToString(), data["System"].ToString());
             case "sfx":

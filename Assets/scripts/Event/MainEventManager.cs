@@ -10,6 +10,8 @@ public class MainEventManager : Singleton<MainEventManager>
     private Dictionary<int, MainEvent> eventDic;
     public Dictionary<int, MainEvent> EventDic { get { return eventDic; } }
 
+    private MainEvent currEvent;
+    private int currEventID = 0;
     public override void Awake()
     {
         base.Awake();
@@ -23,6 +25,6 @@ public class MainEventManager : Singleton<MainEventManager>
 
     private void Update()
     {
-
+        //currEvent.Execute();
     }
 }
