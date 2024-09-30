@@ -6,6 +6,12 @@ using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
+    public enum eLayer
+    {
+        InteractalbeObject = 64
+    }
+
+
     public enum eGameState
     {
         PAUSED,
@@ -56,7 +62,6 @@ public class GameManager : Singleton<GameManager>
         date = 1;
         hour = 6;
         minute = 0;
-        player.TimeEventHandler += ModifyDateTime;
     }
     // Start is called before the first frame update
     void Start()
@@ -74,7 +79,6 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = DEFAULT_TIME_SCALE_PLAYING;
         gameState = eGameState.PLAYING;
-        player = GameObject.Find("Player").GetComponent<Player>();
 
         initDatas();
 
@@ -140,6 +144,12 @@ public class GameManager : Singleton<GameManager>
             (JsonManager.DEFAULT_SAYTALK_DATA_NAME);
         tempDatas[slotIdx] = SayTalkManager.Instance().SayTalkDatas;
         JsonManager.CreateJsonFile(JsonManager.DEFAULT_SAYTALK_DATA_NAME, tempDatas);
+    }
+
+    public void SetPlayer(string name)
+    {
+        player = GameObject.Find(name).GetComponent<Player>();
+        player.TimeEventHandler += ModifyDateTime;
     }
 
     // init npc trait when new game starts

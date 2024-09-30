@@ -20,12 +20,18 @@ public class Player : MonoBehaviour
 
     public Vector2 direction;
 
+    public Animator anime;
+
+    private Camera camera;
+
     private const float DEFAULT_MOVE_SPEED_WALK = 1f;
     private const float DEFAULT_MOVE_SPEED_RUN = 1.5f;
 
     // Start is called before the first frame update
     void Awake()
     {
+        anime = GetComponent<Animator>();
+
         direction = new Vector2(0.0f, 0.0f);
         state = new IdleState();
         stat = new PlayerStat();
@@ -33,6 +39,10 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        camera = Camera.main;
+        camera.gameObject.AddComponent<CameraFollow>().target = this.gameObject.transform;
+        GameManager.Instance.SetPlayer(this.gameObject.name);
+        UITest.Instance.PlayerUI.GetComponent<PlayerInfoUI>().SetPlayerHandler(this.GetComponent<Player>());
         StatEventHandler();
         TimeEventHandler();
     }
