@@ -10,6 +10,7 @@ public class CameraFollow : MonoBehaviour
     public Vector3 offset = new Vector3(0.0f, 0.0f, -10.0f);
     public Vector3 minValue = new Vector3(-1000, -1000, 1);
     public Vector3 maxValue = new Vector3(1000, 1000, 1);
+
     //private Vector3 targetPosition; // 대상의 현재 위치
     public void LateUpdate()
     {

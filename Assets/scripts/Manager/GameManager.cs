@@ -80,14 +80,14 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = DEFAULT_TIME_SCALE_PLAYING;
         gameState = eGameState.PLAYING;
 
-        initDatas();
+        //initDatas();
 
-        if (JsonManager.LoadJsonFile<CurrentGameInfo>(JsonManager.DEFAULT_CURRENT_DATA_NAME).newGame)
+/*        if (JsonManager.LoadJsonFile<CurrentGameInfo>(JsonManager.DEFAULT_CURRENT_DATA_NAME).newGame)
             newGame();
         else
         {
             loadGame(JsonManager.LoadJsonFile<CurrentGameInfo>(JsonManager.DEFAULT_CURRENT_DATA_NAME).dataId);
-        }
+        }*/
     }
 
     public void PauseGame()
