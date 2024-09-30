@@ -8,14 +8,15 @@ public class DoorLock : MiniGame
 {
     private const int DEFAULT_NUMBER_COUNT_LITTLE = 4;
     private const int DEFAULT_NUMBER_COUNT_MANY = 8;
+    private const float DEFAULT_TIME_LIMIT_DOOR_LOCK = 5f;
 
     private int passWordLength;
     private List<int> passWord;
     private List<int> answerSheet;
-    private List<TMP_Text> answerSheetTexts;
+    private List<Transform> answerSheetTexts;
 
     public Transform viewport;
-    public TMP_Text answerSheetPrefab;
+    public Transform answerSheetPrefab;
     public TMP_Text passWordText;
 
     // Start is called before the first frame update
@@ -29,14 +30,20 @@ public class DoorLock : MiniGame
 
     protected override void init(float safety)
     {
-        timeLimit = DEFAULT_TIME_LIMIT + safety;
+        this.safety = safety;
+        if (safety != 3) timeLimit = DEFAULT_TIME_LIMIT_DOOR_LOCK + safety;
+        else
+        {
+            timeLimit = DEFAULT_TIME_LIMIT_DOOR_LOCK + 5f;
+        }
+
         timer.text = timeLimit.ToString("F2");
-        
+
         int length = DEFAULT_NUMBER_COUNT_MANY;
-        
+
         passWord = new List<int>();
         answerSheet = new List<int>();
-        answerSheetTexts = new List<TMP_Text>();
+        answerSheetTexts = new List<Transform>();
         passWordLength = length;
 
         for (int i = viewport.childCount - 1; i >= 0; i--)
@@ -48,13 +55,16 @@ public class DoorLock : MiniGame
         {
             passWord.Add(Random.Range(0, 10));
             answerSheetTexts.Add(Instantiate(answerSheetPrefab, viewport, true));
-            answerSheetTexts[i].text = "";
+            answerSheetTexts[i].GetChild(0).GetComponent<TMP_Text>().text = "";
         }
 
         showPassWord();
     }
 
-    protected override IEnumerator interact() { yield break; }
+    protected override IEnumerator interact()
+    {
+        yield break;
+    }
 
     protected override IEnumerator decreaseGauge()
     {
@@ -63,36 +73,16 @@ public class DoorLock : MiniGame
         {
             gap = Time.deltaTime;
             yield return new WaitForSeconds(gap);
-            
+
             timeLimit -= gap;
             timer.text = timeLimit.ToString("F2");
-            
+
             if (timeLimit <= 0f)
             {
                 sendClearState(false);
                 activated = false;
             }
         }
-    }
-
-    public void AddNumber(int number)
-    {
-        int idx = answerSheet.Count;
-        
-        answerSheet.Add(number);
-
-        if (passWord[idx] != answerSheet[idx])
-        {
-            answerSheet.Clear();
-        }
-
-        if (passWord.Count == answerSheet.Count)
-        {
-            sendClearState(true);
-            activated = false;
-        }
-
-        updateAnswerSheet();
     }
 
     private void showPassWord()
@@ -109,12 +99,47 @@ public class DoorLock : MiniGame
         int i;
         for (i = 0; i < answerSheet.Count; i++)
         {
-            answerSheetTexts[i].text = $"{answerSheet[i]}";
+            answerSheetTexts[i].GetChild(0).GetComponent<TMP_Text>().text = $"{answerSheet[i]}";
         }
 
         for (; i < passWordLength; i++)
         {
-            answerSheetTexts[i].text = "";
+            answerSheetTexts[i].GetChild(0).GetComponent<TMP_Text>().text = "";
         }
+    }
+    
+    public void AddNumber(int number)
+    {
+        int idx = answerSheet.Count;
+
+        answerSheet.Add(number);
+
+        if (passWord[idx] != answerSheet[idx])
+        {
+            answerSheet.Clear();
+        }
+
+        if (passWord.Count == answerSheet.Count)
+        {
+            sendClearState(true);
+            activated = false;
+        }
+
+        updateAnswerSheet();
+    }
+
+    public void HoverNumber(string number)
+    {
+
+    }
+
+    public void ClickNumber(string number)
+    {
+        
+    }
+
+    public void MakeNumberPadDefault(string number)
+    {
+        
     }
 }

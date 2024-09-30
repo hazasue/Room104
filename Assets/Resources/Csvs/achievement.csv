@@ -1,0 +1,11 @@
+id,imagePath,title_KOR,title_EN,description_KOR,description_EN,hint_KOR,hint_EN,cleared
+301,985,시작,The Beginning,삼가 고인의 명복을 빕니다.,May him rest in peace.,Null,Null,FALSE
+302,986,귀신 들린 집 ,Haunted House,과연 찍는게 옳았을까?,Was that really the right choice?,찰칵!,Click!,FALSE
+303,987,알레르기,Allergy,번호를 저장했더라면.,If you'd only saved the number.,남자의 호의를 거절했다.,You've rejected the man's kindness.,FALSE
+304,988,광신도,Fanatic,부적을 얕봤다.,You underestimated the talisman.,부적같은 미신은 믿지 않는다.,Talismans are superstitious.,FALSE
+305,989,침입,Invaded,집에 있을때는 안전고리를 걸자.,Let's keep the chain on when you're home.,안전고리를 굳이 걸지 않아도 안전하지 않을까?,Safety chains  are they necessary?,FALSE
+306,990,살인공포증,Foniasophobia,언제 어디서든 살해당할 것만 같다.,"You feel like you'll get murdered anytime, anywhere.",노멀 엔딩을 달성했다.,You've achieved normal ending.,FALSE
+307,991,유랑(unsettled),Unsettled,당신은 또 집을 찾아 떠났다.,"You depart, looking for yet another home.",굿 엔딩을 달성했다.,You've achieved good ending.,FALSE
+308,992,스위트 홈,Sweet Home,집이라 부를 곳이 생겼다.,You found a place to call home.,트루 엔딩을 달성했다.,You've achieved true ending.,FALSE
+309,993,용량 초과,Over Capacity,모든 사진과 캡쳐본을 획득했다.,You obtained all the photos and screenshots.,사진은 확실한 증거가 된다.,Photos are definite evidence.,FALSE
+310,994,엔딩 콜렉터,Ending Collector,플레이 해주셔서 감사합니다.,Thank you for playing.,6개의 엔딩을 확인하자.,Collect all 6 endings.,FALSE

@@ -1,0 +1,10 @@
+id,nameKR,nameEN,descriptionKR,descriptionEN,requiredStat,requiredStatValue,price,count
+401,안전고리,Security Chain,가장 심플하지만. 가장 효과적!,The simplest. Yet most effective!,null,0,10000,1
+402,문고리 잠금 장치,Knob Lock,문고리를 돌리지 못하면 문은 열리지 않습니다.,If you can't turn the door knob. The dorr won't open.,null,0,40000,1
+403,블라인드 교체,Blinds,사생활을 보호하세요.,Protect your privacy.,null,0,50000,1
+404,운동화,Sneakers,가벼워서 달리기 좋습니다.,Light enough to run.,null,0,60000,1
+405,철창,Window Bars,층수가 낮을수록 추천합니다.,"The lower, the better.",null,0,60000,1
+406,도어 경보기,Door Alarm,침입자 발생,Intruder alert,null,0,70000,1
+407,창문 잠금 장치,Window Lock,잠금장치가 방범의 기본입니다.,A must-have item.,null,0,80000,1
+408,SD 카드,SD Card,SD 카드 없는 CCTV는 와이파이 없는 아이패드.,CCTV without SD card is like an iPad without Wi-Fi.,Int,85,120000,1
+409,CCTV,CCTV,가장 강력한 방범장치,The most effective alarm system.,Int,85,150000,1

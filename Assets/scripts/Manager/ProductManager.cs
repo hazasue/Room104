@@ -8,18 +8,16 @@ public class ProductManager : MonoBehaviour
 
     public Product productObject;
 
-    private Dictionary<int, ProductData> productDatas;
     private Dictionary<int, Product> products; 
 
     // Start is called before the first frame update
     void Awake()
     {
-        init();
+        //Init();
     }
 
-    private void init()
+    public void Init()
     {
-        productDatas = JsonManager.LoadJsonFile<Dictionary<int, ProductData>>(JsonManager.DEFAULT_PRODUCT_DATA_NAME);
         products = new Dictionary<int, Product>();
 
         for (int i = viewport.childCount - 1; i >= 0; i--)
@@ -28,10 +26,23 @@ public class ProductManager : MonoBehaviour
         }
 
         Product tempProduct;
-        foreach (KeyValuePair<int, ProductData> data in productDatas)
+        string name;
+        string description;
+        foreach (KeyValuePair<int, ProductData> data in GameManager.Instance.Products)
         {
+            if (Settings.Instance().isKorean)
+            {
+                name = data.Value.nameKR;
+                description = data.Value.descriptionKR;
+            }
+            else
+            {
+                name = data.Value.nameEN;
+                description = data.Value.descriptionEN;
+            }
+            
             tempProduct = Instantiate(productObject, viewport, true);
-            tempProduct.Init(data.Value.nameKR, data.Value.description, data.Value.price, data.Value.count);
+            tempProduct.Init(name, description, data.Value.price, data.Value.count);
             products.Add(data.Key, tempProduct);
         }
     }

@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     private const string DEFAULT_SCREEN_NAME_CAMERA = "camera";
     private const string DEFAULT_SCREEN_NAME_JOBHUNTER = "jobhunter";
     private const string DEFAULT_SCREEN_NAME_SAYTALK = "saytalk";
+    private const string DEFAULT_SCREEN_NAME_SAYTALKHISTORY = "saytalkhistory";
+
+    private static Vector3 DEFAULT_SAYTALK_SIZE = new Vector2(450f, 44f);
+    private static Vector3 DEFAULT_SAYTALK_INCREASION = new Vector2(0f, 18f);
 
     public GameObject smartPhoneScreen;
     public GameObject shoppingScreen;
@@ -26,13 +30,20 @@ public class UIManager : MonoBehaviour
     public GameObject reportScreen;
     public GameObject cameraScreen;
     public GameObject sayTalkScreen;
+    public GameObject sayTalkHistoryScreen;
     public GameObject jobHunterScreen;
+
+    public Transform playerText;
+    public Transform npcText;
+    public SayTalkRoom sayTalkRoom;
+    public Transform sayTalkList;
+    public Transform sayTalkHistory;
+    public TMP_Text sayTalkTarget;
 
     public TMP_Text currentDateInfo;
     public LoadGameInfo[] saveFiles = new LoadGameInfo[2];
 
     public GameObject diaryWarningMessage;
-
 
     private Stack<GameObject> activatedScreens;
     private Dictionary<string, GameObject> screens;
@@ -67,6 +78,7 @@ public class UIManager : MonoBehaviour
         screens.Add(DEFAULT_SCREEN_NAME_REPORT, reportScreen);
         screens.Add(DEFAULT_SCREEN_NAME_CAMERA, cameraScreen);
         screens.Add(DEFAULT_SCREEN_NAME_SAYTALK, sayTalkScreen);
+        screens.Add(DEFAULT_SCREEN_NAME_SAYTALKHISTORY, sayTalkHistoryScreen);
         screens.Add(DEFAULT_SCREEN_NAME_JOBHUNTER, jobHunterScreen);
     }
 
@@ -164,5 +176,97 @@ public class UIManager : MonoBehaviour
         }
 
         diaryWarningMessage.SetActive(false);
+    }
+
+    public void InitSayTalkList()
+    {
+        Dictionary<int, SayTalkHistory> datas = SayTalkManager.Instance().SayTalkDatas;
+        
+        for (int i = sayTalkList.childCount - 1; i >= 0; i--)
+        {
+            Destroy(sayTalkList.GetChild(i).gameObject);
+        }
+
+        foreach (KeyValuePair<int, SayTalkHistory> data in datas)
+        {
+            SayTalkRoom tempTalk = Instantiate(sayTalkRoom, sayTalkList, true);
+            if (Settings.Instance().isKorean)
+                tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].textKor);
+            else
+            {
+                tempTalk.Init(data.Key, data.Value.datas[data.Value.datas.Count - 1].textEn);
+            }
+            
+            tempTalk.GetComponent<Button>().onClick.AddListener(() => ActivateScreen(DEFAULT_SCREEN_NAME_SAYTALKHISTORY));
+            tempTalk.GetComponent<Button>().onClick.AddListener(() => InitSayTalkHistory(data.Key));
+            // Instantiate button
+            // init button
+        }
+    }
+
+    public void InitSayTalkHistory(int id)
+    {
+        List<SayTalkData> data = SayTalkManager.Instance().SayTalkDatas[id].datas;
+        
+        for (int i = sayTalkHistory.childCount - 1; i >= 0; i--)
+        {
+            Destroy(sayTalkHistory.GetChild(i).gameObject);
+        }
+
+        sayTalkTarget.text = $"{id}";
+
+        Transform tempTransform;
+        TMP_Text tempText;
+        int line = 0;
+        for (int i = 0; i < data.Count; i++)
+        {
+            // Instantiate Texts according to 'isPlaying'
+            if (data[i].isPlayer)
+            {
+                tempTransform = Instantiate(playerText, sayTalkHistory, true);
+                tempText = tempTransform.GetChild(1).GetComponent<TMP_Text>();
+                if (Settings.Instance().isKorean) 
+                    tempText.text = $"<align=right>{data[i].textKor}</align>";
+                else
+                {
+                    tempText.text = $"<align=right>{data[i].textEn}</align>";
+                }
+
+                tempText.ForceMeshUpdate(true);
+                line = tempText.textInfo.lineCount;
+            }
+            else
+            {
+                tempTransform = Instantiate(npcText, sayTalkHistory, true);
+                tempText = tempTransform.GetChild(2).GetComponent<TMP_Text>();
+                if (Settings.Instance().isKorean)
+                    tempTransform.GetChild(2).GetComponent<TMP_Text>().text = $"<align=left>{data[i].textKor}</align>";
+                else
+                {
+                    tempTransform.GetChild(2).GetComponent<TMP_Text>().text = $"<align=left>{data[i].textEn}</align>";
+                }
+                
+                tempText.ForceMeshUpdate(true);
+                line = tempText.textInfo.lineCount;
+            }
+
+            tempTransform.GetComponent<RectTransform>().sizeDelta = DEFAULT_SAYTALK_SIZE + DEFAULT_SAYTALK_INCREASION * line;
+        }
+    }
+    
+    public void ChangeLanguageSettings(bool isKorean)
+    {
+        if (isKorean)
+        {
+            notificationScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_criminal_KOR");
+            reportScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_{DEFAULT_SCREEN_NAME_REPORT}_KOR");
+            jobHunterScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_job_hunter_convenience_KOR");
+        }
+        else
+        {
+            notificationScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_criminal_EN");
+            reportScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_{DEFAULT_SCREEN_NAME_REPORT}_EN");
+            jobHunterScreen.GetComponent<Image>().sprite = Resources.Load<Sprite>($"Sprites/InGame/img_phone_job_hunter_convenience_EN");
+        }
     }
 }

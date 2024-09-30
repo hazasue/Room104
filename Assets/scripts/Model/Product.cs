@@ -16,7 +16,10 @@ public class Product : MonoBehaviour
     public TMP_Text descriptionText;
     public TMP_Text priceText;
 
-    public void Init(string name, string description, int price, int count)
+    public GameObject warningScreen;
+    public TMP_Text warningText;
+
+    public void Init(string name, string description, int price, int count, bool canBuy = true)
     {
         this.name = name;
         this.description = description;
@@ -26,6 +29,26 @@ public class Product : MonoBehaviour
         image.texture = Resources.Load<Texture>("/sprites/" + name);
         nameText.text = name;
         descriptionText.text = description;
-        priceText.text = $"{price}";
+        priceText.text = $"${price:n0}";
+
+        if (count <= 0)
+        {
+            warningScreen.SetActive(true);
+            if (Settings.Instance().isKorean) warningText.text = "매진";
+            else
+            {
+                warningText.text = "Sold Out";
+            }
+        }
+
+        if (!canBuy)
+        {
+            warningScreen.SetActive(true);
+            if (Settings.Instance().isKorean) warningText.text = "구매 불가능";
+            else
+            {
+                warningText.text = "Can't Buy";
+            }
+        }
     }
 }

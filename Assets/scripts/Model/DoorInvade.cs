@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DoorInvade : MiniGame
 {
+    private float additionalIncreasion;
+    
     public override void Activate(float safety)
     {
         activated = true;
@@ -14,12 +16,35 @@ public class DoorInvade : MiniGame
 
     protected override void init(float safety)
     {
-        timeLimit = DEFAULT_TIME_LIMIT + safety;
+        timeLimit = DEFAULT_TIME_LIMIT;
         timer.text = timeLimit.ToString("F2");
 
+        this.safety = safety;
+        switch (safety)
+        {
+            case 0f:
+                additionalIncreasion = 0f;
+                break;
+            
+            case 1f:
+                additionalIncreasion = 0.01f;
+                break;
+            
+            case 2f:
+                additionalIncreasion = 0.03f;
+                break;
+            
+            case 3f:
+                additionalIncreasion = 0.05f;
+                break;
+            
+            default:
+                break;
+        }
+
         gauge.maxValue = MAX_PROGRESS;
-        gauge.value = 0f;
-        progress = 0f;
+        progress = 0.5f;
+        gauge.value = progress;
     }
 
     protected override IEnumerator interact()
@@ -30,7 +55,7 @@ public class DoorInvade : MiniGame
             
             if (Input.GetKeyDown(KeyCode.E))
             {
-                progress += DEFAULT_PROGRESS_INCREASE_AMOUNT;
+                progress += DEFAULT_PROGRESS_INCREASE_AMOUNT + additionalIncreasion;
                 gauge.value = progress;
                 if (progress >= MAX_PROGRESS)
                 {

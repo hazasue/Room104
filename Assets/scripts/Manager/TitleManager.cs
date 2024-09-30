@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TitleManager : MonoBehaviour
 {
@@ -12,11 +13,21 @@ public class TitleManager : MonoBehaviour
     private const string DEFAULT_SCREEN_NAME_LOADGAME = "loadgame";
     private const string DEFAULT_SCREEN_NAME_SETTINGS = "settings";
     private const string DEFAULT_SCREEN_NAME_CREDIT = "credit";
+    private const string DEFAULT_SCREEN_NAME_ACHIEVEMENT = "achievement";
+    
+    private const int SYSTEM_MESSAGE_ID_NEWGAME = 904;
+    private const int SYSTEM_MESSAGE_ID_LOADGAME = 905;
+    private const int SYSTEM_MESSAGE_ID_SETTINGS = 906;
+    private const int SYSTEM_MESSAGE_ID_CREDIT = 907;
+    private const int SYSTEM_MESSAGE_ID_ACHIEVEMENT = 917;
+    private const int SYSTEM_MESSAGE_ID_EXIT = 908;
+
+    private const string CSV_FILENAME_SYSTEMMESSAGE = "system_message";
 
     private static Vector3 DEFAULT_ARROW_POSITION = new Vector3(50f, -100f, 0f);
     private static Vector3 DEFAULT_ARROW_POSITION_GAP = new Vector3(0f, -260f, 0f);
 
-    private static Vector3 DEFAULT_HOVER_POSITION = new Vector3(0f, 100f, 0f);
+    private static Vector3 DEFAULT_HOVER_POSITION = new Vector3(0f, 125f, 0f);
     private static Vector3 DEFAULT_HOVER_GAP = new Vector3(0f, -50f, 0f);
     
     private const int MAX_SAVE_SLOT_COUNT = 3;
@@ -28,6 +39,15 @@ public class TitleManager : MonoBehaviour
     public GameObject loadGameScreen;
     public GameObject settingsScreen;
     public GameObject creditScreen;
+    public GameObject achievementScreen;
+
+    public TMP_Text newGameText;
+    public TMP_Text loadGameText;
+    public TMP_Text settingsText;
+    public TMP_Text creditText;
+    public TMP_Text achievementText;
+    public TMP_Text exitText;
+    private Dictionary<int, SystemMessage> messages;
 
     private Dictionary<string, GameObject> screens;
     private Stack<GameObject> activatedScreens;
@@ -62,6 +82,7 @@ public class TitleManager : MonoBehaviour
         screens.Add(DEFAULT_SCREEN_NAME_LOADGAME, loadGameScreen);
         screens.Add(DEFAULT_SCREEN_NAME_SETTINGS, settingsScreen);
         screens.Add(DEFAULT_SCREEN_NAME_CREDIT, creditScreen);
+        screens.Add(DEFAULT_SCREEN_NAME_ACHIEVEMENT, achievementScreen);
 
         selectedSlot = 0;
 
@@ -70,6 +91,13 @@ public class TitleManager : MonoBehaviour
 
     private void initDatas()
     {
+        List<Dictionary<string, object>> messageDB = CSVReader.Read(CSV_FILENAME_SYSTEMMESSAGE);
+        messages = new Dictionary<int, SystemMessage>();
+        foreach (Dictionary<string, object> data in messageDB)
+        {
+            messages.Add((int)data["id"], new SystemMessage(data["KOR"].ToString(), data["EN"].ToString()));
+        }
+        
         if (!File.Exists(Application.dataPath + "/Data/" + JsonManager.DEFAULT_CURRENT_DATA_NAME + ".json"))
         {
             JsonManager.CreateJsonFile(JsonManager.DEFAULT_CURRENT_DATA_NAME, new CurrentGameInfo(true, 0));
@@ -232,5 +260,39 @@ public class TitleManager : MonoBehaviour
         }
 
         title.texture = Resources.Load<Texture>($"Sprites/Title/{currentEnding}");
+    }
+
+    public void ChangeLanguageSettings(bool isKorean)
+    {
+        if (isKorean)
+        {
+            newGameText.text = messages[SYSTEM_MESSAGE_ID_NEWGAME].kor;
+            loadGameText.text = messages[SYSTEM_MESSAGE_ID_LOADGAME].kor;
+            settingsText.text = messages[SYSTEM_MESSAGE_ID_SETTINGS].kor;
+            creditText.text = messages[SYSTEM_MESSAGE_ID_CREDIT].kor;
+            achievementText.text = messages[SYSTEM_MESSAGE_ID_ACHIEVEMENT].kor;
+            exitText.text = messages[SYSTEM_MESSAGE_ID_EXIT].kor;
+        }
+        else
+        {
+            newGameText.text = messages[SYSTEM_MESSAGE_ID_NEWGAME].en;
+            loadGameText.text = messages[SYSTEM_MESSAGE_ID_LOADGAME].en;
+            settingsText.text = messages[SYSTEM_MESSAGE_ID_SETTINGS].en;
+            creditText.text = messages[SYSTEM_MESSAGE_ID_CREDIT].en;
+            achievementText.text = messages[SYSTEM_MESSAGE_ID_ACHIEVEMENT].en;
+            exitText.text = messages[SYSTEM_MESSAGE_ID_EXIT].en;
+        }
+    }
+}
+
+public class SystemMessage
+{
+    public string kor;
+    public string en;
+
+    public SystemMessage(string kor, string en)
+    {
+        this.kor = kor;
+        this.en = en;
     }
 }

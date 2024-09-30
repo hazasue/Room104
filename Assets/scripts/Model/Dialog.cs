@@ -8,9 +8,12 @@ public class Dialog
     {
         NARRATIVE,
         PORTRAIT,
-        IMAGE,
+        IMAGE1,
+        IMAGE2,
         BGM,
         SFX,
+        MOVE,
+        ANIMATION,
         OBJECT
     }
 
@@ -32,10 +35,31 @@ public class Dialog
         get { return text; }
     }
 
-    public Dialog(int dialogNum, string dialogType, string dialogText)
+    private float duration;
+    public float Duration
+    {
+        get { return duration; }
+    }
+
+    private bool loop;
+    public bool Loop
+    {
+        get { return loop; }
+    }
+
+    private Color32 color;
+    public Color32 Color
+    {
+        get { return color; }
+    }
+
+    public Dialog(int dialogNum, string dialogType, string dialogText, float duration, bool loop, Color32 color)
     {
         this.num = dialogNum;
         this.text = dialogText;
+        this.duration = duration;
+        this.loop = loop;
+        this.color = color;
 
         switch (dialogType)
         {
@@ -47,8 +71,12 @@ public class Dialog
                 this.type = eDialogType.PORTRAIT;
                 break;
             
-            case "image":
-                this.type = eDialogType.IMAGE;
+            case "image1":
+                this.type = eDialogType.IMAGE1;
+                break;
+            
+            case "image2":
+                this.type = eDialogType.IMAGE2;
                 break;
             
             case "bgm":
@@ -57,6 +85,14 @@ public class Dialog
             
             case "sfx":
                 this.type = eDialogType.SFX;
+                break;
+            
+            case "move":
+                this.type = eDialogType.MOVE;
+                break;
+            
+            case "animation":
+                this.type = eDialogType.ANIMATION;
                 break;
             
             case "object":
@@ -69,10 +105,12 @@ public class Dialog
         }
     }
 
-    public void Init(int dialogNum, string dialogType, string dialogText)
+    public void Init(int dialogNum, string dialogType, string dialogText, float duration, bool loop)
     {
         this.num = dialogNum;
         this.text = dialogText;
+        this.duration = duration;
+        this.loop = loop;
 
         switch (dialogType)
         {
@@ -84,8 +122,12 @@ public class Dialog
                 this.type = eDialogType.PORTRAIT;
                 break;
             
-            case "image":
-                this.type = eDialogType.IMAGE;
+            case "image1":
+                this.type = eDialogType.IMAGE1;
+                break;
+            
+            case "image2":
+                this.type = eDialogType.IMAGE2;
                 break;
             
             case "bgm":
@@ -94,6 +136,14 @@ public class Dialog
             
             case "sfx":
                 this.type = eDialogType.SFX;
+                break;
+            
+            case "move":
+                this.type = eDialogType.MOVE;
+                break;
+            
+            case "animation":
+                this.type = eDialogType.ANIMATION;
                 break;
             
             case "object":

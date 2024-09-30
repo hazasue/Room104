@@ -7,6 +7,8 @@ using System.IO;
 
 public class Settings : MonoBehaviour
 {
+    private static Settings instance;
+    
     private static int[] DEFAULT_SCREEN_RESOLUTION_SMALL = new int[2]{ 960, 540 };
     private static int[] DEFAULT_SCREEN_RESOLUTION_DEFAULT = new int[2] { 1280, 720 };
     private static int[] DEFAULT_SCREEN_RESOLUTION_NORMAL = new int[2]{ 1600, 900 };
@@ -30,14 +32,23 @@ public class Settings : MonoBehaviour
     public Toggle masterToggle;
     public Toggle bgmToggle;
     public Toggle sfxToggle;
+    public bool isKorean;
 
     private SettingsData settingsData;
     private Dictionary<int, int> screenResolutions;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         init();
+    }
+
+    public static Settings Instance()
+    {
+        if (instance != null) return instance;
+        instance = FindObjectOfType<Settings>();
+        if (instance == null) Debug.Log("There's no active Settings object");
+        return instance;
     }
 
     private void init()
@@ -51,6 +62,8 @@ public class Settings : MonoBehaviour
             settingsData = new SettingsData(DEFAULT_LANGUAGE_KOREAN, DEFAULT_SCREEN_RESOLUTION_DEFAULT, false, DEFAULT_SOUND_VOLUME, 1f, 1f, true, true, true);
             JsonManager.CreateJsonFile(JsonManager.DEFAULT_SETTING_DATA_NAME, settingsData);
         }
+
+        instance = this;
 
         screenResolutions = new Dictionary<int, int>();
         screenResolutions.Add(DEFAULT_SCREEN_RESOLUTION_SMALL[0], DEFAULT_SCREEN_RESOLUTION_SMALL[1]);
@@ -66,6 +79,14 @@ public class Settings : MonoBehaviour
         resolution.value = resolution.options.FindIndex(option => option.text == $"{settingsData.screenResolution[0]} * {settingsData.screenResolution[1]}");
 
         languageText.text = settingsData.language;
+        if (settingsData.language == DEFAULT_LANGUAGE_KOREAN) isKorean = true;
+        else
+        {
+            isKorean = false;
+        }
+
+        ApplyLanguageSettings();
+
         fullScreenToggle.isOn = settingsData.fullScreen;
 
         masterVolumeSlider.value = settingsData.volumeMaster;
@@ -83,18 +104,41 @@ public class Settings : MonoBehaviour
 
     public void ChangeLanguage()
     {
-        if (languageText.text == DEFAULT_LANGUAGE_KOREAN) languageText.text = DEFAULT_LANGUAGE_ENGLISH;
+        if (languageText.text == DEFAULT_LANGUAGE_KOREAN)
+        {
+            languageText.text = DEFAULT_LANGUAGE_ENGLISH;
+            isKorean = false;
+        }
         else
         {
             languageText.text = DEFAULT_LANGUAGE_KOREAN;
+            isKorean = true;
         }
 
+        ApplyLanguageSettings();
         SaveSettings(DEFAULT_SETTING_NAME_LANGUAGE);
+    }
+
+    public void ApplyLanguageSettings()
+    {
+
+        switch (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name)
+        {
+            case "Title":
+                TitleManager.GetInstance().ChangeLanguageSettings(isKorean);
+                break;
+            
+            case "InGame":
+                UIManager.GetInstance().ChangeLanguageSettings(isKorean);
+                break;
+            
+            default:
+                break;
+        }
     }
 
     public void SaveSettings(string name)
     {
-
         switch (name)
         {
             case DEFAULT_SETTING_NAME_RESOLUTION:
