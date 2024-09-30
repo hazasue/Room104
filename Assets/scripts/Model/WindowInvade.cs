@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WindowInvade : MiniGame
 {
+    private const float DEFAULT_WINDOW_WIDTH = 960f;
+
     public RectTransform structure;
     private Vector3 structurePos;
     private float additionalIncreasion;
@@ -49,6 +51,7 @@ public class WindowInvade : MiniGame
         gauge.value = progress;
 
         structurePos = structure.position;
+        structure.position = structurePos + new Vector3(DEFAULT_WINDOW_WIDTH * progress, 0f, 0f);
     }
 
     protected override IEnumerator interact()
@@ -61,7 +64,7 @@ public class WindowInvade : MiniGame
             {
                 progress += DEFAULT_PROGRESS_INCREASE_AMOUNT + additionalIncreasion;
                 gauge.value = progress;
-                structure.position = structurePos + new Vector3(structure.rect.width * progress, 0f, 0f);
+                structure.position = structurePos + new Vector3(DEFAULT_WINDOW_WIDTH * progress, 0f, 0f);
                 
                 if (progress >= MAX_PROGRESS)
                 {
@@ -85,7 +88,7 @@ public class WindowInvade : MiniGame
             timeLimit -= gap;
             gauge.value = progress;
             timer.text = timeLimit.ToString("F2");
-            structure.position = structurePos + new Vector3(structure.rect.width * progress, 0f, 0f);
+            structure.position = structurePos + new Vector3(DEFAULT_WINDOW_WIDTH * progress, 0f, 0f);
             
             if (timeLimit <= 0f || progress <= 0f)
             {

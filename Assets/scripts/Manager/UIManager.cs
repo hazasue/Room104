@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
     public SayTalkRoom sayTalkRoom;
     public Transform sayTalkList;
     public Transform sayTalkHistory;
+    public TMP_Text sayTalkTarget;
 
     public TMP_Text currentDateInfo;
     public LoadGameInfo[] saveFiles = new LoadGameInfo[2];
@@ -211,6 +212,8 @@ public class UIManager : MonoBehaviour
         {
             Destroy(sayTalkHistory.GetChild(i).gameObject);
         }
+
+        sayTalkTarget.text = $"{id}";
 
         Transform tempTransform;
         TMP_Text tempText;

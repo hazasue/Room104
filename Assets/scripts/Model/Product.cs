@@ -29,7 +29,7 @@ public class Product : MonoBehaviour
         image.texture = Resources.Load<Texture>("/sprites/" + name);
         nameText.text = name;
         descriptionText.text = description;
-        priceText.text = $"{price}";
+        priceText.text = $"${price:n0}";
 
         if (count <= 0)
         {

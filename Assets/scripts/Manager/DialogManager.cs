@@ -108,7 +108,7 @@ public class DialogManager : Singleton<GameManager>
         }
 
         //Debug.Log($"Dialog list count: {dialogLists.Count}");
-        StartDialog(1);
+        //StartDialog(1);
     }
 
     
