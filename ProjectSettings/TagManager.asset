@@ -47,9 +47,6 @@ TagManager:
   - name: Object
     uniqueID: 1260050503
     locked: 0
-  - name: Player
-    uniqueID: 3833109811
-    locked: 0
   - name: ScreenEffect
     uniqueID: 269095731
     locked: 0

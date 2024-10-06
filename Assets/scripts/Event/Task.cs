@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public abstract class Task
 {
@@ -31,12 +32,21 @@ public abstract class Task
         state = eState.Waiting;
     }
 
-    public abstract void Execute();
+    public virtual void Execute()
+    {
+        checkOtherEvent();
+    }
 
     protected Color StringToColor(string color)
     {
         string[] rgba = color.Substring(0, color.Length).Split("_");
         return new Color(float.Parse(rgba[0]), float.Parse(rgba[1]), float.Parse(rgba[2]), float.Parse(rgba[3]));
+    }
+
+    private void checkOtherEvent()
+    {
+        if (otherEventID == -1)
+            return;
     }
 }
 
@@ -51,12 +61,12 @@ public class TextOutput : Task
     public TextOutput(string taskID, string effect, string text, string otherEventID) : base(taskID, otherEventID)
     {
         int.TryParse(effect, out this.effect);
-        this.text = text.Replace("\\n","\n");
+        this.text = text.Replace("\\n", "\n");
     }
 
     public override void Execute()
     {
-        switch(effect)
+        switch (effect)
         {
             //페이드 인
             case 2:
@@ -67,7 +77,7 @@ public class TextOutput : Task
                     UITest.Instance.NoticeObject.SetActive(true);
                 }
                 fadeIn();
-                if(elapseTime >= completionTIme + offset)
+                if (elapseTime >= completionTIme + offset)
                     state = eState.End;
                 break;
             //페이드 아웃
@@ -83,7 +93,7 @@ public class TextOutput : Task
                 Debug.Log("텍스트 출력 효과에 없는 번호가 들어왔습니다.");
                 break;
         }
-
+        base.Execute();
     }
     private void fadeIn()
     {
@@ -147,12 +157,14 @@ public class ImageOutput : Task
             case "image2":
                 imageComp = UITest.Instance.Image2.GetComponent<Image>();
                 break;
-/*            case "image3":
-                imageComp = UITest.Instance.Image3.GetComponent<Image>();
+            //수정 필요
+            case "image3":
+                imageComp = UITest.Instance.Image1.GetComponent<Image>();
                 break;
             case "image4":
-                imageComp = UITest.Instance.Image4.GetComponent<Image>();
-                break;*/
+                imageComp = UITest.Instance.Image2.GetComponent<Image>();
+                break;
+            //
             default:
                 Debug.Log("ImageOutput Layer Error");
                 break;
@@ -165,15 +177,15 @@ public class ImageOutput : Task
 
     public override void Execute()
     {
-        if(state == eState.Waiting)
+        if (state == eState.Waiting)
         {
-            imageComp.sprite = Resources.Load<Sprite>("Sprites/원화/"+resourceName);
-            imageComp.color = color;           
+            imageComp.sprite = Resources.Load<Sprite>("Sprites/원화/" + resourceName);
+            imageComp.color = color;
             state = eState.Running;
         }
-        if(state == eState.Running)
+        if (state == eState.Running)
         {
-            switch(effect)
+            switch (effect)
             {
                 case 0:
                     imageComp.gameObject.SetActive(false);
@@ -210,12 +222,12 @@ public class ImageOutput : Task
     private void fadeIn()
     {
         imageComp.gameObject.SetActive(true);
-        imageComp.color = new Color(255, 255, 255, Mathf.Lerp(0f, 1f, elapseTime / completionTIme));
+        imageComp.color = new Color(color.r, color.g, color.b, Mathf.Lerp(0f, 1f, elapseTime / completionTIme));
         elapseTime += Time.deltaTime;
     }
     private void fadeOut()
     {
-        imageComp.color = new Color(255, 255, 255, Mathf.Lerp(1f, 0f, elapseTime / completionTIme));
+        imageComp.color = new Color(color.r, color.g, color.b, Mathf.Lerp(1f, 0f, elapseTime / completionTIme));
         elapseTime += Time.deltaTime;
     }
 }
@@ -224,16 +236,17 @@ public class ObjectSpawner : Task
 {
     private GameObject subject;
     private Vector2 location;
+    private string objectName;
     private string locationName;
     private int condition;
     public ObjectSpawner(string taskID, string objectName, string locationName, string condition, string ohterEventID) : base(taskID, ohterEventID)
     {
+        this.objectName = objectName;
         this.locationName = locationName;
         int.TryParse(condition, out this.condition);
         switch (this.condition)
         {
             case 0:
-                subject = GameObject.Find(objectName);
                 break;
             case 1:
                 subject = Resources.Load<GameObject>("Prefabs/Spawnable/" + objectName);
@@ -241,19 +254,44 @@ public class ObjectSpawner : Task
             default:
                 break;
         }
+
     }
 
     public override void Execute()
     {
+        // 지울 코드
+        if (condition == 1 &&  subject == null)
+        {
+            if (subject == null)
+                Debug.Log(taskID + " " + objectName + " " + locationName);
+            state = eState.End;
+            return;
+        }
+        //
         switch (this.condition)
         {
             case 0:
+                subject = GameObject.Find(objectName);
+                // 지울 코드
+                if (subject == null)
+                {
+                    if (subject == null)
+                        Debug.Log(taskID + " " + objectName + " " + locationName);
+                    state = eState.End;
+                    return;
+                }
+                //
                 GameObject.Destroy(subject);
                 state = eState.End;
                 break;
             case 1:
+                if(GameObject.Find(objectName) != null)
+                {
+                    state = eState.End;
+                    return;
+                }
                 location = GameObject.Find(locationName).transform.position;
-                GameObject.Instantiate(subject, location, Quaternion.identity);
+                GameObject.Instantiate(subject, location, Quaternion.identity).name = objectName;
                 state = eState.End;
                 break;
             default:
@@ -301,13 +339,14 @@ public class SFX : Task
 public class SpriteModifier : Task
 {
     private GameObject subject;
+    private string objectName;
     private string resourceName;
     private int resourceNum;
     private int effect;
 
     public SpriteModifier(string taskID, string objectName, string resourceName, string resourceNum, string effect, string ohterEventID) : base(taskID, ohterEventID)
     {
-        //subject = GameObject.Find(objectName);
+        this.objectName = objectName;
         this.resourceName = resourceName;
         int.TryParse(resourceNum, out this.resourceNum);
         int.TryParse(effect, out this.effect);
@@ -315,6 +354,9 @@ public class SpriteModifier : Task
 
     public override void Execute()
     {
+        subject = GameObject.Find(objectName);
+        if (subject == null)
+            Debug.Log(taskID + " " + objectName + " " + resourceName);
         state = eState.End;
     }
 }
@@ -323,15 +365,21 @@ public class ObjectMove : Task
 {
     private GameObject subject;
     private Vector2 location;
+    private string objectName;
+    private string locationName;
 
     public ObjectMove(string taskID, string objectName, string locationName, string ohterEventID) : base(taskID, ohterEventID)
     {
-        //subject = GameObject.Find(objectName);
-        //location = GameObject.Find(locationName).transform.position;
+        this.objectName = objectName;
+        this.locationName = locationName;
     }
 
     public override void Execute()
     {
+        subject = GameObject.Find(objectName);
+        location = GameObject.Find(locationName)?.transform.position ?? new Vector3(0, 0, 0);
+        if (subject == null)
+            Debug.Log(taskID + " " + objectName + " " + locationName);
         state = eState.End;
     }
 }
@@ -363,7 +411,9 @@ public class Narrative : Task
                     break;
             }
         }
-        if(InputManager.Instance.GetKeyAction() == eKeyAction.TextSkip)
+        if (effect == 1 && InputManager.Instance.GetKeyAction() == eKeyAction.TextSkip)
+            state = eState.End;
+        else if (effect == 0)
             state = eState.End;
     }
 }
@@ -401,10 +451,30 @@ public class Portrait : Task
                     break;
             }
         }
-        if (InputManager.Instance.GetKeyAction() == eKeyAction.TextSkip)
+        if (effect == 1 && InputManager.Instance.GetKeyAction() == eKeyAction.TextSkip)
+            state = eState.End;
+        else if (effect == 0)
             state = eState.End;
     }
 }
+
+public class SceneChanger : Task
+{
+    private string sceneName;
+    public SceneChanger(string taskID, string resourceName, string otherEventID) :base(taskID, otherEventID)
+    {
+        this.sceneName = resourceName;
+    }
+
+    public override void Execute()
+    {
+        base.Execute();
+        Debug.Log("씬 체인저 실행됨");
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        state = eState.End;
+    }
+}
+
 
 public class Animation : Task
 {
@@ -422,10 +492,3 @@ public class Animation : Task
         state = eState.End;
     }
 }
-
-
-
-
-
-
-

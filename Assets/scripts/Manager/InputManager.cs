@@ -107,7 +107,7 @@ public class InputManager : Singleton<InputManager>
             return;
         }
 
-        if (Input.GetKey(keySet.Keys[eKeyAction.TextSkip][0]))
+        if (Input.GetKeyDown(keySet.Keys[eKeyAction.TextSkip][0]))
         {
             action = eKeyAction.TextSkip;
             return;

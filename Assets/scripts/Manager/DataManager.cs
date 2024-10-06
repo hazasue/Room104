@@ -36,7 +36,7 @@ public class DataManager : Singleton<DataManager>
                 (eventID, new MainEvent(data["Route"].ToString(), data["EventDay"].ToString(), data["Trigger"].ToString(),
                 data["Details"].ToString(), data["EventTime"].ToString(), data["EventID"].ToString())
                 );
-            Debug.Log(MainEventManager.Instance.EventDic[eventID].EventID.ToString());
+            //Debug.Log(MainEventManager.Instance.EventDic[eventID].EventID.ToString());
         }
     }
 
@@ -108,6 +108,8 @@ public class DataManager : Singleton<DataManager>
                 return new ObjectMove(data["TaskID"].ToString(), data["ObjectName"].ToString(), data["RescName"].ToString(), data["System"].ToString());
             case "animation":
                 return new Animation(data["TaskID"].ToString(), data["ObjectName"].ToString(), data["RescName"].ToString(), data["System"].ToString());
+            case "scene":
+                return new SceneChanger(data["TaskID"].ToString(), data["RescName"].ToString(), data["System"].ToString());
             default:
                 Debug.Log("파일에서 올바른 타입을 입력 받지 못하여 Task를 생성하지 못하였습니다." + data["TaskID"].ToString());
                 return null;

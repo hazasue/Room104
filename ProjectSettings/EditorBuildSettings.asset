@@ -20,4 +20,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstRun.unity
     guid: 783f1ad3ed104814a8de396557c99a9b
+  - enabled: 1
+    path: Assets/Scenes/hall1.unity
+    guid: c26663ce905a9664a8802b5e65a07c30
+  - enabled: 1
+    path: Assets/Scenes/police.unity
+    guid: b5ecca9f1183423469372ff2e07e834d
+  - enabled: 1
+    path: Assets/Scenes/room3.unity
+    guid: 2c1cbf49f86e1f64c95b1da897ebe37c
+  - enabled: 1
+    path: Assets/Scenes/town.unity
+    guid: 1d958496951aac4428c5b899a09caab4
   m_configObjects: {}
