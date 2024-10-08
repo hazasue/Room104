@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MiniGameManager : Singleton<MiniGameManager>
 {
     private Dictionary<string, MiniGame> miniGames;
 
+    public Image clearScreen;
+
     public MiniGame doorLock;
     public MiniGame doorInvade;
     public MiniGame windowInvade;
+    public MiniGame hiddenCatch;
     
     // Start is called before the first frame update
     public override void Awake()
@@ -30,8 +35,9 @@ public class MiniGameManager : Singleton<MiniGameManager>
         miniGames.Add("door lock", doorLock);
         miniGames.Add("door invade", doorInvade);
         miniGames.Add("window invade", windowInvade);
+        miniGames.Add("hidden catch", hiddenCatch);
 
-        ActivateGame("window invade");
+        ActivateGame("hidden catch");
     }
 
     public void ActivateGame(string name)
@@ -52,12 +58,25 @@ public class MiniGameManager : Singleton<MiniGameManager>
         miniGame.gameObject.SetActive(false);
         
         if (state)
-        { 
+        {
             //clear();
+            StartCoroutine(activateClearScreen("img_minigame_success", 0.5f));
         } 
         else
         {
             //failed();
+            StartCoroutine(activateClearScreen("img_minigame_failed", 0.5f));
         }
+    }
+
+    private IEnumerator activateClearScreen(string screenName, float duration)
+    {
+        clearScreen.gameObject.SetActive(true);
+
+        clearScreen.sprite = Resources.Load<Sprite>($"Sprites/MiniGame/{screenName}");
+
+        yield return new WaitForSeconds(duration);
+        
+        clearScreen.gameObject.SetActive(false);
     }
 }

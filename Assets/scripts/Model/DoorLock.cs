@@ -19,6 +19,12 @@ public class DoorLock : MiniGame
     public Transform answerSheetPrefab;
     public TMP_Text passWordText;
 
+    private Dictionary<int, Image> images;
+    public List<Image> imageLists;
+    public List<Sprite> defaultImages;
+    public List<Sprite> hoverImages;
+    public List<Sprite> clickImages;
+
     // Start is called before the first frame update
 
     public override void Activate(float safety)
@@ -58,6 +64,12 @@ public class DoorLock : MiniGame
             answerSheetTexts[i].GetChild(0).GetComponent<TMP_Text>().text = "";
         }
 
+        images = new Dictionary<int, Image>();
+        for (int i = 0; i < imageLists.Count; i++)
+        {
+            images.Add(i, imageLists[i]);
+        }
+        
         showPassWord();
     }
 
@@ -128,18 +140,26 @@ public class DoorLock : MiniGame
         updateAnswerSheet();
     }
 
-    public void HoverNumber(string number)
+    public void HoverNumber(int number)
     {
-
+        images[number].sprite = hoverImages[number];
     }
 
-    public void ClickNumber(string number)
+    public void ClickNumber(int number)
     {
-        
+        images[number].sprite = clickImages[number];
+        StartCoroutine(resetNumberPad(number));
     }
 
-    public void MakeNumberPadDefault(string number)
+    public void MakeNumberPadDefault(int number)
     {
-        
+        images[number].sprite = defaultImages[number];
+    }
+
+    private IEnumerator resetNumberPad(int number)
+    {
+        yield return new WaitForSeconds(0.05f);
+
+        images[number].sprite = defaultImages[number];
     }
 }

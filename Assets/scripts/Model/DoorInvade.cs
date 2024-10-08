@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class DoorInvade : MiniGame
 {
+    private const float DEFAULT_DOOR_ROTATION = 25f;
+    
+    public Transform structure;
+    private Vector3 structurePos;
+    
     private float additionalIncreasion;
     
     public override void Activate(float safety)
@@ -45,6 +50,9 @@ public class DoorInvade : MiniGame
         gauge.maxValue = MAX_PROGRESS;
         progress = 0.5f;
         gauge.value = progress;
+        
+        structurePos = structure.eulerAngles;
+        structure.rotation = Quaternion.Euler(structurePos + new Vector3(0f, DEFAULT_DOOR_ROTATION * progress, 0f));
     }
 
     protected override IEnumerator interact()
@@ -57,11 +65,35 @@ public class DoorInvade : MiniGame
             {
                 progress += DEFAULT_PROGRESS_INCREASE_AMOUNT + additionalIncreasion;
                 gauge.value = progress;
+                structure.rotation = Quaternion.Euler(structurePos + new Vector3(0f, DEFAULT_DOOR_ROTATION * progress, 0f));
                 if (progress >= MAX_PROGRESS)
                 {
                     sendClearState(true);
                     activated = false;
                 }
+            }
+        }
+    }
+    
+    protected override IEnumerator decreaseGauge()
+    {
+        float gap;
+        while (activated)
+        {
+            gap = Time.deltaTime;
+            yield return new WaitForSeconds(gap);
+
+            progress -= gap * DEFAULT_DECREASE_MULTIPLE;
+            if (progress < 0f) progress = 0f;
+            timeLimit -= gap;
+            gauge.value = progress;
+            timer.text = timeLimit.ToString("F2");
+            structure.rotation = Quaternion.Euler(structurePos + new Vector3(0f, DEFAULT_DOOR_ROTATION * progress, 0f));
+            
+            if (timeLimit <= 0f || progress <= 0f)
+            {
+                sendClearState(false);
+                activated = false;
             }
         }
     }

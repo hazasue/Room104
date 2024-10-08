@@ -27,8 +27,11 @@ public class TitleManager : MonoBehaviour
     private static Vector3 DEFAULT_ARROW_POSITION = new Vector3(50f, -100f, 0f);
     private static Vector3 DEFAULT_ARROW_POSITION_GAP = new Vector3(0f, -260f, 0f);
 
-    private static Vector3 DEFAULT_HOVER_POSITION = new Vector3(0f, 125f, 0f);
-    private static Vector3 DEFAULT_HOVER_GAP = new Vector3(0f, -50f, 0f);
+    private static Vector3 DEFAULT_HOVER_POSITION = new Vector3(0f, 200f, 0f);
+    private static Vector3 DEFAULT_HOVER_GAP = new Vector3(0f, -75f, 0f);
+
+    private static Vector2 LOGO_SIZE_ENG = new Vector2(446f, 259f);
+    private static Vector2 LOGO_SIZE_KOR = new Vector2(395f, 111f);
     
     private const int MAX_SAVE_SLOT_COUNT = 3;
 
@@ -40,6 +43,9 @@ public class TitleManager : MonoBehaviour
     public GameObject settingsScreen;
     public GameObject creditScreen;
     public GameObject achievementScreen;
+
+    public Image logoImage;
+    public RectTransform logoTransform;
 
     public TMP_Text newGameText;
     public TMP_Text loadGameText;
@@ -272,6 +278,8 @@ public class TitleManager : MonoBehaviour
             creditText.text = messages[SYSTEM_MESSAGE_ID_CREDIT].kor;
             achievementText.text = messages[SYSTEM_MESSAGE_ID_ACHIEVEMENT].kor;
             exitText.text = messages[SYSTEM_MESSAGE_ID_EXIT].kor;
+            logoImage.sprite = Resources.Load<Sprite>($"Sprites/Title/spr_logo_kor");
+            logoTransform.sizeDelta = LOGO_SIZE_KOR;
         }
         else
         {
@@ -281,6 +289,8 @@ public class TitleManager : MonoBehaviour
             creditText.text = messages[SYSTEM_MESSAGE_ID_CREDIT].en;
             achievementText.text = messages[SYSTEM_MESSAGE_ID_ACHIEVEMENT].en;
             exitText.text = messages[SYSTEM_MESSAGE_ID_EXIT].en;
+            logoImage.sprite = Resources.Load<Sprite>($"Sprites/Title/spr_logo_eng");
+            logoTransform.sizeDelta = LOGO_SIZE_ENG;
         }
     }
 }
